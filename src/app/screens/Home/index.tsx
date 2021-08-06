@@ -4,15 +4,16 @@ import { Text, ScrollView, View } from "react-native";
 import PremiereCard from "../../components/PremiereCard";
 import ScheduleCard from "../../components/ScheduleCard";
 import HorizontalList from "../../components/HorizontalList";
+import TitleSection from "../../components/TitleSection";
 import { style } from "./index.style";
 
 const Home = () => {
   return (
     <ScrollView style={style.container}>
-      <Text style={style.title}>Witaj w Quick Week App</Text>
-      <Text style={style.text}>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      </Text>
+      <TitleSection
+        title="Witaj w Quick Week App"
+        text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+      />
       <PremiereCard />
       <ScheduleCard />
       <Text style={style.subTitle}>Odkryj teraz</Text>

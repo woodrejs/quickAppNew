@@ -12,9 +12,9 @@ const { home, eventSingle, placeSingle } = screensName;
 const HomeStack = () => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name={eventSingle} component={EventSingle} />
       <Stack.Screen name={home} component={Home} />
       <Stack.Screen name={placeSingle} component={PlaceSingle} />
+      <Stack.Screen name={eventSingle} component={EventSingle} />
     </Stack.Navigator>
   );
 };

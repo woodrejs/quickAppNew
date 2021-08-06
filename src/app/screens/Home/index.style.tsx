@@ -7,14 +7,6 @@ export const style = StyleSheet.create({
     width: "100%",
     padding: 10,
   },
-  title: {
-    color: COLORS.black,
-    fontSize: 30,
-    fontFamily: "Montserrat700",
-    fontWeight: "700",
-    paddingTop: 5,
-    paddingBottom: 15,
-  },
   text: {
     color: COLORS.black,
     fontSize: 12,

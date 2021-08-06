@@ -5,12 +5,16 @@ import SectionIconButton from "./SectionIconButton";
 import SectionButton from "./SectionButton";
 import { style } from "./index.style";
 
-const ButtonsSection = () => {
+type Props = {
+  title: string;
+};
+
+const ButtonsSection: React.FC<Props> = ({ title }) => {
   return (
     <View style={style.container}>
       <SectionIconButton type="heart" />
       <SectionIconButton type="phone" />
-      <SectionButton title="dodaj do planu" />
+      <SectionButton title={title} />
     </View>
   );
 };
