@@ -6,5 +6,6 @@ export type Props = {
       canGoBack: () => boolean;
       goBack: () => void;
     };
+    screenName: string;
   };
 };

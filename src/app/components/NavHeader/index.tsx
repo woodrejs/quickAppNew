@@ -8,12 +8,11 @@ import HeaderIcon from "./HeaderIcon";
 import { style } from "./index.style";
 import { Props } from "./index.utils";
 import { COLORS } from "../../style/colors";
-import { screensName } from "../../routes/utils";
 
-const NavHeader: React.FC<Props> = ({ route: { navigation } }) => {
+const NavHeader: React.FC<Props> = ({ route: { navigation } }, screenName) => {
   const { navigate, openDrawer, canGoBack, goBack } = navigation;
 
-  const handleIconPress = () => navigate(screensName.settings, null);
+  const handleIconPress = () => navigate(screenName, null);
   const handleButtonPress = () => openDrawer();
   const handleArrowPress = () => goBack();
 

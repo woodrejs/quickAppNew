@@ -1,13 +1,14 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { screenOptions, screensName } from "./utils";
+import { screensNames } from "../utils/screensNames";
+import { screenOptions } from "./utils";
 
 import Settings from "../screens/Settings";
 
 const Stack = createStackNavigator();
-const { settings } = screensName;
 
-const SettingsStack = () => {
+const SettingsStack = ({}) => {
+  const { settings } = screensNames;
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name={settings} component={Settings} />

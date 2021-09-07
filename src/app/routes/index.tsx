@@ -2,44 +2,25 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 
-import { stacksNames } from "./utils";
+//components
+import CustomDrawer from "../components/CustomDrawer";
 
-import HomeStack from "./homeStack";
-import EventsStack from "./eventsStack";
-import PlacesStack from "./placesStack";
-import ScheduleStack from "./scheduleStack";
-import FavoritesStack from "./favoritesStack";
-import AuthStack from "./authStack";
-import SettingsStack from "./settingsStack";
+//utils
+import { Stacks } from "./stacks";
 
 const Drawer = createDrawerNavigator();
-const {
-  homeStackName,
-  favoritesStackName,
-  placesStackName,
-  eventsStackName,
-  scheduleStackName,
-  settingsStackName,
-  authStackName,
-} = stacksNames;
 
 const Navigation = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName={homeStackName}
+        initialRouteName={"homeStack"}
         screenOptions={{ headerShown: false }}
+        drawerContent={CustomDrawer}
       >
-        {/* screens */}
-        <Drawer.Screen name={homeStackName} component={HomeStack} />
-        <Drawer.Screen name={favoritesStackName} component={FavoritesStack} />
-        <Drawer.Screen name={placesStackName} component={PlacesStack} />
-        <Drawer.Screen name={eventsStackName} component={EventsStack} />
-        <Drawer.Screen name={scheduleStackName} component={ScheduleStack} />
-
-        {/* user settings */}
-        <Drawer.Screen name={settingsStackName} component={SettingsStack} />
-        <Drawer.Screen name={authStackName} component={AuthStack} />
+        {Stacks.map(({ name, component, id }) => (
+          <Drawer.Screen key={id} name={name} component={component} />
+        ))}
       </Drawer.Navigator>
     </NavigationContainer>
   );

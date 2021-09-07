@@ -1,15 +1,16 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { screenOptions, screensName } from "./utils";
+import { screensNames } from "../utils/screensNames";
+import { screenOptions } from "./utils";
 
 import Login from "../screens/Login";
 import Register from "../screens/Register";
 import Home from "../screens/Home";
 
 const Stack = createStackNavigator();
-const { login, register, home } = screensName;
 
 const AuthStack = () => {
+  const { login, register, home } = screensNames;
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name={login} component={Login} />

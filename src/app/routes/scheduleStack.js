@@ -1,19 +1,20 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { screenOptions, screensName } from "./utils";
+import { screensNames } from "../utils/screensNames";
+import { screenOptions } from "./utils";
 
 import EventSingle from "../screens/EventSingle";
-import EventList from "../screens/EventList";
+import Schedule from "../screens/Schedule";
 
 const Stack = createStackNavigator();
-const { eventList, eventSingle } = screensName;
 
-const EventsStack = () => {
+const ScheduleStack = () => {
+  const { schedule, eventSingle } = screensNames;
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name={eventList} component={EventList} />
+      <Stack.Screen name={schedule} component={Schedule} />
       <Stack.Screen name={eventSingle} component={EventSingle} />
     </Stack.Navigator>
   );
 };
-export default EventsStack;
+export default ScheduleStack;
