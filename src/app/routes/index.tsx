@@ -3,7 +3,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 
 //components
-import CustomDrawer from "../components/CustomDrawer";
+import MenuCustomDrawer from "../components/MenuCustomDrawer";
 
 //utils
 import { Stacks } from "./stacks";
@@ -16,7 +16,7 @@ const Navigation = () => {
       <Drawer.Navigator
         initialRouteName={"homeStack"}
         screenOptions={{ headerShown: false }}
-        drawerContent={CustomDrawer}
+        drawerContent={MenuCustomDrawer}
       >
         {Stacks.map(({ name, component, id }) => (
           <Drawer.Screen key={id} name={name} component={component} />

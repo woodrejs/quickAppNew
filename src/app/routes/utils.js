@@ -1,7 +1,7 @@
 import React from "react";
-import NavHeader from "../components/NavHeader";
+import NavHeaderSection from "../components/NavHeaderSection";
 import { screensNames } from "../utils/screensNames";
 
 export const screenOptions = (route) => ({
-  header: () => <NavHeader route={route} screenName={screensNames.settings} />,
+  header: () => <NavHeaderSection route={route} screenName={screensNames.settings} />,
 });

@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text } from "react-native";
-
+//components
 import RegisterForm from "../../components/Forms/RegisterForm";
-import AuthFooter from "../../components/AuthFooter";
-
-import { screensName } from "../../routes/utils";
+import AuthLinksSection from "../../components/AuthLinksSection";
+//utils & styles
+import { screensNames } from "../../utils/screensNames";
 import { style } from "./index.style";
 import { Props } from "./index.utils";
 
@@ -13,9 +13,9 @@ const Register: React.FC<Props> = ({ navigation }) => {
     <View style={style.container}>
       <Text style={style.title}>utwórz {"\n"}konto</Text>
       <RegisterForm />
-      <AuthFooter
+      <AuthLinksSection
         navigation={navigation}
-        primaryButton={["zaloguj", screensName.login]}
+        primaryButton={["zaloguj", screensNames.login]}
       />
     </View>
   );

@@ -1,18 +1,18 @@
 import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
 
-import TitleSection from "../../components/TitleSection";
-import WeekSlider from "../../components/WeekSlider";
-import ScheduleList from "../../components/ScheduleList";
-import ScheduleButton from "../../components/ScheduleButton";
+import ScreenTitleSection from "../../components/ScreenTitleSection";
+import ScheduleSliderPanel from "../../components/ScheduleSliderPanel";
+import ScheduleCardsList from "../../components/ScheduleCardsList";
+import AddEventButton from "../../components/AddEventButton";
 
 const Schedule = () => {
   return (
     <ScrollView style={style.container}>
-      <TitleSection title="Zaplanuj swój tydzień" />
-      <WeekSlider />
-      <ScheduleList />
-      <ScheduleButton />
+      <ScreenTitleSection title="Zaplanuj swój tydzień" />
+      <ScheduleSliderPanel />
+      <ScheduleCardsList />
+      <AddEventButton />
     </ScrollView>
   );
 };

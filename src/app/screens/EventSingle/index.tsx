@@ -1,20 +1,20 @@
 import React from "react";
 import { ScrollView, Text } from "react-native";
-
-import LargeImgSection from "../../components/LargeImgSection";
-import HorizontalGallery from "../../components/HorizontalGallery";
-import LocalizationMap from "../../components/LocalizationMap";
-import ButtonsSection from "../../components/ButtonsSection";
-import IconsSection from "../../components/IconsSection";
-
+//components
+import LargeImageCard from "../../components/LargeImageCard";
+import HorizontalImagesGallery from "../../components/HorizontalImagesGallery";
+import LocalizationMapSection from "../../components/LocalizationMapSection";
+import CTAButtonsSection from "../../components/CTAButtonsSection";
+import InfoIconsSection from "../../components/InfoIconsSection";
+//utils & styles
 import { style } from "./index.style";
 
 const EventSingle = () => {
   return (
     <>
       <ScrollView style={style.container}>
-        <LargeImgSection />
-        <IconsSection />
+        <LargeImageCard />
+        <InfoIconsSection />
         <Text style={style.description}>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
           Ipsum has been the industry's standard dummy text ever since the 1500s, when an
@@ -25,7 +25,7 @@ const EventSingle = () => {
           recently with desktop publishing software like Aldus PageMaker including
           versions of Lorem Ipsum.
         </Text>
-        <HorizontalGallery />
+        <HorizontalImagesGallery />
 
         <Text style={style.title}>Name of event</Text>
         <Text style={style.subTitle}>ul. Obornicka 22/20 51-113 Wrocław</Text>
@@ -36,9 +36,9 @@ const EventSingle = () => {
           book. It has survived not only five centuries, but also the leap into electronic
           typesetting, remainin.
         </Text>
-        <LocalizationMap />
+        <LocalizationMapSection />
       </ScrollView>
-      <ButtonsSection title="dodaj do planu" />
+      <CTAButtonsSection title="dodaj do planu" />
     </>
   );
 };

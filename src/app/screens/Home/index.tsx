@@ -1,24 +1,24 @@
 import React from "react";
 import { Text, ScrollView, View } from "react-native";
 
-import PremiereCard from "../../components/PremiereCard";
-import ScheduleCard from "../../components/ScheduleCard";
-import HorizontalList from "../../components/HorizontalList";
-import TitleSection from "../../components/TitleSection";
+import LargeEventCard from "../../components/LargeEventCard";
+import ScheduleEventCard from "../../components/ScheduleEventCard";
+import HorizontalCardList from "../../components/HorizontalCardList";
+import ScreenTitleSection from "../../components/ScreenTitleSection";
 import { style } from "./index.style";
 
 const Home = () => {
   return (
     <ScrollView style={style.container}>
-      <TitleSection
+      <ScreenTitleSection
         title="Witaj w Quick Week App"
         text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       />
-      <PremiereCard />
-      <ScheduleCard />
+      <LargeEventCard />
+      <ScheduleEventCard />
       <Text style={style.subTitle}>Odkryj teraz</Text>
-      <HorizontalList name="Wydarzenia" />
-      <HorizontalList name="Miejsca" />
+      <HorizontalCardList name="Wydarzenia" />
+      <HorizontalCardList name="Miejsca" />
       <Text style={style.subTitle}>Wrocław</Text>
       <Text style={style.label}>Miasto Spotkań</Text>
       <Text style={style.text}>
@@ -26,7 +26,7 @@ const Home = () => {
         Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is
         simply dummy text of the printing and typesetting industry.
       </Text>
-      <HorizontalList name="Największe atrakcje" />
+      <HorizontalCardList name="Największe atrakcje" />
       <View style={style.footer} />
     </ScrollView>
   );
