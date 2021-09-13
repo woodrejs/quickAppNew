@@ -1,13 +1,15 @@
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
-import { Fontisto } from "@expo/vector-icons";
-
+//components
 import HorizontalListCard from "./HorizontalListCard";
+import HorizontalListButton from "./HorizontalListButton";
+//utils & styles
+import { Fontisto } from "@expo/vector-icons";
 import { COLORS } from "../../style/colors";
 import { style } from "./index.style";
 import { Props } from "./index.utils";
 
-const HorizontalCardList: React.FC<Props> = ({ name }) => {
+const HorizontalCardList: React.FC<Props> = ({ name, data }) => {
   return (
     <View style={style.container}>
       <View style={style.box}>
@@ -15,18 +17,10 @@ const HorizontalCardList: React.FC<Props> = ({ name }) => {
         <Fontisto name="eye" size={14} color={COLORS.lightExtra} />
       </View>
       <ScrollView style={style.list} horizontal>
-        <HorizontalListCard />
-        <HorizontalListCard />
-        <HorizontalListCard />
-        <HorizontalListCard />
-        <HorizontalListCard />
-        <HorizontalListCard />
-        <HorizontalListCard />
-        <HorizontalListCard />
-        <HorizontalListCard />
-        <HorizontalListCard />
-        <HorizontalListCard />
-        <HorizontalListCard />
+        {data.map(({ id, img }) => (
+          <HorizontalListCard key={id} id={id} img={img} />
+        ))}
+        <HorizontalListButton />
       </ScrollView>
     </View>
   );

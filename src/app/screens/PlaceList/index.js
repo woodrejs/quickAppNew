@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import ScreenTitleSection from "../../components/ScreenTitleSection";
 import SortButtonsSection from "../../components/SortButtonsSection";
 import VerticalCardList from "../../components/VerticalCardList";
+import ListPaginationButton from "../../components/ListPaginationButton";
 
 const PlaceList = () => {
   return (
@@ -14,6 +15,7 @@ const PlaceList = () => {
       />
       <SortButtonsSection />
       <VerticalCardList />
+      <ListPaginationButton />
     </ScrollView>
   );
 };

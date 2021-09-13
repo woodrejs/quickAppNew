@@ -6,7 +6,17 @@ import { style } from "./index.style";
 import { COLORS } from "../../style/colors";
 import { Fontisto } from "@expo/vector-icons";
 
-const LargeEventCard = () => {
+const LargeEventCard = ({ data }) => {
+  //data is a list, need to be map in future !!!
+  //ticketing change=> <CardHeaderSection hour={ticketing} !!!
+  //clock icon to change on ticket icon  !!!
+  // date need to be formated  !!!
+  //tmp:
+  const title = data[0].title;
+  const img = data[0].img;
+  const startDate = data[0].startDate;
+  const ticketing = data[0].ticketing;
+
   return (
     <View style={style.container}>
       <View style={style.box}>
@@ -17,13 +27,9 @@ const LargeEventCard = () => {
         <ImageBackground
           style={style.imageBox}
           imageStyle={style.image}
-          source={require("../../../../assets/index_1.jpg")}
+          source={{ uri: img }}
         >
-          <CardHeaderSection
-            title="Long name of some event"
-            hour="19:00"
-            date="22/12/2021"
-          />
+          <CardHeaderSection title={title} hour={ticketing} date={startDate} />
         </ImageBackground>
       </TouchableHighlight>
     </View>
