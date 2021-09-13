@@ -3,12 +3,12 @@ import { ImageBackground } from "react-native";
 
 import { style } from "./index.style";
 
-const HorizontalGalleryImage = () => {
+const HorizontalGalleryImage = ({ src }) => {
   return (
     <ImageBackground
       style={style.container}
       imageStyle={style.image}
-      source={require("../../../../../assets/index_3.jpg")}
+      source={{ uri: src }}
     />
   );
 };

@@ -4,12 +4,23 @@ import { View } from "react-native";
 import InfoSectionIcon from "./InfoSectionIcon";
 import { style } from "./index.style";
 
-const InfoIconsSection = () => {
+const InfoIconsSection = ({ venue }) => {
+  // const { carParkAvailable, foodAndDrinkAvailable, disabledAccessAvailable } = venue;
+
   return (
     <View style={style.container}>
-      <InfoSectionIcon title="bezpłatny" type="parking" />
-      <InfoSectionIcon title="przystosowany" type="disabled" />
-      <InfoSectionIcon title="dostępny" type="food" />
+      <InfoSectionIcon
+        title={venue?.carParkAvailable ? "bezpłatny" : "płatny"}
+        type="parking"
+      />
+      <InfoSectionIcon
+        title={venue?.disabledAccessAvailable ? "przystosowany" : "nie przystosowany"}
+        type="disabled"
+      />
+      <InfoSectionIcon
+        title={venue?.foodAndDrinkAvailable ? "dostępny" : "brak"}
+        type="food"
+      />
     </View>
   );
 };

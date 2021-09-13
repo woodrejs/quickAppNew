@@ -4,18 +4,23 @@ import { View, ImageBackground } from "react-native";
 import CardHeaderSection from "../CardHeaderSection";
 import { style } from "./index.style";
 
-const LargeImageCard = () => {
+const LargeImageCard = ({
+  img,
+  title,
+  address,
+  price = null,
+  hour = null,
+  date = null,
+}) => {
   return (
     <View style={style.container}>
-      <ImageBackground
-        style={style.box}
-        imageStyle={style.image}
-        source={require("../../../../assets/index_3.jpg")}
-      >
+      <ImageBackground style={style.box} imageStyle={style.image} source={{ uri: img }}>
         <CardHeaderSection
-          title="Long name of some event"
-          price="20 PLN"
-          place="ul. Obornicka 22/20 51-113 Wrocław"
+          title={title}
+          price={price}
+          place={address}
+          hour={hour}
+          date={date}
         />
       </ImageBackground>
     </View>

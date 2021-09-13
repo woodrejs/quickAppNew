@@ -1,16 +1,16 @@
 import React from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import HorizontalGalleryImage from "./HorizontalGalleryImage";
 import { style } from "./index.style";
 
-const HorizontalImagesGallery = () => {
+const HorizontalImagesGallery = ({ images }) => {
   return (
     <ScrollView style={style.container} horizontal>
-      <HorizontalGalleryImage />
-      <HorizontalGalleryImage />
-      <HorizontalGalleryImage />
-      <HorizontalGalleryImage />
+      {images &&
+        images.map(({ standard, id }) => (
+          <HorizontalGalleryImage key={id} src={standard} />
+        ))}
     </ScrollView>
   );
 };

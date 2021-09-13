@@ -1,13 +1,8 @@
 export type Props = {
-  title: string;
+  img: string;
   type: string;
+  id: number;
   navigation: {
     navigate: () => void;
   };
-  data: [
-    {
-      id: number;
-      img: string;
-    }
-  ];
 };

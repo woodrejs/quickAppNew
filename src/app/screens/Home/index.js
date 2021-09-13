@@ -9,7 +9,7 @@ import ScreenTitleSection from "../../components/ScreenTitleSection";
 //styles
 import { style } from "./index.style";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const moviesData = useSelector((state) => state.homeSlice.movies.list);
   const playsData = useSelector((state) => state.homeSlice.plays.list);
   const placesData = useSelector((state) => state.homeSlice.places.list);
@@ -26,10 +26,10 @@ const Home = () => {
       <LargeEventCard data={mainData} />
       <ScheduleEventCard />
       <Text style={style.subTitle}>Odkryj teraz</Text>
-      <HorizontalCardList name="Filmy" data={moviesData} />
-      <HorizontalCardList name="Sztuki" data={playsData} />
-      <HorizontalCardList name="Książki" data={booksData} />
-      <HorizontalCardList name="Sport" data={sportData} />
+      <HorizontalCardList title="Filmy" data={moviesData} navigation={navigation} />
+      <HorizontalCardList title="Sztuki" data={playsData} navigation={navigation} />
+      <HorizontalCardList title="Książki" data={booksData} navigation={navigation} />
+      <HorizontalCardList title="Sport" data={sportData} navigation={navigation} />
       <Text style={style.subTitle}>Wrocław</Text>
       <Text style={style.label}>Miasto Spotkań</Text>
       <Text style={style.text}>
@@ -37,7 +37,12 @@ const Home = () => {
         Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is
         simply dummy text of the printing and typesetting industry.
       </Text>
-      <HorizontalCardList name="Miejsca" data={placesData} />
+      <HorizontalCardList
+        title="Miejsca"
+        data={placesData}
+        navigation={navigation}
+        type="place"
+      />
       <View style={style.footer} />
     </ScrollView>
   );

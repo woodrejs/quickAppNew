@@ -4,11 +4,11 @@ import { View } from "react-native";
 import SectionIcon from "./SectionIcon";
 import { style } from "./index.style";
 
-const ContactSection = () => {
+const ContactSection = ({ email, telephone }) => {
   return (
     <View style={style.container}>
-      <SectionIcon title="jakismail@mail.com" type="mail" />
-      <SectionIcon title="532589632" type="phone" />
+      <SectionIcon title={email} type="mail" />
+      <SectionIcon title={telephone} type="phone" />
     </View>
   );
 };
