@@ -9,6 +9,7 @@ import CTAButtonsSection from "../../components/CTAButtonsSection";
 import InfoIconsSection from "../../components/InfoIconsSection";
 import ContactSection from "../../components/ContactSection";
 import LoadingSection from "../../components/LoadingSection";
+import RenderHtmlSection from "../../components/RenderHtmlSection";
 //utils & styles
 import { style } from "./index.style";
 import { getSinglePlaceData } from "../../utils/fetchFunctions";
@@ -42,7 +43,12 @@ const PlaceSingle = ({ navigation }) => {
               address={placeData?.address}
             />
             <InfoIconsSection venue={placeData?.venue} />
-            <Text style={style.description}>{placeData?.longDescription}</Text>
+
+            <RenderHtmlSection
+              source={placeData?.longDescription}
+              style={style.description}
+            />
+
             <HorizontalImagesGallery images={placeData?.images} />
 
             <Text style={style.title}>{placeData?.title}</Text>

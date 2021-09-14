@@ -8,6 +8,7 @@ import LocalizationMapSection from "../../components/LocalizationMapSection";
 import CTAButtonsSection from "../../components/CTAButtonsSection";
 import InfoIconsSection from "../../components/InfoIconsSection";
 import LoadingSection from "../../components/LoadingSection";
+import RenderHtmlSection from "../../components/RenderHtmlSection";
 //utils & styles
 import { style } from "./index.style";
 import { getSingleOfferData } from "../../utils/fetchFunctions";
@@ -41,15 +42,24 @@ const EventSingle = () => {
               img={offerData?.mainImage.large}
               title={offerData?.title}
               price={offerData?.ticketing}
-              date={`${offerData?.startDate} - ${offerData?.endDate}`}
+              date={offerData?.startDate}
             />
             <InfoIconsSection venue={offerData?.venue} />
-            <Text style={style.description}>{offerData?.longDescription}</Text>
+
+            <RenderHtmlSection
+              source={offerData?.longDescription}
+              style={style.description}
+            />
 
             <Text style={style.title}>{offerData?.place.name}</Text>
             <Text style={style.subTitle}>{offerData?.address}</Text>
             <HorizontalImagesGallery images={offerData?.place.images} />
-            <Text style={style.description}>{offerData?.place.longDescription}</Text>
+
+            <RenderHtmlSection
+              source={offerData?.place.longDescription}
+              style={style.description}
+            />
+
             <LocalizationMapSection />
           </ScrollView>
           <CTAButtonsSection title="dodaj do planu" />

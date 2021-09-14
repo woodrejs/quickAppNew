@@ -8,7 +8,6 @@ export const style = StyleSheet.create({
     fontFamily: "Montserrat400",
     fontWeight: "400",
     fontSize: 12,
-    lineHeight: 17,
     paddingHorizontal: 10,
     paddingBottom: 60,
   },

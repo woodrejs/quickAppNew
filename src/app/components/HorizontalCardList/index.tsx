@@ -1,11 +1,10 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, ScrollView } from "react-native";
 //components
 import HorizontalListCard from "./HorizontalListCard";
 import HorizontalListButton from "./HorizontalListButton";
+import SubTitleHeader from "../SubTitleHeader";
 //utils & styles
-import { Fontisto } from "@expo/vector-icons";
-import { COLORS } from "../../style/colors";
 import { style } from "./index.style";
 import { Props } from "./index.utils";
 
@@ -17,10 +16,8 @@ const HorizontalCardList: React.FC<Props> = ({
 }) => {
   return (
     <View style={style.container}>
-      <View style={style.box}>
-        <Text style={style.title}>{title}</Text>
-        <Fontisto name="eye" size={14} color={COLORS.lightExtra} />
-      </View>
+      <SubTitleHeader title={title} type={type} navigation={navigation} />
+
       <ScrollView style={style.list} horizontal>
         {data.map(({ id, img }) => (
           <HorizontalListCard
@@ -31,7 +28,7 @@ const HorizontalCardList: React.FC<Props> = ({
             type={type}
           />
         ))}
-        <HorizontalListButton />
+        <HorizontalListButton type={type} navigation={navigation} />
       </ScrollView>
     </View>
   );

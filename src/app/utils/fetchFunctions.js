@@ -2,6 +2,10 @@ import axios from "axios";
 import { API_KEY } from "@env";
 import { v4 as uuidv4 } from "uuid";
 
+const fomatDate = (date) => {
+  return date.slice(0, 10);
+};
+
 export const getPlacesCardsData = async (pageSize) => {
   if (!pageSize || typeof pageSize !== "number") return;
 
@@ -65,7 +69,7 @@ export const getMainCardData = async (pageSize, types) => {
         id,
         img,
         title,
-        startDate,
+        startDate: fomatDate(startDate),
         ticketing,
       };
     });
@@ -122,7 +126,7 @@ export const getSingleOfferData = async (offerId) => {
     const resp = await axios.get(URL);
 
     const { id, title, longDescription, pageLink, events, mainImage } = resp.data;
-    const { startDate, endDate, ticketing, place } = events[0];
+    const { startDate, ticketing, place } = events[0];
     const { street, zipCode, city } = place.address;
     const { carParkAvailable, foodAndDrinkAvailable, disabledAccessAvailable } =
       place.venue;
@@ -132,8 +136,7 @@ export const getSingleOfferData = async (offerId) => {
       title,
       longDescription,
       pageLink,
-      startDate,
-      endDate,
+      startDate: fomatDate(startDate),
       ticketing,
       place: {
         name: resp.data.events[0].place.title,

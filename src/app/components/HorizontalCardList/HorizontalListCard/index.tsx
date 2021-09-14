@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageBackground, TouchableHighlight } from "react-native";
+import { ImageBackground, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 //utils & styles
 import { style } from "./index.style";
@@ -21,13 +21,13 @@ const HorizontalListCard: React.FC<Props> = ({ img, id, navigation, type }) => {
   };
 
   return (
-    <TouchableHighlight onPress={handlePress}>
+    <TouchableOpacity onPress={handlePress}>
       <ImageBackground
         style={style.container}
         imageStyle={style.image}
         source={{ uri: img }}
       />
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 };
 export default HorizontalListCard;
