@@ -1,15 +1,17 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../../style/colors";
 
-const ListPaginationButton = () => {
+const ListPaginationButton = ({ handler }) => {
   return (
-    <View style={style.container}>
-      <View style={style.box}>
-        <AntDesign name="plus" size={20} color={COLORS.white} />
+    <TouchableOpacity onPress={handler}>
+      <View style={style.container}>
+        <View style={style.box}>
+          <AntDesign name="plus" size={20} color={COLORS.white} />
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

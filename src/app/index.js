@@ -45,13 +45,13 @@ const App = () => {
 
   return (
     <SafeAreaProvider>
-      {isLoaded &&
-      moviesIsLoaded &&
+      {moviesIsLoaded &&
       playsIsLoaded &&
       booksIsLoaded &&
       sportIsLoaded &&
       placesIsLoaded &&
-      mainIsLoaded ? (
+      mainIsLoaded &&
+      isLoaded ? (
         <Navigation />
       ) : (
         <Intro />

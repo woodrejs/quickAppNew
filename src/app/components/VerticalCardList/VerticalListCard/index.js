@@ -1,20 +1,35 @@
 import React from "react";
-import { ImageBackground, TouchableHighlight, StyleSheet } from "react-native";
-
+import { ImageBackground, TouchableOpacity, StyleSheet } from "react-native";
+import { useDispatch } from "react-redux";
+import { screensNames } from "../../../utils/screensNames";
 import { COLORS } from "../../../style/colors";
 import VerticalCardLabel from "./VerticalCardLabel";
 import CardCTASection from "../../CardCTASection";
+import { setId as setPlaceId } from "../../../redux/singlePlace.slice";
+import { setId as setOfferId } from "../../../redux/singleOffer.slice";
 
-const VerticalListCard = () => {
+const VerticalListCard = ({ title, id, img, navigation, type }) => {
+  const dispatch = useDispatch();
+  const handlePress = () => {
+    console.log(id);
+
+    if (type === "place") {
+      dispatch(setPlaceId(id));
+      navigation.navigate(screensNames.placeSingle);
+    } else {
+      dispatch(setOfferId(id));
+      navigation.navigate(screensNames.eventSingle);
+    }
+  };
   return (
     <ImageBackground
       style={style.container}
       imageStyle={style.image}
-      source={require("../../../../../assets/index_1.jpg")}
+      source={{ uri: img.standard }}
     >
-      <TouchableHighlight style={style.box}>
-        <VerticalCardLabel title="Long name of some place" />
-      </TouchableHighlight>
+      <TouchableOpacity style={style.box} onPress={handlePress}>
+        <VerticalCardLabel title={title} />
+      </TouchableOpacity>
       <CardCTASection />
     </ImageBackground>
   );

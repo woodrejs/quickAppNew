@@ -3,14 +3,20 @@ import { View, StyleSheet } from "react-native";
 
 import VerticalListCard from "./VerticalListCard";
 
-const VerticalCardList = () => {
+const VerticalCardList = ({ data, navigation, type }) => {
   return (
     <View style={style.container}>
-      <VerticalListCard />
-      <VerticalListCard />
-      <VerticalListCard />
-      <VerticalListCard />
-      <VerticalListCard />
+      {data &&
+        data.map(({ id, title, img }) => (
+          <VerticalListCard
+            img={img}
+            title={title}
+            key={id}
+            id={id}
+            navigation={navigation}
+            type={type}
+          />
+        ))}
     </View>
   );
 };

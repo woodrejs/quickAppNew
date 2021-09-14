@@ -2,6 +2,11 @@ import axios from "axios";
 import { API_KEY } from "@env";
 import { v4 as uuidv4 } from "uuid";
 
+/*TODO:
+    +move fomatDate
+    +handle errors
+*/
+
 const fomatDate = (date) => {
   return date.slice(0, 10);
 };
@@ -159,6 +164,39 @@ export const getSingleOfferData = async (offerId) => {
   }
 };
 
+export const getOffersList = async (types = null, pageSize = 10, page = 1) => {
+  const URL = `http://go.wroclaw.pl/api/v1.0/offers/?key=${API_KEY}&type-id=${types}&page-size=${pageSize}&page=${page}`;
+
+  try {
+    const resp = await axios.get(URL);
+    const data = resp.data.items;
+
+    return data.map(({ id, title, mainImage }) => ({
+      id,
+      title,
+      img: { standard: mainImage?.standard },
+    }));
+  } catch (error) {
+    console.log({ getOffersList: error });
+  }
+};
+export const getPlacesList = async (types = null, pageSize = 10, page = 1) => {
+  const URL = `http://go.wroclaw.pl/api/v1.0/places/?key=${API_KEY}&type-id=${types}&page-size=${pageSize}&page=${page}`;
+
+  try {
+    const resp = await axios.get(URL);
+    const data = resp.data.items;
+
+    return data.map(({ id, title, mainImage }) => ({
+      id,
+      title,
+      img: { standard: mainImage?.standard },
+    }));
+  } catch (error) {
+    console.log({ getPlacesList: error });
+  }
+};
+
 // --------------------------------
 //offer types list
 export const offertypeslist = async (pageSize, types) => {
@@ -169,6 +207,7 @@ export const offertypeslist = async (pageSize, types) => {
   resp.data.items.map((item) => {
     console.log({ alias: item.alias, id: item.id });
   });
+
   // const data = resp.data.items.map(({ alias, id }) => {
   //   tmpArr.push({
   //     alias,
