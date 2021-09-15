@@ -9,7 +9,10 @@ import ScreenTitleSection from "../../components/ScreenTitleSection";
 //styles
 import { style } from "./index.style";
 
+
+
 const Home = ({ navigation }) => {
+ 
   const moviesData = useSelector((state) => state.homeSlice.movies.list);
   const playsData = useSelector((state) => state.homeSlice.plays.list);
   const placesData = useSelector((state) => state.homeSlice.places.list);
@@ -23,7 +26,7 @@ const Home = ({ navigation }) => {
         title="Witaj w Quick Week App"
         text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       />
-      <LargeEventCard data={mainData} />
+      <LargeEventCard data={mainData} navigation={navigation} />
       <ScheduleEventCard />
       <Text style={style.subTitle}>Odkryj teraz</Text>
       <HorizontalCardList title="Filmy" data={moviesData} navigation={navigation} />

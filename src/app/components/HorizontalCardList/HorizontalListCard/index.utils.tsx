@@ -1,5 +1,7 @@
 export type Props = {
-  img: string;
+  img: {
+    standard: string;
+  };
   type: string;
   id: number;
   navigation: {

@@ -1,21 +1,31 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { View, Text, TouchableHighlight, ImageBackground } from "react-native";
-
+//components
 import CardHeaderSection from "../CardHeaderSection";
+//utils & styles
+import { useIsFocused } from "@react-navigation/native";
+import { Fontisto } from "@expo/vector-icons";
 import { style } from "./index.style";
 import { COLORS } from "../../style/colors";
-import { Fontisto } from "@expo/vector-icons";
 
-const LargeEventCard = ({ data }) => {
-  //data is a list, need to be map in future !!!
-  //ticketing change=> <CardHeaderSection hour={ticketing} !!!
-  //clock icon to change on ticket icon  !!!
-  // date need to be formated  !!!
-  //tmp:
-  const title = data[0].title;
-  const img = data[0].img;
-  const startDate = data[0].startDate;
-  const ticketing = data[0].ticketing;
+const LargeEventCard = ({ data, navigation }) => {
+  const [counter, setCounter] = useState(0);
+  const [intervalId, setIntervalId] = useState();
+  const isFocused = useIsFocused();
+  const { title, img, startDate, ticketing } = data[counter];
+
+  const startRace = () => {
+    setIntervalId(
+      setInterval(() => {
+        setCounter((prevState) => (prevState < data.length - 1 ? prevState + 1 : 0));
+      }, 5000)
+    );
+  };
+  const stopRace = () => clearInterval(intervalId, 5000);
+
+  useEffect(() => {
+    isFocused ? startRace() : stopRace();
+  }, [isFocused]);
 
   return (
     <View style={style.container}>
@@ -29,7 +39,7 @@ const LargeEventCard = ({ data }) => {
           imageStyle={style.image}
           source={{ uri: img }}
         >
-          <CardHeaderSection title={title} hour={ticketing} date={startDate} />
+          <CardHeaderSection title={title} ticketing={ticketing} date={startDate} />
         </ImageBackground>
       </TouchableHighlight>
     </View>

@@ -7,7 +7,7 @@ import { Props } from "./index.utils";
 
 const CardHeaderSection: React.FC<Props> = ({
   title,
-  hour = null,
+  ticketing = null,
   date = null,
   place = null,
   price = null,
@@ -17,7 +17,7 @@ const CardHeaderSection: React.FC<Props> = ({
       <Text style={style.price}>{price}</Text>
       <Text style={style.title}>{title}</Text>
       <View style={style.box}>
-        {hour && <HeaderSectionIcon type="hour" title={hour} />}
+        {ticketing && <HeaderSectionIcon type="ticketing" title={ticketing} />}
         {date && <HeaderSectionIcon type="date" title={date} />}
         {place && <HeaderSectionIcon type="place" title={place} />}
       </View>

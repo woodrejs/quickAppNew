@@ -39,6 +39,7 @@ const homeSlice = createSlice({
       // if (name !== "movies" && name !== "places" && name !== "plays") return;
 
       state[name].list = value;
+      state[name].loaded = true;
     },
     //action:{name,value}
     setListLoaded(state, action) {

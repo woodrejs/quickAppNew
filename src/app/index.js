@@ -7,12 +7,8 @@ import { useFonts } from "@use-expo/font";
 import Intro from "./screens/Intro";
 //utils
 import { customFonts } from "./style/fonts";
-import { setListLoaded, setList } from "./redux/home.slice";
-import {
-  getPlacesCardsData,
-  getOffersCardsData,
-  getMainCardData,
-} from "./utils/fetchFunctions";
+import { setList } from "./redux/home.slice";
+import { fetchItemList, getMainCardData } from "./utils/fetchFunctions";
 
 const App = () => {
   const [isLoaded] = useFonts(customFonts); // move to redux-store ???
@@ -28,17 +24,28 @@ const App = () => {
   useEffect(() => {
     async function init() {
       //mainCard
-      await cardInitialization(getMainCardData, "main", 5, 3, dispatch);
+      const main = await getMainCardData(3, 5);
+      dispatch(setList(["main", main]));
+
       //movies
-      await cardInitialization(getOffersCardsData, "movies", 5, 1, dispatch);
+      const movies = await fetchItemList("offers", 1, 1, 5); //fetchItemList(type, page, types, pageSize)
+      dispatch(setList(["movies", movies]));
+
       //plays
-      await cardInitialization(getOffersCardsData, "plays", 5, 2, dispatch);
+      const plays = await fetchItemList("offers", 1, 2, 5);
+      dispatch(setList(["plays", plays]));
+
       //books
-      await cardInitialization(getOffersCardsData, "books", 5, 7, dispatch);
+      const books = await fetchItemList("offers", 1, 7, 5);
+      dispatch(setList(["books", books]));
+
       //sport
-      await cardInitialization(getOffersCardsData, "sport", 5, 4, dispatch);
+      const sport = await fetchItemList("offers", 1, 4, 5);
+      dispatch(setList(["sport", sport]));
+
       //places
-      await cardInitialization(getPlacesCardsData, "places", 5, null, dispatch);
+      const places = await fetchItemList("places", 1, null, 5);
+      dispatch(setList(["places", places]));
     }
     init();
   }, []);
@@ -60,14 +67,3 @@ const App = () => {
   );
 };
 export default App;
-
-//move to utils ???
-async function cardInitialization(getFn, name, pageSize, types, dispatch) {
-  try {
-    const list = await getFn(pageSize, types);
-    dispatch(setList([name, list]));
-    dispatch(setListLoaded([name, true]));
-  } catch (error) {
-    console.log({ cardInitialization: error });
-  }
-}

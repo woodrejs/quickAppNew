@@ -28,5 +28,5 @@ export const style = StyleSheet.create({
     backgroundColor: COLORS.black,
     borderRadius: 20,
   },
-  image: { borderRadius: 20, opacity: 0.7 },
+  image: { borderRadius: 20, opacity: 0.5 },
 });

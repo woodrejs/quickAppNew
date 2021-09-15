@@ -11,82 +11,48 @@ const fomatDate = (date) => {
   return date.slice(0, 10);
 };
 
-export const getPlacesCardsData = async (pageSize) => {
-  if (!pageSize || typeof pageSize !== "number") return;
-
-  const URL = `http://go.wroclaw.pl/api/v1.0/places/?key=${API_KEY}&page-size=${pageSize}`;
+//type, page, types, pageSize
+export const fetchItemList = async (type, page = 1, types = null, pageSize = 10) => {
+  const URL = `http://go.wroclaw.pl/api/v1.0/${type}/?key=${API_KEY}&type-id=${types}&page-size=${pageSize}&page=${page}`;
 
   try {
     const resp = await axios.get(URL);
 
-    const data = resp.data.items.map((item) => {
-      const img = item.mainImage.standard;
-      const id = item.id;
-      const title = item.title;
-
-      return { id, img, title };
+    const filteredData = resp.data.items.filter((item) => {
+      return "mainImage" in item && "id" in item && "title" in item;
     });
 
-    return data;
+    return filteredData.map(({ id, title, mainImage }) => ({
+      id,
+      title,
+      img: { standard: mainImage?.standard },
+    }));
   } catch (error) {
-    console.log({ getPlacesCardsData: error });
+    console.log({ fetchItemList: error });
   }
 };
-export const getOffersCardsData = async (pageSize, types) => {
-  if (!types || typeof types !== "number") return;
-  if (!pageSize || typeof pageSize !== "number") return;
-
+export const getMainCardData = async (types, pageSize) => {
   const URL = `http://go.wroclaw.pl/api/v1.0/offers/?key=${API_KEY}&page-size=${pageSize}&type-id=${types}`;
 
   try {
     const resp = await axios.get(URL);
 
-    const data = resp.data.items.map((item) => {
-      const img = item.mainImage.standard;
-      const id = item.id;
-      const title = item.title;
-
-      return { id, img, title };
+    const filteredData = resp.data.items.filter((item) => {
+      return "mainImage" in item && "id" in item && "title" in item && "events" in item;
     });
 
-    return data;
-  } catch (error) {
-    console.log({ getOffersCardsData: error });
-  }
-};
-export const getMainCardData = async (pageSize, types) => {
-  if (!types || typeof types !== "number") return;
-  if (!pageSize || typeof pageSize !== "number") return;
-
-  const URL = `http://go.wroclaw.pl/api/v1.0/offers/?key=${API_KEY}&page-size=${pageSize}&type-id=${types}`;
-
-  try {
-    const resp = await axios.get(URL);
-
-    const data = resp.data.items.map((item) => {
-      const img = item.mainImage.standard;
-      const id = item.id;
-      const title = item.title;
-      const startDate = item.events[0].startDate;
-      const ticketing = item.events[0].ticketing;
-
-      return {
-        id,
-        img,
-        title,
-        startDate: fomatDate(startDate),
-        ticketing,
-      };
-    });
-
-    return data;
+    return filteredData.map(({ id, mainImage, title, events }) => ({
+      id,
+      img: mainImage.standard,
+      title,
+      startDate: fomatDate(events[0].startDate),
+      ticketing: events[0].ticketing,
+    }));
   } catch (error) {
     console.log({ getMainCardData: error });
   }
 };
 export const getSinglePlaceData = async (placeId) => {
-  if (!placeId || typeof placeId !== "number") return;
-
   const URL = `http://go.wroclaw.pl/api/v1.0/places/${placeId}/?key=${API_KEY}`;
 
   try {
@@ -123,8 +89,6 @@ export const getSinglePlaceData = async (placeId) => {
   }
 };
 export const getSingleOfferData = async (offerId) => {
-  if (!offerId || typeof offerId !== "number") return;
-
   const URL = `http://go.wroclaw.pl/api/v1.0/offers/${offerId}/?key=${API_KEY}`;
 
   try {
@@ -163,40 +127,6 @@ export const getSingleOfferData = async (offerId) => {
     console.log({ getSingleOfferData: error });
   }
 };
-
-export const getOffersList = async (types = null, pageSize = 10, page = 1) => {
-  const URL = `http://go.wroclaw.pl/api/v1.0/offers/?key=${API_KEY}&type-id=${types}&page-size=${pageSize}&page=${page}`;
-
-  try {
-    const resp = await axios.get(URL);
-    const data = resp.data.items;
-
-    return data.map(({ id, title, mainImage }) => ({
-      id,
-      title,
-      img: { standard: mainImage?.standard },
-    }));
-  } catch (error) {
-    console.log({ getOffersList: error });
-  }
-};
-export const getPlacesList = async (types = null, pageSize = 10, page = 1) => {
-  const URL = `http://go.wroclaw.pl/api/v1.0/places/?key=${API_KEY}&type-id=${types}&page-size=${pageSize}&page=${page}`;
-
-  try {
-    const resp = await axios.get(URL);
-    const data = resp.data.items;
-
-    return data.map(({ id, title, mainImage }) => ({
-      id,
-      title,
-      img: { standard: mainImage?.standard },
-    }));
-  } catch (error) {
-    console.log({ getPlacesList: error });
-  }
-};
-
 // --------------------------------
 //offer types list
 export const offertypeslist = async (pageSize, types) => {

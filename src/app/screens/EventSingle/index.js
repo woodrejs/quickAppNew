@@ -31,8 +31,6 @@ const EventSingle = () => {
     return () => dispatch(setIsLoaded(false));
   }, []);
 
-  console.log(offerData);
-
   return (
     <>
       {offerDataLoaded ? (

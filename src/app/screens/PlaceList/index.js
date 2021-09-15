@@ -8,7 +8,7 @@ import VerticalCardList from "../../components/VerticalCardList";
 import ListPaginationButton from "../../components/ListPaginationButton";
 import LoadingSection from "../../components/LoadingSection";
 //utils & styles
-import { getPlacesList } from "../../utils/fetchFunctions";
+import { fetchItemList } from "../../utils/fetchFunctions";
 import { setIsLoaded, setData, addData } from "../../redux/listPlace.slice";
 
 const PlaceList = ({ navigation }) => {
@@ -21,7 +21,7 @@ const PlaceList = ({ navigation }) => {
 
   useEffect(() => {
     async function init() {
-      const data = await getPlacesList();
+      const data = await fetchItemList("places"); //type, page, types, pageSize
       dispatch(setData(data));
     }
 
@@ -32,7 +32,7 @@ const PlaceList = ({ navigation }) => {
 
   useEffect(() => {
     async function usePagination() {
-      const data = await getPlacesList(null, 10, paginationCounter); //types, pageSize, page
+      const data = await fetchItemList("places", paginationCounter); //type, page, types, pageSize
       dispatch(addData(data));
     }
     paginationCounter > 1 && usePagination();
