@@ -4,6 +4,7 @@ import { View, Text } from "react-native";
 import HeaderSectionIcon from "./HeaderSectionIcon";
 import { style } from "./index.style";
 import { Props } from "./index.utils";
+import { setTicketed } from "../../utils";
 
 const CardHeaderSection: React.FC<Props> = ({
   title,
@@ -14,7 +15,7 @@ const CardHeaderSection: React.FC<Props> = ({
 }) => {
   return (
     <View style={style.container}>
-      <Text style={style.price}>{price}</Text>
+      <Text style={style.price}>{setTicketed(price)}</Text>
       <Text style={style.title}>{title}</Text>
       <View style={style.box}>
         {ticketing && <HeaderSectionIcon type="ticketing" title={ticketing} />}

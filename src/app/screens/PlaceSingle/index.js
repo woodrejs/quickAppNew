@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 //components
 import LargeImageCard from "../../components/LargeImageCard";
@@ -32,39 +32,27 @@ const PlaceSingle = ({ navigation }) => {
     return () => dispatch(setIsLoaded(false));
   }, []);
 
-  return (
-    <>
-      {placeDataLoaded ? (
-        <>
-          <ScrollView style={style.container}>
-            <LargeImageCard
-              img={placeData?.mainImage.large}
-              title={placeData?.title}
-              address={placeData?.address}
-            />
-            <InfoIconsSection venue={placeData?.venue} />
+  if (placeDataLoaded) {
+    const { images, title, location, venue } = placeData;
+    const { mainImage, address, longDescription } = placeData;
+    const { large } = mainImage;
+    const { email, telephone } = venue;
 
-            <RenderHtmlSection
-              source={placeData?.longDescription}
-              style={style.description}
-            />
-
-            <HorizontalImagesGallery images={placeData?.images} />
-
-            <Text style={style.title}>{placeData?.title}</Text>
-            <Text style={style.subTitle}>{placeData?.address}</Text>
-            <ContactSection
-              email={placeData?.venue.email}
-              telephone={placeData?.venue.telephone}
-            />
-            <LocalizationMapSection />
-          </ScrollView>
-          <CTAButtonsSection title="odwiedź stronę" />
-        </>
-      ) : (
-        <LoadingSection />
-      )}
-    </>
-  );
+    return (
+      <>
+        <ScrollView style={style.container}>
+          <LargeImageCard img={large} title={title} address={address} />
+          <InfoIconsSection venue={venue} />
+          <RenderHtmlSection source={longDescription} style={style.description} />
+          <HorizontalImagesGallery images={images} />
+          <Text style={style.title} children={title} />
+          <Text style={style.subTitle} children={address} />
+          <ContactSection email={email} telephone={telephone} />
+          <LocalizationMapSection location={location} />
+        </ScrollView>
+        <CTAButtonsSection title="odwiedź stronę" />
+      </>
+    );
+  } else return <LoadingSection />;
 };
 export default PlaceSingle;

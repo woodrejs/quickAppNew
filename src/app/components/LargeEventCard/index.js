@@ -1,19 +1,23 @@
-import React, { useState, useEffect, useRef } from "react";
-import { View, Text, TouchableHighlight, ImageBackground } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, TouchableOpacity, ImageBackground } from "react-native";
 //components
 import CardHeaderSection from "../CardHeaderSection";
+import LargeCardHeader from "./LargeCardHeader";
 //utils & styles
 import { useIsFocused } from "@react-navigation/native";
-import { Fontisto } from "@expo/vector-icons";
 import { style } from "./index.style";
-import { COLORS } from "../../style/colors";
+import { useDispatch } from "react-redux";
+import { setId } from "../../redux/singleOffer.slice";
+import { screensNames } from "../../utils/screensNames";
 
 const LargeEventCard = ({ data, navigation }) => {
   const [counter, setCounter] = useState(0);
   const [intervalId, setIntervalId] = useState();
   const isFocused = useIsFocused();
-  const { title, img, startDate, ticketing } = data[counter];
+  const dispatch = useDispatch();
+  const { id, title, img, startDate, ticketing } = data[counter];
 
+  const stopRace = () => clearInterval(intervalId, 5000);
   const startRace = () => {
     setIntervalId(
       setInterval(() => {
@@ -21,7 +25,10 @@ const LargeEventCard = ({ data, navigation }) => {
       }, 5000)
     );
   };
-  const stopRace = () => clearInterval(intervalId, 5000);
+  const handlePress = () => {
+    dispatch(setId(id));
+    navigation.navigate(screensNames.eventSingle);
+  };
 
   useEffect(() => {
     isFocused ? startRace() : stopRace();
@@ -29,11 +36,9 @@ const LargeEventCard = ({ data, navigation }) => {
 
   return (
     <View style={style.container}>
-      <View style={style.box}>
-        <Text style={style.title}>Premiera w tym tygodniu</Text>
-        <Fontisto name="eye" size={14} color={COLORS.lightExtra} />
-      </View>
-      <TouchableHighlight>
+      <LargeCardHeader id={id} navigation={navigation} title="Wybrane w tym tygodniu" />
+
+      <TouchableOpacity onPress={handlePress}>
         <ImageBackground
           style={style.imageBox}
           imageStyle={style.image}
@@ -41,7 +46,7 @@ const LargeEventCard = ({ data, navigation }) => {
         >
           <CardHeaderSection title={title} ticketing={ticketing} date={startDate} />
         </ImageBackground>
-      </TouchableHighlight>
+      </TouchableOpacity>
     </View>
   );
 };

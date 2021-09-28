@@ -14,7 +14,11 @@ const LargeImageCard = ({
 }) => {
   return (
     <View style={style.container}>
-      <ImageBackground style={style.box} imageStyle={style.image} source={{ uri: img }}>
+      <ImageBackground
+        style={style.box}
+        imageStyle={style.image}
+        source={img ? { uri: img } : require("../../../../assets/img/no_img.jpg")}
+      >
         <CardHeaderSection
           title={title}
           price={price}

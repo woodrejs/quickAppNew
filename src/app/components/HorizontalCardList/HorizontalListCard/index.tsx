@@ -25,7 +25,11 @@ const HorizontalListCard: React.FC<Props> = ({ img, id, navigation, type, title 
       <ImageBackground
         style={style.container}
         imageStyle={style.image}
-        source={{ uri: img.standard }}
+        source={
+          img?.standard
+            ? { uri: img.standard }
+            : require("../../../../../assets/img/no_img.jpg")
+        }
       >
         <Text style={style.title}>{title}</Text>
       </ImageBackground>

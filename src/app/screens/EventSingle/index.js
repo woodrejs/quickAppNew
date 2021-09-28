@@ -31,41 +31,27 @@ const EventSingle = () => {
     return () => dispatch(setIsLoaded(false));
   }, []);
 
-  return (
-    <>
-      {offerDataLoaded ? (
-        <>
-          <ScrollView style={style.container}>
-            <LargeImageCard
-              img={offerData?.mainImage.large}
-              title={offerData?.title}
-              price={offerData?.ticketing}
-              date={offerData?.startDate}
-            />
-            <InfoIconsSection venue={offerData?.venue} />
+  if (offerDataLoaded) {
+    const { mainImage, title, ticketing, startDate, venue } = offerData;
+    const { longDescription, place, address, location } = offerData;
+    const { images, name, longDescription: placeLongDescription } = place;
+    const { large } = mainImage;
 
-            <RenderHtmlSection
-              source={offerData?.longDescription}
-              style={style.description}
-            />
-
-            <Text style={style.title}>{offerData?.place.name}</Text>
-            <Text style={style.subTitle}>{offerData?.address}</Text>
-            <HorizontalImagesGallery images={offerData?.place.images} />
-
-            <RenderHtmlSection
-              source={offerData?.place.longDescription}
-              style={style.description}
-            />
-
-            <LocalizationMapSection />
-          </ScrollView>
-          <CTAButtonsSection title="dodaj do planu" />
-        </>
-      ) : (
-        <LoadingSection />
-      )}
-    </>
-  );
+    return (
+      <>
+        <ScrollView style={style.container}>
+          <LargeImageCard img={large} title={title} price={ticketing} date={startDate} />
+          <InfoIconsSection venue={venue} />
+          <RenderHtmlSection source={longDescription} style={style.description} />
+          <Text style={style.title} children={name} />
+          <Text style={style.subTitle} children={address} />
+          <HorizontalImagesGallery images={images} />
+          <RenderHtmlSection source={placeLongDescription} style={style.description} />
+          <LocalizationMapSection location={location} />
+        </ScrollView>
+        <CTAButtonsSection title="dodaj do planu" />
+      </>
+    );
+  } else return <LoadingSection />;
 };
 export default EventSingle;

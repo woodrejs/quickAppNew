@@ -19,16 +19,19 @@ const HorizontalCardList: React.FC<Props> = ({
       <SubTitleHeader title={title} type={type} navigation={navigation} />
 
       <ScrollView style={style.list} horizontal>
-        {data.map(({ id, img, title }) => (
-          <HorizontalListCard
-            key={id}
-            id={id}
-            img={img}
-            title={title}
-            navigation={navigation}
-            type={type}
-          />
-        ))}
+        {data.map(({ id, img, title }) => {
+          if (id && title)
+            return (
+              <HorizontalListCard
+                key={id}
+                id={id}
+                img={img}
+                title={title}
+                navigation={navigation}
+                type={type}
+              />
+            );
+        })}
         <HorizontalListButton type={type} navigation={navigation} />
       </ScrollView>
     </View>
