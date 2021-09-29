@@ -1,21 +1,59 @@
 import * as React from "react";
 import { Formik } from "formik";
-import { View } from "react-native";
+import { View, TextInput, Button } from "react-native";
 
 import FormButton from "../FormButton";
 import FormInput from "../FormInput";
-
+import { useSelector, useDispatch } from "react-redux";
 import { style } from "./index.style";
+import { userRegister, RegisterSchema } from "../../../utils/strapi";
+import { setLoggedIn } from "../../../redux/user.slice";
+import { stacksNames } from "../../../utils/stacksNames";
 
-const RegisterForm = () => {
+const RegisterForm = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const handleOnSubmit = async ({ username, email, password }) => {
+    const jwt = await userRegister(username, email, password);
+    dispatch(setLoggedIn(jwt));
+    navigation.navigate(stacksNames.home);
+  };
+
   return (
-    <Formik>
-      <View style={style.container}>
-        <FormInput label="name" />
-        <FormInput label="email" />
-        <FormInput label="password" />
-        <FormButton label="zarejestruj" customStyle={style.button} />
-      </View>
+    <Formik
+      initialValues={{ username: "", email: "", password: "" }}
+      onSubmit={handleOnSubmit}
+      validationSchema={RegisterSchema}
+    >
+      {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
+        <View style={style.container}>
+          <FormInput
+            label="username"
+            change={handleChange("username")}
+            blur={handleBlur("username")}
+            val={values.username}
+            error={errors.username}
+          />
+          <FormInput
+            label="email"
+            change={handleChange("email")}
+            blur={handleBlur("email")}
+            val={values.email}
+            error={errors.email}
+          />
+          <FormInput
+            label="password"
+            change={handleChange("password")}
+            blur={handleBlur("password")}
+            val={values.password}
+            error={errors.password}
+          />
+          <FormButton
+            label="zarejestruj"
+            customStyle={style.button}
+            press={handleSubmit}
+          />
+        </View>
+      )}
     </Formik>
   );
 };

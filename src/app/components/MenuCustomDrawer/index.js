@@ -2,12 +2,21 @@ import React from "react";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import { Stacks } from "../../routes/stacks";
 import { View, StyleSheet, Text } from "react-native";
-
-import { AntDesign } from "@expo/vector-icons";
+import { useSelector, useDispatch } from "react-redux";
+import { AntDesign, Entypo } from "@expo/vector-icons";
 import { COLORS } from "../../style/colors";
+import { stacksNames } from "../../utils/stacksNames";
+import { setLoggedOut } from "../../redux/user.slice";
 
 const MenuCustomDrawer = (props) => {
+  const dispatch = useDispatch();
+  const userIsLogged = useSelector(({ userSlice }) => userSlice.logged);
+
   const handlePress = (name) => props.navigation.navigate(name);
+  const handleLogOut = () => {
+    dispatch(setLoggedOut());
+    props.navigation.navigate(stacksNames.auth);
+  };
 
   return (
     <DrawerContentScrollView {...props} style={style.container}>
@@ -17,9 +26,26 @@ const MenuCustomDrawer = (props) => {
         </View>
         <Text style={style.title}>Witaj {"\n"}username</Text>
       </View>
-      {Stacks.map(({ name, icon, id }) => (
-        <DrawerItem key={id} label={name} onPress={() => handlePress(name)} icon={icon} />
-      ))}
+      {Stacks.map(({ name, icon, id }) => {
+        if (name === stacksNames.auth && userIsLogged) return;
+
+        return (
+          <DrawerItem
+            key={id}
+            label={name}
+            onPress={() => handlePress(name)}
+            icon={icon}
+          />
+        );
+      })}
+      
+      {userIsLogged && (
+        <DrawerItem
+          label="Wyloguj"
+          onPress={handleLogOut}
+          icon={() => <Entypo name="lock-open" size={24} color={COLORS.black} />}
+        />
+      )}
     </DrawerContentScrollView>
   );
 };

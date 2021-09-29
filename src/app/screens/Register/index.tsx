@@ -12,7 +12,7 @@ const Register: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={style.container}>
       <Text style={style.title}>utwórz {"\n"}konto</Text>
-      <RegisterForm />
+      <RegisterForm navigation={navigation} />
       <AuthLinksSection
         navigation={navigation}
         primaryButton={["zaloguj", screensNames.login]}

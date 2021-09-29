@@ -16,7 +16,8 @@ const Navigation = () => {
       <Drawer.Navigator
         initialRouteName={"homeStack"}
         screenOptions={{ headerShown: false }}
-        drawerContent={MenuCustomDrawer}
+        drawerContent={(props) => <MenuCustomDrawer {...props} />}
+        //https://github.com/react-navigation/react-navigation/issues/8463 check it
       >
         {Stacks.map(({ name, component, id }) => (
           <Drawer.Screen key={id} name={name} component={component} />
