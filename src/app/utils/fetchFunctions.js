@@ -23,9 +23,10 @@ export const fetchItemList = async (type, page = 1, types = null, pageSize = 10)
     });
 
     return filteredData.map(({ id, title, mainImage }) => ({
-      id,
+      id: `${id}`,
       title,
-      img: { standard: mainImage?.standard },
+      img: mainImage?.standard,
+      type,
     }));
   } catch (error) {
     console.log({ fetchItemList: error });
@@ -42,7 +43,7 @@ export const getMainCardData = async (types, pageSize) => {
     });
 
     return filteredData.map(({ id, mainImage, title, events }) => ({
-      id,
+      id: `${id}`,
       img: mainImage.standard,
       title,
       startDate: fomatDate(events[0].startDate),
@@ -53,6 +54,7 @@ export const getMainCardData = async (types, pageSize) => {
   }
 };
 export const getSingleOfferData = async (offerId) => {
+  console.log(offerId);
   const URL = `http://go.wroclaw.pl/api/v1.0/offers/${offerId}/?key=${API_KEY}`;
 
   try {
@@ -117,7 +119,7 @@ export const getSingleOfferData = async (offerId) => {
     }
 
     return {
-      id,
+      id: `${id}`,
       title,
       longDescription,
       pageLink,
@@ -180,7 +182,7 @@ export const getSinglePlaceData = async (placeId) => {
     }
 
     return {
-      id,
+      id: `${id}`,
       title,
       longDescription,
       pageLink,

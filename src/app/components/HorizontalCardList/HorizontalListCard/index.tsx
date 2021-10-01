@@ -8,13 +8,19 @@ import { setId as setOfferId } from "../../../redux/singleOffer.slice";
 import { Props } from "./index.utils";
 import { screensNames } from "../../../utils/screensNames";
 
-const HorizontalListCard: React.FC<Props> = ({ img, id, navigation, type, title }) => {
+const HorizontalListCard: React.FC<Props> = ({
+  img,
+  id,
+  navigation,
+  type = "offers",
+  title,
+}) => {
   const dispatch = useDispatch();
   const handlePress = () => {
-    if (type === "place") {
+    if (type === "places") {
       dispatch(setPlaceId(id));
       navigation.navigate(screensNames.placeSingle);
-    } else {
+    } else if (type === "offers") {
       dispatch(setOfferId(id));
       navigation.navigate(screensNames.eventSingle);
     }
@@ -25,11 +31,7 @@ const HorizontalListCard: React.FC<Props> = ({ img, id, navigation, type, title 
       <ImageBackground
         style={style.container}
         imageStyle={style.image}
-        source={
-          img?.standard
-            ? { uri: img.standard }
-            : require("../../../../../assets/img/no_img.jpg")
-        }
+        source={img ? { uri: img } : require("../../../../../assets/img/no_img.jpg")}
       >
         <Text style={style.title}>{title}</Text>
       </ImageBackground>

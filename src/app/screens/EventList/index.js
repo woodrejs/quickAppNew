@@ -8,14 +8,17 @@ import VerticalCardList from "../../components/VerticalCardList";
 import ListPaginationButton from "../../components/ListPaginationButton";
 import LoadingSection from "../../components/LoadingSection";
 //utils & styles
-import {  fetchItemList } from "../../utils/fetchFunctions";
+import { fetchItemList } from "../../utils/fetchFunctions";
 import { setIsLoaded, setData, addData } from "../../redux/listOffer.slice";
+import { useIsFocused } from "@react-navigation/native";
 
+//todo: pozbyc sie img.standard na rzecz img
 const EventList = ({ navigation }) => {
   const [paginationCounter, setPaginationCounter] = useState(1);
   const offerListData = useSelector(({ listOfferSlice }) => listOfferSlice.data);
   const offerListDataLoaded = useSelector(({ listOfferSlice }) => listOfferSlice.loaded);
 
+  const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const handlePagination = () => setPaginationCounter((state) => state + 1);
 
@@ -25,11 +28,8 @@ const EventList = ({ navigation }) => {
       dispatch(setData(data));
     }
 
-    init();
-
-    return () => dispatch(setIsLoaded(false));
-  }, []);
-
+    isFocused ? init() : dispatch(setIsLoaded(false));
+  }, [isFocused]);
   useEffect(() => {
     async function usePagination() {
       const data = await fetchItemList("offers", paginationCounter); //type, page, types, pageSize
@@ -44,8 +44,11 @@ const EventList = ({ navigation }) => {
         title="Zobacz najnowsze wydarzenia"
         text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       />
+
       <SortButtonsSection />
-      <VerticalCardList data={offerListData} navigation={navigation} type="event" />
+
+      <VerticalCardList list={offerListData} navigation={navigation} />
+
       <ListPaginationButton handler={handlePagination} />
     </ScrollView>
   ) : (

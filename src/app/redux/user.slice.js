@@ -19,8 +19,13 @@ const userSlice = createSlice({
       state.jwt = null;
       state.favorites = [];
     },
+    setFavorites(state, action) {
+      const { payload } = action;
+
+      state.favorites = payload;
+    },
   },
 });
 
-export const { setLoggedIn, setLoggedOut } = userSlice.actions;
+export const { setLoggedIn, setLoggedOut, setFavorites } = userSlice.actions;
 export default userSlice.reducer;

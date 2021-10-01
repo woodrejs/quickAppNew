@@ -1,6 +1,6 @@
 export type Props = {
   title: string;
-  type: string;
+  variant: string;
   navigation: {
     navigate: () => void;
   };

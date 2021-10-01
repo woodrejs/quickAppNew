@@ -1,16 +1,28 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-
+import React, { useEffect, useState } from "react";
+import { View, StyleSheet, Text } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 import GridListItem from "./GridListItem";
 
+import { setFavorites } from "../../redux/user.slice";
+import { findFavorites } from "../../utils/strapi";
+
 const GridCardList = () => {
-  return (
+  const dispatch = useDispatch();
+  const jwt = useSelector(({ userSlice }) => userSlice.jwt);
+  const userIsLogged = useSelector(({ userSlice }) => userSlice.logged);
+  const favorites = useSelector(({ userSlice }) => userSlice.favorites);
+
+  console.log(favorites);
+
+  return userIsLogged ? (
     <View style={style.container}>
-      <GridListItem />
-      <GridListItem />
-      <GridListItem />
-      <GridListItem />
-      <GridListItem />
+      {favorites.map((item) => (
+        <GridListItem key={item.id} data={item} />
+      ))}
+    </View>
+  ) : (
+    <View>
+      <Text>Musisz być zalogowany.</Text>
     </View>
   );
 };

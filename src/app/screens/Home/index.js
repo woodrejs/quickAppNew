@@ -9,10 +9,7 @@ import ScreenTitleSection from "../../components/ScreenTitleSection";
 //styles
 import { style } from "./index.style";
 
-
-
 const Home = ({ navigation }) => {
- 
   const moviesData = useSelector((state) => state.homeSlice.movies.list);
   const playsData = useSelector((state) => state.homeSlice.plays.list);
   const placesData = useSelector((state) => state.homeSlice.places.list);
@@ -44,7 +41,7 @@ const Home = ({ navigation }) => {
         title="Miejsca"
         data={placesData}
         navigation={navigation}
-        type="place"
+        variant="places"
       />
       <View style={style.footer} />
     </ScrollView>

@@ -1,14 +1,18 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-
+import { useSelector, useDispatch } from "react-redux";
 import CardSectionButton from "./CardSectionButton";
 
-const CardCTASection = () => {
+const CardCTASection = ({ data, inFavorite, inSchedule = false }) => {
+  const isLogged = useSelector(({ userSlice }) => userSlice.logged);
+
   return (
-    <View style={style.container}>
-      <CardSectionButton type="favorite" />
-      <CardSectionButton type="schedule" />
-    </View>
+    isLogged && (
+      <View style={style.container}>
+        <CardSectionButton data={data} variant="favorite" selected={inFavorite} />
+        <CardSectionButton data={data} variant="schedule" selected={inSchedule} />
+      </View>
+    )
   );
 };
 

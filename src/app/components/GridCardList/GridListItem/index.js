@@ -10,18 +10,19 @@ import {
 import { COLORS } from "../../../style/colors";
 import CardCTASection from "../../CardCTASection";
 
-const GridListItem = () => {
+const GridListItem = ({ data }) => {
+  const { uid, img, title, type } = data;
   return (
     <ImageBackground
       style={style.container}
       imageStyle={style.image}
-      source={require("../../../../../assets/index_1.jpg")}
+      source={img ? { uri: img } : require("../../../../../assets/img/no_img.jpg")}
     >
       <TouchableHighlight style={style.box}>
-        <Text style={style.title}>Long name of some event</Text>
+        <Text style={style.title}>{title}</Text>
       </TouchableHighlight>
 
-      <CardCTASection />
+      <CardCTASection data={{ id: uid, img, title, type }} inFavorite />
     </ImageBackground>
   );
 };

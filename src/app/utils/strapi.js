@@ -1,39 +1,16 @@
 import axios from "axios";
 import { STRAPI_DB } from "@env";
 import * as Yup from "yup";
-import { v4 as uuidv4 } from "uuid";
 
+// USER
 export async function userLogin(identifier, password) {
   try {
     const { data } = await axios.post(`${STRAPI_DB}auth/local`, { identifier, password });
+
     return data.jwt;
   } catch (error) {
     console.log({ userAuth: error });
   }
-
-  // Object {
-  //   "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTMwMGQ0MmU5ZWJlNDUyOGQ2NGMyNCIsImlhdCI6MTYzMjg5NTIwMSwiZXhwIjoxNjM1NDg3MjAxfQ.qDvlH0yyRp3LRYP3k5uRlGL4S-oPsPXUren-6GWTIwc",
-  //   "user": Object {
-  //     "__v": 0,
-  //     "_id": "615300d42e9ebe4528d64c24",
-  //     "blocked": false,
-  //     "confirmed": true,
-  //     "createdAt": "2021-09-28T11:47:32.387Z",
-  //     "email": "quickweek@gmail.com",
-  //     "id": "615300d42e9ebe4528d64c24",
-  //     "provider": "local",
-  //     "role": Object {
-  //       "__v": 0,
-  //       "_id": "6152f81d2e9ebe4528d64b3b",
-  //       "description": "Default role given to authenticated user.",
-  //       "id": "6152f81d2e9ebe4528d64b3b",
-  //       "name": "Authenticated",
-  //       "type": "authenticated",
-  //     },
-  //     "updatedAt": "2021-09-28T11:47:32.603Z",
-  //     "username": "Admin",
-  //   },
-  // }
 }
 export async function userRegister(username, email, password) {
   try {
@@ -46,32 +23,54 @@ export async function userRegister(username, email, password) {
   } catch (error) {
     console.log({ userAuth: error });
   }
-
-  // Object {
-  //   "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTQwMDdkNDQzNjMzMzRkNDNhNDUzOCIsImlhdCI6MTYzMjg5NTEwMSwiZXhwIjoxNjM1NDg3MTAxfQ.e-RN_HeMP-PwjRpniF-VcQMREORrdc30b2GdOxuvGr8",
-  //   "user": Object {
-  //     "__v": 0,
-  //     "_id": "6154007d44363334d43a4538",
-  //     "blocked": false,
-  //     "confirmed": true,
-  //     "createdAt": "2021-09-29T05:58:21.118Z",
-  //     "email": "maciek@maciek.pl",
-  //     "id": "6154007d44363334d43a4538",
-  //     "provider": "local",
-  //     "role": Object {
-  //       "__v": 0,
-  //       "_id": "6152f81d2e9ebe4528d64b3b",
-  //       "description": "Default role given to authenticated user.",
-  //       "id": "6152f81d2e9ebe4528d64b3b",
-  //       "name": "Authenticated",
-  //       "type": "authenticated",
-  //     },
-  //     "updatedAt": "2021-09-29T05:58:21.337Z",
-  //     "username": "Maciek",
-  //   },
-  // }
 }
-//validation schema
+// FAVORITES
+export async function deleteFavorite(id, jwt) {
+  try {
+    const { data } = await axios({
+      method: "delete",
+      url: `${STRAPI_DB}favorites/${id}`,
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log({ deleteFavorite: error });
+  }
+}
+export async function createFavorite(obj, jwt) {
+  try {
+    const { data } = await axios({
+      method: "post",
+      url: `${STRAPI_DB}favorites`,
+      data: obj,
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    console.log({ createFavorite: error });
+  }
+}
+export async function findFavorites(jwt) {
+  try {
+    const { data } = await axios({
+      method: "get",
+      url: `${STRAPI_DB}favorites`,
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    });
+
+    return data;
+  } catch (error) {
+    console.log({ findFavorites: error });
+  }
+}
+//VALIDATIONS SCHEMES
 export const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email("Niepoprawny adres email.")

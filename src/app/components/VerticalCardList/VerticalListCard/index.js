@@ -8,11 +8,10 @@ import CardCTASection from "../../CardCTASection";
 import { setId as setPlaceId } from "../../../redux/singlePlace.slice";
 import { setId as setOfferId } from "../../../redux/singleOffer.slice";
 
-const VerticalListCard = ({ title, id, img, navigation, type }) => {
+const VerticalListCard = ({ data, navigation, inFavorite = false }) => {
   const dispatch = useDispatch();
   const handlePress = () => {
-    console.log(id);
-
+    //console.log(id);
     if (type === "place") {
       dispatch(setPlaceId(id));
       navigation.navigate(screensNames.placeSingle);
@@ -21,16 +20,18 @@ const VerticalListCard = ({ title, id, img, navigation, type }) => {
       navigation.navigate(screensNames.eventSingle);
     }
   };
+  
   return (
     <ImageBackground
       style={style.container}
       imageStyle={style.image}
-      source={{ uri: img.standard }}
+      source={{ uri: data.img }}
     >
       <TouchableOpacity style={style.box} onPress={handlePress}>
-        <VerticalCardLabel title={title} />
+        <VerticalCardLabel title={data.title} />
       </TouchableOpacity>
-      <CardCTASection />
+
+      <CardCTASection data={data} inFavorite={inFavorite} />
     </ImageBackground>
   );
 };

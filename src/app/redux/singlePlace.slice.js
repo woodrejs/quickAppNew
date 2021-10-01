@@ -12,8 +12,6 @@ const singlePlaceSlice = createSlice({
     setId(state, action) {
       const { payload } = action;
 
-      if (typeof payload !== "number") return;
-
       state.id = payload;
     },
     setIsLoaded(state, action) {

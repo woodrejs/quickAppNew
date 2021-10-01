@@ -6,8 +6,8 @@ import FormButton from "../FormButton";
 import FormInput from "../FormInput";
 import { useSelector, useDispatch } from "react-redux";
 import { style } from "./index.style";
-import { userRegister, RegisterSchema } from "../../../utils/strapi";
-import { setLoggedIn } from "../../../redux/user.slice";
+import { userRegister, RegisterSchema, findFavorites } from "../../../utils/strapi";
+import { setLoggedIn, setFavorites } from "../../../redux/user.slice";
 import { stacksNames } from "../../../utils/stacksNames";
 
 const RegisterForm = ({ navigation }) => {
@@ -15,6 +15,8 @@ const RegisterForm = ({ navigation }) => {
   const handleOnSubmit = async ({ username, email, password }) => {
     const jwt = await userRegister(username, email, password);
     dispatch(setLoggedIn(jwt));
+    const data = await findFavorites(jwt);
+    dispatch(setFavorites(data));
     navigation.navigate(stacksNames.home);
   };
 

@@ -6,10 +6,10 @@ import { COLORS } from "../../../style/colors";
 import { style } from "./index.style";
 import { stacksNames } from "../../../utils/stacksNames";
 
-const HorizontalListButton = ({ navigation, type }) => {
+const HorizontalListButton = ({ navigation, variant }) => {
   const handlePress = () => {
-    switch (type) {
-      case "place":
+    switch (variant) {
+      case "places":
         navigation.navigate(stacksNames.places);
         break;
       default:

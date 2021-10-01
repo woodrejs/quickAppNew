@@ -10,12 +10,14 @@ import LoadingSection from "../../components/LoadingSection";
 //utils & styles
 import { fetchItemList } from "../../utils/fetchFunctions";
 import { setIsLoaded, setData, addData } from "../../redux/listPlace.slice";
+import { useIsFocused } from "@react-navigation/native";
 
 const PlaceList = ({ navigation }) => {
   const [paginationCounter, setPaginationCounter] = useState(1);
   const placeListData = useSelector(({ listPlaceSlice }) => listPlaceSlice.data);
   const placeListDataLoaded = useSelector(({ listPlaceSlice }) => listPlaceSlice.loaded);
 
+  const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const handlePagination = () => setPaginationCounter((state) => state + 1);
 
@@ -25,10 +27,8 @@ const PlaceList = ({ navigation }) => {
       dispatch(setData(data));
     }
 
-    init();
-
-    return () => dispatch(setIsLoaded(false));
-  }, []);
+    isFocused ? init() : dispatch(setIsLoaded(false));
+  }, [isFocused]);
 
   useEffect(() => {
     async function usePagination() {
@@ -45,7 +45,7 @@ const PlaceList = ({ navigation }) => {
         text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       />
       <SortButtonsSection />
-      <VerticalCardList data={placeListData} navigation={navigation} type="place" />
+      <VerticalCardList list={placeListData} navigation={navigation} />
       <ListPaginationButton handler={handlePagination} />
     </ScrollView>
   ) : (

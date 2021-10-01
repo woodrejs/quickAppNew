@@ -6,10 +6,10 @@ import { Fontisto } from "@expo/vector-icons";
 import { stacksNames } from "../../utils/stacksNames";
 import { style } from "./index.style";
 
-const SubTitleHeader = ({ navigation, type, title }) => {
+const SubTitleHeader = ({ navigation, variant, title }) => {
   const handlePress = () => {
-    switch (type) {
-      case "place":
+    switch (variant) {
+      case "places":
         navigation.navigate(stacksNames.places);
         break;
       case "schedule":

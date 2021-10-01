@@ -12,14 +12,14 @@ const HorizontalCardList: React.FC<Props> = ({
   title,
   data,
   navigation,
-  type = "event",
+  variant = "offers",
 }) => {
   return (
     <View style={style.container}>
-      <SubTitleHeader title={title} type={type} navigation={navigation} />
+      <SubTitleHeader title={title} variant={variant} navigation={navigation} />
 
       <ScrollView style={style.list} horizontal>
-        {data.map(({ id, img, title }) => {
+        {data.map(({ id, img, title, type }) => {
           if (id && title)
             return (
               <HorizontalListCard
@@ -32,7 +32,7 @@ const HorizontalCardList: React.FC<Props> = ({
               />
             );
         })}
-        <HorizontalListButton type={type} navigation={navigation} />
+        <HorizontalListButton variant={variant} navigation={navigation} />
       </ScrollView>
     </View>
   );

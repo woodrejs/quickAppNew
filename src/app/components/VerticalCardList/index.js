@@ -1,23 +1,13 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-
+import { useSelector, useDispatch } from "react-redux";
 import VerticalListCard from "./VerticalListCard";
 
-const VerticalCardList = ({ data, navigation, type }) => {
+const VerticalCardList = ({ list, navigation }) => {
+  const favorites = useSelector(({ userSlice }) => userSlice.favorites);
+
   return (
-    <View style={style.container}>
-      {data &&
-        data.map(({ id, title, img }) => (
-          <VerticalListCard
-            img={img}
-            title={title}
-            key={id}
-            id={id}
-            navigation={navigation}
-            type={type}
-          />
-        ))}
-    </View>
+    <View style={style.container}>{list && isInArray(list, favorites, navigation)}</View>
   );
 };
 
@@ -29,3 +19,19 @@ const style = StyleSheet.create({
     paddingBottom: 20,
   },
 });
+
+function isInArray(arr1, arr2, navigation) {
+  let counter = {};
+
+  arr2.forEach((item) => {
+    counter[item.uid] = true;
+  });
+
+  return arr1.map((item) =>
+    counter[item.id] ? (
+      <VerticalListCard data={item} key={item.id} navigation={navigation} inFavorite />
+    ) : (
+      <VerticalListCard data={item} key={item.id} navigation={navigation} />
+    )
+  );
+}

@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const singleOfferSlice = createSlice({
   name: "singleOfferSlice",
   initialState: {
@@ -11,8 +10,6 @@ const singleOfferSlice = createSlice({
   reducers: {
     setId(state, action) {
       const { payload } = action;
-
-      if (typeof payload !== "number") return;
 
       state.id = payload;
     },
@@ -26,7 +23,7 @@ const singleOfferSlice = createSlice({
     setData(state, action) {
       const { payload } = action;
 
-    /*
+      /*
      {
          id,
          title,
