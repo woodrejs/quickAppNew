@@ -5,19 +5,28 @@ import { COLORS } from "../../style/colors";
 import { Fontisto } from "@expo/vector-icons";
 import { stacksNames } from "../../utils/stacksNames";
 import { style } from "./index.style";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilters as setOffersFilters } from "../../redux/listOffer.slice";
+import { setFilters as setPlacesFilters } from "../../redux/listPlace.slice";
 
-const SubTitleHeader = ({ navigation, variant, title }) => {
+const SubTitleHeader = ({ navigation, variant, title, filters }) => {
+  const dispatch = useDispatch();
+
   const handlePress = () => {
     switch (variant) {
       case "places":
+        dispatch(setPlacesFilters(filters));
         navigation.navigate(stacksNames.places);
         break;
       case "schedule":
         navigation.navigate(stacksNames.schedule);
         break;
-      default:
+      case "offers":
+        dispatch(setOffersFilters(filters));
         navigation.navigate(stacksNames.events);
         break;
+      default:
+        return null;
     }
   };
 

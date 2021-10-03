@@ -2,7 +2,6 @@ import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
 
 import ScreenTitleSection from "../../components/ScreenTitleSection";
-import SortButtonsSection from "../../components/SortButtonsSection";
 import GridCardList from "../../components/GridCardList";
 
 const FavoritesList = () => {
@@ -12,7 +11,7 @@ const FavoritesList = () => {
         title="Twoje ulubione wydarzenia i miejsca"
         text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       />
-      <SortButtonsSection />
+
       <GridCardList />
     </ScrollView>
   );

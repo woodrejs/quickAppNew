@@ -26,10 +26,30 @@ const Home = ({ navigation }) => {
       <LargeEventCard data={mainData} navigation={navigation} />
       <ScheduleEventCard />
       <Text style={style.subTitle}>Odkryj teraz</Text>
-      <HorizontalCardList title="Filmy" data={moviesData} navigation={navigation} />
-      <HorizontalCardList title="Sztuki" data={playsData} navigation={navigation} />
-      <HorizontalCardList title="Książki" data={booksData} navigation={navigation} />
-      <HorizontalCardList title="Sport" data={sportData} navigation={navigation} />
+      <HorizontalCardList
+        title="Filmy"
+        data={moviesData}
+        navigation={navigation}
+        filters={[1]}
+      />
+      <HorizontalCardList
+        title="Sztuki"
+        data={playsData}
+        navigation={navigation}
+        filters={[2]}
+      />
+      <HorizontalCardList
+        title="Książki"
+        data={booksData}
+        navigation={navigation}
+        filters={[7]}
+      />
+      <HorizontalCardList
+        title="Sport"
+        data={sportData}
+        navigation={navigation}
+        filters={[4]}
+      />
       <Text style={style.subTitle}>Wrocław</Text>
       <Text style={style.label}>Miasto Spotkań</Text>
       <Text style={style.text}>

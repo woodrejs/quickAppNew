@@ -1,1980 +1,2772 @@
 const offersType = [
   {
-    alias: "kino",
+    active: false,
+    key: uuidv4(),
+    title: "kino",
     id: 1,
   },
   {
-    alias: "teatr",
+    active: false,
+    key: uuidv4(),
+    title: "teatr",
     id: 2,
   },
 
   {
-    alias: "sztuka",
+    active: false,
+    key: uuidv4(),
+    title: "sztuka",
     id: 3,
   },
 
   {
-    alias: "sport-i-rekreacja",
+    active: false,
+    key: uuidv4(),
+    title: "sport-i-rekreacja",
     id: 4,
   },
 
   {
-    alias: "muzyka",
+    active: false,
+    key: uuidv4(),
+    title: "muzyka",
     id: 5,
   },
 
   {
-    alias: "rozrywka",
+    active: false,
+    key: uuidv4(),
+    title: "rozrywka",
     id: 6,
   },
 
   {
-    alias: "literatura",
+    active: false,
+    key: uuidv4(),
+    title: "literatura",
     id: 7,
   },
 
   {
-    alias: "edukacja-i-rozwoj",
+    active: false,
+    key: uuidv4(),
+    title: "edukacja-i-rozwoj",
     id: 8,
   },
 
   {
-    alias: "inne",
+    active: false,
+    key: uuidv4(),
+    title: "inne",
     id: 12,
   },
 
   {
-    alias: "dla-dzieci",
+    active: false,
+    key: uuidv4(),
+    title: "dla-dzieci",
     id: 79,
   },
 
   {
-    alias: "esk",
+    active: false,
+    key: uuidv4(),
+    title: "esk",
     id: 80,
   },
 
   {
-    alias: "w-plenerze",
+    active: false,
+    key: uuidv4(),
+    title: "w-plenerze",
     id: 84,
   },
 
   {
-    alias: "dla-seniorow",
+    active: false,
+    key: uuidv4(),
+    title: "dla-seniorow",
     id: 85,
   },
 
   {
-    alias: "tylko-dla-doroslych",
+    active: false,
+    key: uuidv4(),
+    title: "tylko-dla-doroslych",
     id: 98,
   },
 
   {
-    alias: "dla-wszystkich",
+    active: false,
+    key: uuidv4(),
+    title: "dla-wszystkich",
     id: 101,
   },
 
   {
-    alias: "ferie-zimowe",
+    active: false,
+    key: uuidv4(),
+    title: "ferie-zimowe",
     id: 102,
   },
 
   {
-    alias: "dla-rodzicow",
+    active: false,
+    key: uuidv4(),
+    title: "dla-rodzicow",
     id: 108,
   },
 
   {
-    alias: "ze-zwierzakiem",
+    active: false,
+    key: uuidv4(),
+    title: "ze-zwierzakiem",
     id: 109,
   },
 
   {
-    alias: "wydarzenie-kinowe",
+    active: false,
+    key: uuidv4(),
+    title: "wydarzenie-kinowe",
     id: 113,
   },
 
   {
-    alias: "spektakl",
+    active: false,
+    key: uuidv4(),
+    title: "spektakl",
     id: 114,
   },
 
   {
-    alias: "wystawa",
+    active: false,
+    key: uuidv4(),
+    title: "wystawa",
     id: 115,
   },
 
   {
-    alias: "performance",
+    active: false,
+    key: uuidv4(),
+    title: "performance",
     id: 116,
   },
 
   {
-    alias: "wernisaz",
+    active: false,
+    key: uuidv4(),
+    title: "wernisaz",
     id: 117,
   },
 
   {
-    alias: "zajecia-sportowe",
+    active: false,
+    key: uuidv4(),
+    title: "zajecia-sportowe",
     id: 118,
   },
 
   {
-    alias: "wydarzenia-sportowe",
+    active: false,
+    key: uuidv4(),
+    title: "wydarzenia-sportowe",
     id: 119,
   },
 
   {
-    alias: "zawody",
+    active: false,
+    key: uuidv4(),
+    title: "zawody",
     id: 120,
   },
 
   {
-    alias: "koncert",
+    active: false,
+    key: uuidv4(),
+    title: "koncert",
     id: 121,
   },
 
   {
-    alias: "pop",
+    active: false,
+    key: uuidv4(),
+    title: "pop",
     id: 122,
   },
 
   {
-    alias: "rock",
+    active: false,
+    key: uuidv4(),
+    title: "rock",
     id: 123,
   },
 
   {
-    alias: "etniczna",
+    active: false,
+    key: uuidv4(),
+    title: "etniczna",
     id: 124,
   },
 
   {
-    alias: "kabaret",
+    active: false,
+    key: uuidv4(),
+    title: "kabaret",
     id: 125,
   },
 
   {
-    alias: "show",
+    active: false,
+    key: uuidv4(),
+    title: "show",
     id: 126,
   },
 
   {
-    alias: "jarmarki",
+    active: false,
+    key: uuidv4(),
+    title: "jarmarki",
     id: 127,
   },
 
   {
-    alias: "piknik",
+    active: false,
+    key: uuidv4(),
+    title: "piknik",
     id: 128,
   },
 
   {
-    alias: "wybory",
+    active: false,
+    key: uuidv4(),
+    title: "wybory",
     id: 129,
   },
 
   {
-    alias: "widowisko",
+    active: false,
+    key: uuidv4(),
+    title: "widowisko",
     id: 130,
   },
 
   {
-    alias: "eventy",
+    active: false,
+    key: uuidv4(),
+    title: "eventy",
     id: 131,
   },
 
   {
-    alias: "spotkania-z-autorami",
+    active: false,
+    key: uuidv4(),
+    title: "spotkania-z-autorami",
     id: 132,
   },
 
   {
-    alias: "kluby-dyskusyjne",
+    active: false,
+    key: uuidv4(),
+    title: "kluby-dyskusyjne",
     id: 133,
   },
 
   {
-    alias: "kursy",
+    active: false,
+    key: uuidv4(),
+    title: "kursy",
     id: 134,
   },
 
   {
-    alias: "szkolenia",
+    active: false,
+    key: uuidv4(),
+    title: "szkolenia",
     id: 135,
   },
 
   {
-    alias: "konferencje",
+    active: false,
+    key: uuidv4(),
+    title: "konferencje",
     id: 136,
   },
 
   {
-    alias: "warsztaty",
+    active: false,
+    key: uuidv4(),
+    title: "warsztaty",
     id: 137,
   },
 
   {
-    alias: "wyklad",
+    active: false,
+    key: uuidv4(),
+    title: "wyklad",
     id: 138,
   },
 
   {
-    alias: "targi",
+    active: false,
+    key: uuidv4(),
+    title: "targi",
     id: 139,
   },
 
   {
-    alias: "akcje-spoleczne",
+    active: false,
+    key: uuidv4(),
+    title: "akcje-spoleczne",
     id: 140,
   },
 
   {
-    alias: "happeningi",
+    active: false,
+    key: uuidv4(),
+    title: "happeningi",
     id: 141,
   },
 
   {
-    alias: "gieldy",
+    active: false,
+    key: uuidv4(),
+    title: "gieldy",
     id: 142,
   },
 
   {
-    alias: "konkursy",
+    active: false,
+    key: uuidv4(),
+    title: "konkursy",
     id: 143,
   },
 
   {
-    alias: "spotkania",
+    active: false,
+    key: uuidv4(),
+    title: "spotkania",
     id: 144,
   },
 
   {
-    alias: "dramat",
+    active: false,
+    key: uuidv4(),
+    title: "dramat",
     id: 145,
   },
 
   {
-    alias: "thriller",
+    active: false,
+    key: uuidv4(),
+    title: "thriller",
     id: 146,
   },
 
   {
-    alias: "komedia",
+    active: false,
+    key: uuidv4(),
+    title: "komedia",
     id: 147,
   },
 
   {
-    alias: "horror",
+    active: false,
+    key: uuidv4(),
+    title: "horror",
     id: 148,
   },
 
   {
-    alias: "bajka",
+    active: false,
+    key: uuidv4(),
+    title: "bajka",
     id: 149,
   },
 
   {
-    alias: "obyczajowy",
+    active: false,
+    key: uuidv4(),
+    title: "obyczajowy",
     id: 150,
   },
 
   {
-    alias: "animacja",
+    active: false,
+    key: uuidv4(),
+    title: "animacja",
     id: 151,
   },
 
   {
-    alias: "dokument",
+    active: false,
+    key: uuidv4(),
+    title: "dokument",
     id: 152,
   },
 
   {
-    alias: "akcja",
+    active: false,
+    key: uuidv4(),
+    title: "akcja",
     id: 153,
   },
 
   {
-    alias: "musical",
+    active: false,
+    key: uuidv4(),
+    title: "musical",
     id: 154,
   },
 
   {
-    alias: "familijny",
+    active: false,
+    key: uuidv4(),
+    title: "familijny",
     id: 155,
   },
 
   {
-    alias: "balet",
+    active: false,
+    key: uuidv4(),
+    title: "balet",
     id: 156,
   },
 
   {
-    alias: "dramat",
+    active: false,
+    key: uuidv4(),
+    title: "dramat",
     id: 157,
   },
 
   {
-    alias: "pantomima",
+    active: false,
+    key: uuidv4(),
+    title: "pantomima",
     id: 158,
   },
 
   {
-    alias: "opera",
+    active: false,
+    key: uuidv4(),
+    title: "opera",
     id: 159,
   },
 
   {
-    alias: "komedia",
+    active: false,
+    key: uuidv4(),
+    title: "komedia",
     id: 160,
   },
 
   {
-    alias: "kryminal",
+    active: false,
+    key: uuidv4(),
+    title: "kryminal",
     id: 161,
   },
 
   {
-    alias: "tragikomedia",
+    active: false,
+    key: uuidv4(),
+    title: "tragikomedia",
     id: 162,
   },
 
   {
-    alias: "opera-dla-dzieci",
+    active: false,
+    key: uuidv4(),
+    title: "opera-dla-dzieci",
     id: 163,
   },
 
   {
-    alias: "sportowy",
+    active: false,
+    key: uuidv4(),
+    title: "sportowy",
     id: 164,
   },
 
   {
-    alias: "western",
+    active: false,
+    key: uuidv4(),
+    title: "western",
     id: 165,
   },
 
   {
-    alias: "krotkometrazowy",
+    active: false,
+    key: uuidv4(),
+    title: "krotkometrazowy",
     id: 166,
   },
 
   {
-    alias: "kryminal",
+    active: false,
+    key: uuidv4(),
+    title: "kryminal",
     id: 167,
   },
 
   {
-    alias: "przygodowy",
+    active: false,
+    key: uuidv4(),
+    title: "przygodowy",
     id: 168,
   },
 
   {
-    alias: "sci-fi",
+    active: false,
+    key: uuidv4(),
+    title: "sci-fi",
     id: 169,
   },
 
   {
-    alias: "jazz",
+    active: false,
+    key: uuidv4(),
+    title: "jazz",
     id: 170,
   },
 
   {
-    alias: "sensacyjny",
+    active: false,
+    key: uuidv4(),
+    title: "sensacyjny",
     id: 171,
   },
 
   {
-    alias: "teatr-muzyczny",
+    active: false,
+    key: uuidv4(),
+    title: "teatr-muzyczny",
     id: 172,
   },
 
   {
-    alias: "tragedia",
+    active: false,
+    key: uuidv4(),
+    title: "tragedia",
     id: 173,
   },
 
   {
-    alias: "fantasy",
+    active: false,
+    key: uuidv4(),
+    title: "fantasy",
     id: 175,
   },
 
   {
-    alias: "romans",
+    active: false,
+    key: uuidv4(),
+    title: "romans",
     id: 176,
   },
 
   {
-    alias: "fabularny",
+    active: false,
+    key: uuidv4(),
+    title: "fabularny",
     id: 177,
   },
 
   {
-    alias: "transmisja",
+    active: false,
+    key: uuidv4(),
+    title: "transmisja",
     id: 178,
   },
 
   {
-    alias: "inny",
+    active: false,
+    key: uuidv4(),
+    title: "inny",
     id: 179,
   },
 
   {
-    alias: "w-klubie",
+    active: false,
+    key: uuidv4(),
+    title: "w-klubie",
     id: 180,
   },
 
   {
-    alias: "historyczny",
+    active: false,
+    key: uuidv4(),
+    title: "historyczny",
     id: 181,
   },
 
   {
-    alias: "rozne",
+    active: false,
+    key: uuidv4(),
+    title: "rozne",
     id: 182,
   },
 
   {
-    alias: "spektakl",
+    active: false,
+    key: uuidv4(),
+    title: "spektakl",
     id: 183,
   },
 
   {
-    alias: "inne",
+    active: false,
+    key: uuidv4(),
+    title: "inne",
     id: 184,
   },
 
   {
-    alias: "klasyczna",
+    active: false,
+    key: uuidv4(),
+    title: "klasyczna",
     id: 185,
   },
 
   {
-    alias: "twg-2017",
+    active: false,
+    key: uuidv4(),
+    title: "twg-2017",
     id: 186,
   },
 
   {
-    alias: "polityczny",
+    active: false,
+    key: uuidv4(),
+    title: "polityczny",
     id: 187,
   },
 
   {
-    alias: "poetycki",
+    active: false,
+    key: uuidv4(),
+    title: "poetycki",
     id: 188,
   },
 
   {
-    alias: "dramat-wojenny-non-fiction",
+    active: false,
+    key: uuidv4(),
+    title: "dramat-wojenny-non-fiction",
     id: 189,
   },
 
   {
-    alias: "wojenny",
+    active: false,
+    key: uuidv4(),
+    title: "wojenny",
     id: 190,
   },
 
   {
-    alias: "blues",
+    active: false,
+    key: uuidv4(),
+    title: "blues",
     id: 191,
   },
 
   {
-    alias: "hip-hop",
+    active: false,
+    key: uuidv4(),
+    title: "hip-hop",
     id: 192,
   },
 
   {
-    alias: "reggae",
+    active: false,
+    key: uuidv4(),
+    title: "reggae",
     id: 193,
   },
 
   {
-    alias: "metal",
+    active: false,
+    key: uuidv4(),
+    title: "metal",
     id: 194,
   },
 
   {
-    alias: "biegi-i-maratony",
+    active: false,
+    key: uuidv4(),
+    title: "biegi-i-maratony",
     id: 195,
   },
 
   {
-    alias: "tragikomedia",
+    active: false,
+    key: uuidv4(),
+    title: "tragikomedia",
     id: 196,
   },
 
   {
-    alias: "inne",
+    active: false,
+    key: uuidv4(),
+    title: "inne",
     id: 197,
   },
 
   {
-    alias: "teatr-tanca",
+    active: false,
+    key: uuidv4(),
+    title: "teatr-tanca",
     id: 198,
   },
 
   {
-    alias: "startupy",
+    active: false,
+    key: uuidv4(),
+    title: "startupy",
     id: 199,
   },
 
   {
-    alias: "zdrowie",
+    active: false,
+    key: uuidv4(),
+    title: "zdrowie",
     id: 200,
   },
 
   {
-    alias: "spacery-i-wycieczki",
+    active: false,
+    key: uuidv4(),
+    title: "spacery-i-wycieczki",
     id: 201,
   },
 
   {
-    alias: "teatr-lalek",
+    active: false,
+    key: uuidv4(),
+    title: "teatr-lalek",
     id: 297,
   },
 
   {
-    alias: "kryminalny",
+    active: false,
+    key: uuidv4(),
+    title: "kryminalny",
     id: 299,
   },
 
   {
-    alias: "sztuki-wizualne",
+    active: false,
+    key: uuidv4(),
+    title: "sztuki-wizualne",
     id: 300,
   },
 
   {
-    alias: "architektura",
+    active: false,
+    key: uuidv4(),
+    title: "architektura",
     id: 301,
   },
 
   {
-    alias: "film",
+    active: false,
+    key: uuidv4(),
+    title: "film",
     id: 302,
   },
 
   {
-    alias: "literatura",
+    active: false,
+    key: uuidv4(),
+    title: "literatura",
     id: 303,
   },
 
   {
-    alias: "muzyka",
+    active: false,
+    key: uuidv4(),
+    title: "muzyka",
     id: 304,
   },
 
   {
-    alias: "opera",
+    active: false,
+    key: uuidv4(),
+    title: "opera",
     id: 305,
   },
 
   {
-    alias: "performance",
+    active: false,
+    key: uuidv4(),
+    title: "performance",
     id: 306,
   },
 
   {
-    alias: "teatr",
+    active: false,
+    key: uuidv4(),
+    title: "teatr",
     id: 307,
   },
 
   {
-    alias: "promowane-wydarzenia",
+    active: false,
+    key: uuidv4(),
+    title: "promowane-wydarzenia",
     id: 308,
   },
 
   {
-    alias: "zajecia-dla-dzieci",
+    active: false,
+    key: uuidv4(),
+    title: "zajecia-dla-dzieci",
     id: 333,
   },
 
   {
-    alias: "design",
+    active: false,
+    key: uuidv4(),
+    title: "design",
     id: 334,
   },
 
   {
-    alias: "nad-odra",
+    active: false,
+    key: uuidv4(),
+    title: "nad-odra",
     id: 371,
   },
 
   {
-    alias: "dodatkowe-kategorie-wydarzen",
+    active: false,
+    key: uuidv4(),
+    title: "dodatkowe-kategorie-wydarzen",
     id: 425,
   },
 
   {
-    alias: "wroclaw-eu",
+    active: false,
+    key: uuidv4(),
+    title: "wroclaw-eu",
     id: 439,
   },
 
   {
-    alias: "promowane",
+    active: false,
+    key: uuidv4(),
+    title: "promowane",
     id: 440,
   },
 
   {
-    alias: "festiwale",
+    active: false,
+    key: uuidv4(),
+    title: "festiwale",
     id: 554,
   },
 
   {
-    alias: "urzad",
+    active: false,
+    key: uuidv4(),
+    title: "urzad",
     id: 873,
   },
 
   {
-    alias: "bezplatne-wydarzenia-wroclaw",
+    active: false,
+    key: uuidv4(),
+    title: "bezplatne-wydarzenia-wroclaw",
     id: 875,
   },
 
   {
-    alias: "wroclaw-wspiera",
+    active: false,
+    key: uuidv4(),
+    title: "wroclaw-wspiera",
     id: 876,
   },
 
   {
-    alias: "gra-gra-terenowa",
+    active: false,
+    key: uuidv4(),
+    title: "gra-gra-terenowa",
     id: 879,
   },
 
   {
-    alias: "boze-narodzenie-we-wroclawiu",
+    active: false,
+    key: uuidv4(),
+    title: "boze-narodzenie-we-wroclawiu",
     id: 880,
   },
 
   {
-    alias: "zdrowie-1",
+    active: false,
+    key: uuidv4(),
+    title: "zdrowie-1",
     id: 881,
   },
 
   {
-    alias: "edukacja-i-rozwoj-1",
+    active: false,
+    key: uuidv4(),
+    title: "edukacja-i-rozwoj-1",
     id: 882,
   },
 
   {
-    alias: "pomoc-spoleczna-1",
+    active: false,
+    key: uuidv4(),
+    title: "pomoc-spoleczna-1",
     id: 883,
   },
 
   {
-    alias: "sport-i-rekreacja-1",
+    active: false,
+    key: uuidv4(),
+    title: "sport-i-rekreacja-1",
     id: 884,
   },
 
   {
-    alias: "poradnictwo",
+    active: false,
+    key: uuidv4(),
+    title: "poradnictwo",
     id: 885,
   },
 
   {
-    alias: "kultura-1",
+    active: false,
+    key: uuidv4(),
+    title: "kultura-1",
     id: 886,
   },
 
   {
-    alias: "profilaktyka",
+    active: false,
+    key: uuidv4(),
+    title: "profilaktyka",
     id: 887,
   },
 
   {
-    alias: "uzaleznienia",
+    active: false,
+    key: uuidv4(),
+    title: "uzaleznienia",
     id: 888,
   },
 
   {
-    alias: "zdrowie-psychiczne",
+    active: false,
+    key: uuidv4(),
+    title: "zdrowie-psychiczne",
     id: 889,
   },
 
   {
-    alias: "cukrzyca",
+    active: false,
+    key: uuidv4(),
+    title: "cukrzyca",
     id: 890,
   },
 
   {
-    alias: "nowotwory",
+    active: false,
+    key: uuidv4(),
+    title: "nowotwory",
     id: 891,
   },
 
   {
-    alias: "pomoc-medyczna-1",
+    active: false,
+    key: uuidv4(),
+    title: "pomoc-medyczna-1",
     id: 892,
   },
 
   {
-    alias: "grupa-docelowa",
+    active: false,
+    key: uuidv4(),
+    title: "grupa-docelowa",
     id: 893,
   },
 
   {
-    alias: "seniorzy",
+    active: false,
+    key: uuidv4(),
+    title: "seniorzy",
     id: 894,
   },
 
   {
-    alias: "niepelnosprawni-1",
+    active: false,
+    key: uuidv4(),
+    title: "niepelnosprawni-1",
     id: 895,
   },
 
   {
-    alias: "dzieci-i-mlodziez",
+    active: false,
+    key: uuidv4(),
+    title: "dzieci-i-mlodziez",
     id: 896,
   },
 
   {
-    alias: "rodzice",
+    active: false,
+    key: uuidv4(),
+    title: "rodzice",
     id: 898,
   },
 
   {
-    alias: "obcokrajowcy",
+    active: false,
+    key: uuidv4(),
+    title: "obcokrajowcy",
     id: 899,
   },
 
   {
-    alias: "dzieci-0-3",
+    active: false,
+    key: uuidv4(),
+    title: "dzieci-0-3",
     id: 900,
   },
 
   {
-    alias: "dzieci-4-6",
+    active: false,
+    key: uuidv4(),
+    title: "dzieci-4-6",
     id: 901,
   },
 
   {
-    alias: "wolontariat",
+    active: false,
+    key: uuidv4(),
+    title: "wolontariat",
     id: 902,
   },
 
   {
-    alias: "czas-wolny",
+    active: false,
+    key: uuidv4(),
+    title: "czas-wolny",
     id: 903,
   },
 
   {
-    alias: "opieka-1",
+    active: false,
+    key: uuidv4(),
+    title: "opieka-1",
     id: 904,
   },
 
   {
-    alias: "porady-prawne",
+    active: false,
+    key: uuidv4(),
+    title: "porady-prawne",
     id: 905,
   },
 
   {
-    alias: "porady-psychologiczne",
+    active: false,
+    key: uuidv4(),
+    title: "porady-psychologiczne",
     id: 906,
   },
 
   {
-    alias: "porady-pedagogiczne",
+    active: false,
+    key: uuidv4(),
+    title: "porady-pedagogiczne",
     id: 907,
   },
 
   {
-    alias: "sporty-walki",
+    active: false,
+    key: uuidv4(),
+    title: "sporty-walki",
     id: 908,
   },
 
   {
-    alias: "koszykowka",
+    active: false,
+    key: uuidv4(),
+    title: "koszykowka",
     id: 909,
   },
 
   {
-    alias: "pilka-nozna",
+    active: false,
+    key: uuidv4(),
+    title: "pilka-nozna",
     id: 910,
   },
 
   {
-    alias: "siatkowka",
+    active: false,
+    key: uuidv4(),
+    title: "siatkowka",
     id: 911,
   },
 
   {
-    alias: "kardiologia",
+    active: false,
+    key: uuidv4(),
+    title: "kardiologia",
     id: 912,
   },
 
   {
-    alias: "stomatologia",
+    active: false,
+    key: uuidv4(),
+    title: "stomatologia",
     id: 913,
   },
 
   {
-    alias: "wady-postawy",
+    active: false,
+    key: uuidv4(),
+    title: "wady-postawy",
     id: 914,
   },
 
   {
-    alias: "zajecia-pozalekcyjne",
+    active: false,
+    key: uuidv4(),
+    title: "zajecia-pozalekcyjne",
     id: 915,
   },
 
   {
-    alias: "wsparcie",
+    active: false,
+    key: uuidv4(),
+    title: "wsparcie",
     id: 917,
   },
 
   {
-    alias: "tlumacze",
+    active: false,
+    key: uuidv4(),
+    title: "tlumacze",
     id: 918,
   },
 
   {
-    alias: "wypozyczalnie",
+    active: false,
+    key: uuidv4(),
+    title: "wypozyczalnie",
     id: 919,
   },
 
   {
-    alias: "integracja",
+    active: false,
+    key: uuidv4(),
+    title: "integracja",
     id: 920,
   },
 
   {
-    alias: "opieka-nad-dziecmi",
+    active: false,
+    key: uuidv4(),
+    title: "opieka-nad-dziecmi",
     id: 921,
   },
 
   {
-    alias: "dzieci-7-10",
+    active: false,
+    key: uuidv4(),
+    title: "dzieci-7-10",
     id: 922,
   },
 
   {
-    alias: "mlodziez-11-14",
+    active: false,
+    key: uuidv4(),
+    title: "mlodziez-11-14",
     id: 923,
   },
 
   {
-    alias: "mlodziez-15-18",
+    active: false,
+    key: uuidv4(),
+    title: "mlodziez-15-18",
     id: 924,
   },
 
   {
-    alias: "z-klubow-sportowych",
+    active: false,
+    key: uuidv4(),
+    title: "z-klubow-sportowych",
     id: 925,
   },
 
   {
-    alias: "noworodki-i-wczesniaki",
+    active: false,
+    key: uuidv4(),
+    title: "noworodki-i-wczesniaki",
     id: 926,
   },
 
   {
-    alias: "kobiety-w-ciazy",
+    active: false,
+    key: uuidv4(),
+    title: "kobiety-w-ciazy",
     id: 927,
   },
 
   {
-    alias: "rodziny-wielodzietne",
+    active: false,
+    key: uuidv4(),
+    title: "rodziny-wielodzietne",
     id: 928,
   },
 
   {
-    alias: "pozostale",
+    active: false,
+    key: uuidv4(),
+    title: "pozostale",
     id: 929,
   },
 
   {
-    alias: "wolontariusze",
+    active: false,
+    key: uuidv4(),
+    title: "wolontariusze",
     id: 930,
   },
 
   {
-    alias: "ngo",
+    active: false,
+    key: uuidv4(),
+    title: "ngo",
     id: 931,
   },
 
   {
-    alias: "rady-osiedli",
+    active: false,
+    key: uuidv4(),
+    title: "rady-osiedli",
     id: 932,
   },
 
   {
-    alias: "kibice-sportowi",
+    active: false,
+    key: uuidv4(),
+    title: "kibice-sportowi",
     id: 933,
   },
 
   {
-    alias: "szkoly-i-nauczyciele",
+    active: false,
+    key: uuidv4(),
+    title: "szkoly-i-nauczyciele",
     id: 934,
   },
 
   {
-    alias: "elektroniczna",
+    active: false,
+    key: uuidv4(),
+    title: "elektroniczna",
     id: 937,
   },
 
   {
-    alias: "folk",
+    active: false,
+    key: uuidv4(),
+    title: "folk",
     id: 938,
   },
 
   {
-    alias: "oprowadzanie",
+    active: false,
+    key: uuidv4(),
+    title: "oprowadzanie",
     id: 939,
   },
 
   {
-    alias: "walentynki",
+    active: false,
+    key: uuidv4(),
+    title: "walentynki",
     id: 1364,
   },
 
   {
-    alias: "oferty-pracy",
+    active: false,
+    key: uuidv4(),
+    title: "oferty-pracy",
     id: 1367,
   },
 
   {
-    alias: "zabawa",
+    active: false,
+    key: uuidv4(),
+    title: "zabawa",
     id: 1369,
   },
 
   {
-    alias: "pokaz-doswiadczenie",
+    active: false,
+    key: uuidv4(),
+    title: "pokaz-doswiadczenie",
     id: 1371,
   },
 
   {
-    alias: "instalacja",
+    active: false,
+    key: uuidv4(),
+    title: "instalacja",
     id: 1372,
   },
 
   {
-    alias: "wspiera-promowane",
+    active: false,
+    key: uuidv4(),
+    title: "wspiera-promowane",
     id: 1390,
   },
 
   {
-    alias: "konsultacje-spoleczne-1",
+    active: false,
+    key: uuidv4(),
+    title: "konsultacje-spoleczne-1",
     id: 1404,
   },
 
   {
-    alias: "grow-green",
+    active: false,
+    key: uuidv4(),
+    title: "grow-green",
     id: 1406,
   },
 
   {
-    alias: "100-lat-niepodleglosci",
+    active: false,
+    key: uuidv4(),
+    title: "100-lat-niepodleglosci",
     id: 1407,
   },
 
   {
-    alias: "dzien-zyczliwosci",
+    active: false,
+    key: uuidv4(),
+    title: "dzien-zyczliwosci",
     id: 1466,
   },
 
   {
-    alias: "kalendarz-prezydenta-wroclawia",
+    active: false,
+    key: uuidv4(),
+    title: "kalendarz-prezydenta-wroclawia",
     id: 1471,
   },
 
   {
-    alias: "www-wroclaw-pl",
+    active: false,
+    key: uuidv4(),
+    title: "www-wroclaw-pl",
     id: 1505,
   },
 
   {
-    alias: "spotkania-zmien-piec",
+    active: false,
+    key: uuidv4(),
+    title: "spotkania-zmien-piec",
     id: 1507,
   },
 
   {
-    alias: "prezydent-wroclawia-poleca",
+    active: false,
+    key: uuidv4(),
+    title: "prezydent-wroclawia-poleca",
     id: 1621,
   },
 
   {
-    alias: "kino",
+    active: false,
+    key: uuidv4(),
+    title: "kino",
     id: 1,
   },
 
   {
-    alias: "teatr",
+    active: false,
+    key: uuidv4(),
+    title: "teatr",
     id: 2,
   },
 
   {
-    alias: "sztuka",
+    active: false,
+    key: uuidv4(),
+    title: "sztuka",
     id: 3,
   },
 
   {
-    alias: "sport-i-rekreacja",
+    active: false,
+    key: uuidv4(),
+    title: "sport-i-rekreacja",
     id: 4,
   },
 
   {
-    alias: "muzyka",
+    active: false,
+    key: uuidv4(),
+    title: "muzyka",
     id: 5,
   },
 
   {
-    alias: "rozrywka",
+    active: false,
+    key: uuidv4(),
+    title: "rozrywka",
     id: 6,
   },
 
   {
-    alias: "literatura",
+    active: false,
+    key: uuidv4(),
+    title: "literatura",
     id: 7,
   },
 
   {
-    alias: "edukacja-i-rozwoj",
+    active: false,
+    key: uuidv4(),
+    title: "edukacja-i-rozwoj",
     id: 8,
   },
 
   {
-    alias: "inne",
+    active: false,
+    key: uuidv4(),
+    title: "inne",
     id: 12,
   },
 
   {
-    alias: "dla-dzieci",
+    active: false,
+    key: uuidv4(),
+    title: "dla-dzieci",
     id: 79,
   },
 
   {
-    alias: "esk",
+    active: false,
+    key: uuidv4(),
+    title: "esk",
     id: 80,
   },
 
   {
-    alias: "w-plenerze",
+    active: false,
+    key: uuidv4(),
+    title: "w-plenerze",
     id: 84,
   },
 
   {
-    alias: "dla-seniorow",
+    active: false,
+    key: uuidv4(),
+    title: "dla-seniorow",
     id: 85,
   },
 
   {
-    alias: "tylko-dla-doroslych",
+    active: false,
+    key: uuidv4(),
+    title: "tylko-dla-doroslych",
     id: 98,
   },
 
   {
-    alias: "dla-wszystkich",
+    active: false,
+    key: uuidv4(),
+    title: "dla-wszystkich",
     id: 101,
   },
 
   {
-    alias: "ferie-zimowe",
+    active: false,
+    key: uuidv4(),
+    title: "ferie-zimowe",
     id: 102,
   },
 
   {
-    alias: "dla-rodzicow",
+    active: false,
+    key: uuidv4(),
+    title: "dla-rodzicow",
     id: 108,
   },
 
   {
-    alias: "ze-zwierzakiem",
+    active: false,
+    key: uuidv4(),
+    title: "ze-zwierzakiem",
     id: 109,
   },
 
   {
-    alias: "wydarzenie-kinowe",
+    active: false,
+    key: uuidv4(),
+    title: "wydarzenie-kinowe",
     id: 113,
   },
 
   {
-    alias: "spektakl",
+    active: false,
+    key: uuidv4(),
+    title: "spektakl",
     id: 114,
   },
 
   {
-    alias: "wystawa",
+    active: false,
+    key: uuidv4(),
+    title: "wystawa",
     id: 115,
   },
 
   {
-    alias: "performance",
+    active: false,
+    key: uuidv4(),
+    title: "performance",
     id: 116,
   },
 
   {
-    alias: "wernisaz",
+    active: false,
+    key: uuidv4(),
+    title: "wernisaz",
     id: 117,
   },
 
   {
-    alias: "zajecia-sportowe",
+    active: false,
+    key: uuidv4(),
+    title: "zajecia-sportowe",
     id: 118,
   },
 
   {
-    alias: "wydarzenia-sportowe",
+    active: false,
+    key: uuidv4(),
+    title: "wydarzenia-sportowe",
     id: 119,
   },
 
   {
-    alias: "zawody",
+    active: false,
+    key: uuidv4(),
+    title: "zawody",
     id: 120,
   },
 
   {
-    alias: "koncert",
+    active: false,
+    key: uuidv4(),
+    title: "koncert",
     id: 121,
   },
 
   {
-    alias: "pop",
+    active: false,
+    key: uuidv4(),
+    title: "pop",
     id: 122,
   },
 
   {
-    alias: "rock",
+    active: false,
+    key: uuidv4(),
+    title: "rock",
     id: 123,
   },
 
   {
-    alias: "etniczna",
+    active: false,
+    key: uuidv4(),
+    title: "etniczna",
     id: 124,
   },
 
   {
-    alias: "kabaret",
+    active: false,
+    key: uuidv4(),
+    title: "kabaret",
     id: 125,
   },
 
   {
-    alias: "show",
+    active: false,
+    key: uuidv4(),
+    title: "show",
     id: 126,
   },
 
   {
-    alias: "jarmarki",
+    active: false,
+    key: uuidv4(),
+    title: "jarmarki",
     id: 127,
   },
 
   {
-    alias: "piknik",
+    active: false,
+    key: uuidv4(),
+    title: "piknik",
     id: 128,
   },
 
   {
-    alias: "wybory",
+    active: false,
+    key: uuidv4(),
+    title: "wybory",
     id: 129,
   },
 
   {
-    alias: "widowisko",
+    active: false,
+    key: uuidv4(),
+    title: "widowisko",
     id: 130,
   },
 
   {
-    alias: "eventy",
+    active: false,
+    key: uuidv4(),
+    title: "eventy",
     id: 131,
   },
 
   {
-    alias: "spotkania-z-autorami",
+    active: false,
+    key: uuidv4(),
+    title: "spotkania-z-autorami",
     id: 132,
   },
 
   {
-    alias: "kluby-dyskusyjne",
+    active: false,
+    key: uuidv4(),
+    title: "kluby-dyskusyjne",
     id: 133,
   },
 
   {
-    alias: "kursy",
+    active: false,
+    key: uuidv4(),
+    title: "kursy",
     id: 134,
   },
 
   {
-    alias: "szkolenia",
+    active: false,
+    key: uuidv4(),
+    title: "szkolenia",
     id: 135,
   },
 
   {
-    alias: "konferencje",
+    active: false,
+    key: uuidv4(),
+    title: "konferencje",
     id: 136,
   },
 
   {
-    alias: "warsztaty",
+    active: false,
+    key: uuidv4(),
+    title: "warsztaty",
     id: 137,
   },
 
   {
-    alias: "wyklad",
+    active: false,
+    key: uuidv4(),
+    title: "wyklad",
     id: 138,
   },
 
   {
-    alias: "targi",
+    active: false,
+    key: uuidv4(),
+    title: "targi",
     id: 139,
   },
 
   {
-    alias: "akcje-spoleczne",
+    active: false,
+    key: uuidv4(),
+    title: "akcje-spoleczne",
     id: 140,
   },
 
   {
-    alias: "happeningi",
+    active: false,
+    key: uuidv4(),
+    title: "happeningi",
     id: 141,
   },
 
   {
-    alias: "gieldy",
+    active: false,
+    key: uuidv4(),
+    title: "gieldy",
     id: 142,
   },
 
   {
-    alias: "konkursy",
+    active: false,
+    key: uuidv4(),
+    title: "konkursy",
     id: 143,
   },
 
   {
-    alias: "spotkania",
+    active: false,
+    key: uuidv4(),
+    title: "spotkania",
     id: 144,
   },
 
   {
-    alias: "dramat",
+    active: false,
+    key: uuidv4(),
+    title: "dramat",
     id: 145,
   },
 
   {
-    alias: "thriller",
+    active: false,
+    key: uuidv4(),
+    title: "thriller",
     id: 146,
   },
 
   {
-    alias: "komedia",
+    active: false,
+    key: uuidv4(),
+    title: "komedia",
     id: 147,
   },
 
   {
-    alias: "horror",
+    active: false,
+    key: uuidv4(),
+    title: "horror",
     id: 148,
   },
 
   {
-    alias: "bajka",
+    active: false,
+    key: uuidv4(),
+    title: "bajka",
     id: 149,
   },
 
   {
-    alias: "obyczajowy",
+    active: false,
+    key: uuidv4(),
+    title: "obyczajowy",
     id: 150,
   },
 
   {
-    alias: "animacja",
+    active: false,
+    key: uuidv4(),
+    title: "animacja",
     id: 151,
   },
 
   {
-    alias: "dokument",
+    active: false,
+    key: uuidv4(),
+    title: "dokument",
     id: 152,
   },
 
   {
-    alias: "akcja",
+    active: false,
+    key: uuidv4(),
+    title: "akcja",
     id: 153,
   },
 
   {
-    alias: "musical",
+    active: false,
+    key: uuidv4(),
+    title: "musical",
     id: 154,
   },
 
   {
-    alias: "familijny",
+    active: false,
+    key: uuidv4(),
+    title: "familijny",
     id: 155,
   },
 
   {
-    alias: "balet",
+    active: false,
+    key: uuidv4(),
+    title: "balet",
     id: 156,
   },
 
   {
-    alias: "dramat",
+    active: false,
+    key: uuidv4(),
+    title: "dramat",
     id: 157,
   },
 
   {
-    alias: "pantomima",
+    active: false,
+    key: uuidv4(),
+    title: "pantomima",
     id: 158,
   },
 
   {
-    alias: "opera",
+    active: false,
+    key: uuidv4(),
+    title: "opera",
     id: 159,
   },
 
   {
-    alias: "komedia",
+    active: false,
+    key: uuidv4(),
+    title: "komedia",
     id: 160,
   },
 
   {
-    alias: "kryminal",
+    active: false,
+    key: uuidv4(),
+    title: "kryminal",
     id: 161,
   },
 
   {
-    alias: "tragikomedia",
+    active: false,
+    key: uuidv4(),
+    title: "tragikomedia",
     id: 162,
   },
 
   {
-    alias: "opera-dla-dzieci",
+    active: false,
+    key: uuidv4(),
+    title: "opera-dla-dzieci",
     id: 163,
   },
 
   {
-    alias: "sportowy",
+    active: false,
+    key: uuidv4(),
+    title: "sportowy",
     id: 164,
   },
 
   {
-    alias: "western",
+    active: false,
+    key: uuidv4(),
+    title: "western",
     id: 165,
   },
 
   {
-    alias: "krotkometrazowy",
+    active: false,
+    key: uuidv4(),
+    title: "krotkometrazowy",
     id: 166,
   },
 
   {
-    alias: "kryminal",
+    active: false,
+    key: uuidv4(),
+    title: "kryminal",
     id: 167,
   },
 
   {
-    alias: "przygodowy",
+    active: false,
+    key: uuidv4(),
+    title: "przygodowy",
     id: 168,
   },
 
   {
-    alias: "sci-fi",
+    active: false,
+    key: uuidv4(),
+    title: "sci-fi",
     id: 169,
   },
 
   {
-    alias: "jazz",
+    active: false,
+    key: uuidv4(),
+    title: "jazz",
     id: 170,
   },
 
   {
-    alias: "sensacyjny",
+    active: false,
+    key: uuidv4(),
+    title: "sensacyjny",
     id: 171,
   },
 
   {
-    alias: "teatr-muzyczny",
+    active: false,
+    key: uuidv4(),
+    title: "teatr-muzyczny",
     id: 172,
   },
 
   {
-    alias: "tragedia",
+    active: false,
+    key: uuidv4(),
+    title: "tragedia",
     id: 173,
   },
 
   {
-    alias: "fantasy",
+    active: false,
+    key: uuidv4(),
+    title: "fantasy",
     id: 175,
   },
 
   {
-    alias: "romans",
+    active: false,
+    key: uuidv4(),
+    title: "romans",
     id: 176,
   },
 
   {
-    alias: "fabularny",
+    active: false,
+    key: uuidv4(),
+    title: "fabularny",
     id: 177,
   },
 
   {
-    alias: "transmisja",
+    active: false,
+    key: uuidv4(),
+    title: "transmisja",
     id: 178,
   },
 
   {
-    alias: "inny",
+    active: false,
+    key: uuidv4(),
+    title: "inny",
     id: 179,
   },
 
   {
-    alias: "w-klubie",
+    active: false,
+    key: uuidv4(),
+    title: "w-klubie",
     id: 180,
   },
 
   {
-    alias: "historyczny",
+    active: false,
+    key: uuidv4(),
+    title: "historyczny",
     id: 181,
   },
 
   {
-    alias: "rozne",
+    active: false,
+    key: uuidv4(),
+    title: "rozne",
     id: 182,
   },
 
   {
-    alias: "spektakl",
+    active: false,
+    key: uuidv4(),
+    title: "spektakl",
     id: 183,
   },
 
   {
-    alias: "inne",
+    active: false,
+    key: uuidv4(),
+    title: "inne",
     id: 184,
   },
 
   {
-    alias: "klasyczna",
+    active: false,
+    key: uuidv4(),
+    title: "klasyczna",
     id: 185,
   },
 
   {
-    alias: "twg-2017",
+    active: false,
+    key: uuidv4(),
+    title: "twg-2017",
     id: 186,
   },
 
   {
-    alias: "polityczny",
+    active: false,
+    key: uuidv4(),
+    title: "polityczny",
     id: 187,
   },
 
   {
-    alias: "poetycki",
+    active: false,
+    key: uuidv4(),
+    title: "poetycki",
     id: 188,
   },
 
   {
-    alias: "dramat-wojenny-non-fiction",
+    active: false,
+    key: uuidv4(),
+    title: "dramat-wojenny-non-fiction",
     id: 189,
   },
 
   {
-    alias: "wojenny",
+    active: false,
+    key: uuidv4(),
+    title: "wojenny",
     id: 190,
   },
 
   {
-    alias: "blues",
+    active: false,
+    key: uuidv4(),
+    title: "blues",
     id: 191,
   },
 
   {
-    alias: "hip-hop",
+    active: false,
+    key: uuidv4(),
+    title: "hip-hop",
     id: 192,
   },
 
   {
-    alias: "reggae",
+    active: false,
+    key: uuidv4(),
+    title: "reggae",
     id: 193,
   },
 
   {
-    alias: "metal",
+    active: false,
+    key: uuidv4(),
+    title: "metal",
     id: 194,
   },
 
   {
-    alias: "biegi-i-maratony",
+    active: false,
+    key: uuidv4(),
+    title: "biegi-i-maratony",
     id: 195,
   },
 
   {
-    alias: "tragikomedia",
+    active: false,
+    key: uuidv4(),
+    title: "tragikomedia",
     id: 196,
   },
 
   {
-    alias: "inne",
+    active: false,
+    key: uuidv4(),
+    title: "inne",
     id: 197,
   },
 
   {
-    alias: "teatr-tanca",
+    active: false,
+    key: uuidv4(),
+    title: "teatr-tanca",
     id: 198,
   },
 
   {
-    alias: "startupy",
+    active: false,
+    key: uuidv4(),
+    title: "startupy",
     id: 199,
   },
 
   {
-    alias: "zdrowie",
+    active: false,
+    key: uuidv4(),
+    title: "zdrowie",
     id: 200,
   },
 
   {
-    alias: "spacery-i-wycieczki",
+    active: false,
+    key: uuidv4(),
+    title: "spacery-i-wycieczki",
     id: 201,
   },
 
   {
-    alias: "teatr-lalek",
+    active: false,
+    key: uuidv4(),
+    title: "teatr-lalek",
     id: 297,
   },
 
   {
-    alias: "kryminalny",
+    active: false,
+    key: uuidv4(),
+    title: "kryminalny",
     id: 299,
   },
 
   {
-    alias: "sztuki-wizualne",
+    active: false,
+    key: uuidv4(),
+    title: "sztuki-wizualne",
     id: 300,
   },
 
   {
-    alias: "architektura",
+    active: false,
+    key: uuidv4(),
+    title: "architektura",
     id: 301,
   },
 
   {
-    alias: "film",
+    active: false,
+    key: uuidv4(),
+    title: "film",
     id: 302,
   },
 
   {
-    alias: "literatura",
+    active: false,
+    key: uuidv4(),
+    title: "literatura",
     id: 303,
   },
 
   {
-    alias: "muzyka",
+    active: false,
+    key: uuidv4(),
+    title: "muzyka",
     id: 304,
   },
 
   {
-    alias: "opera",
+    active: false,
+    key: uuidv4(),
+    title: "opera",
     id: 305,
   },
 
   {
-    alias: "performance",
+    active: false,
+    key: uuidv4(),
+    title: "performance",
     id: 306,
   },
 
   {
-    alias: "teatr",
+    active: false,
+    key: uuidv4(),
+    title: "teatr",
     id: 307,
   },
 
   {
-    alias: "promowane-wydarzenia",
+    active: false,
+    key: uuidv4(),
+    title: "promowane-wydarzenia",
     id: 308,
   },
 
   {
-    alias: "zajecia-dla-dzieci",
+    active: false,
+    key: uuidv4(),
+    title: "zajecia-dla-dzieci",
     id: 333,
   },
 
   {
-    alias: "design",
+    active: false,
+    key: uuidv4(),
+    title: "design",
     id: 334,
   },
 
   {
-    alias: "nad-odra",
+    active: false,
+    key: uuidv4(),
+    title: "nad-odra",
     id: 371,
   },
 
   {
-    alias: "dodatkowe-kategorie-wydarzen",
+    active: false,
+    key: uuidv4(),
+    title: "dodatkowe-kategorie-wydarzen",
     id: 425,
   },
 
   {
-    alias: "wroclaw-eu",
+    active: false,
+    key: uuidv4(),
+    title: "wroclaw-eu",
     id: 439,
   },
 
   {
-    alias: "promowane",
+    active: false,
+    key: uuidv4(),
+    title: "promowane",
     id: 440,
   },
 
   {
-    alias: "festiwale",
+    active: false,
+    key: uuidv4(),
+    title: "festiwale",
     id: 554,
   },
 
   {
-    alias: "urzad",
+    active: false,
+    key: uuidv4(),
+    title: "urzad",
     id: 873,
   },
 
   {
-    alias: "bezplatne-wydarzenia-wroclaw",
+    active: false,
+    key: uuidv4(),
+    title: "bezplatne-wydarzenia-wroclaw",
     id: 875,
   },
 
   {
-    alias: "wroclaw-wspiera",
+    active: false,
+    key: uuidv4(),
+    title: "wroclaw-wspiera",
     id: 876,
   },
 
   {
-    alias: "gra-gra-terenowa",
+    active: false,
+    key: uuidv4(),
+    title: "gra-gra-terenowa",
     id: 879,
   },
 
   {
-    alias: "boze-narodzenie-we-wroclawiu",
+    active: false,
+    key: uuidv4(),
+    title: "boze-narodzenie-we-wroclawiu",
     id: 880,
   },
 
   {
-    alias: "zdrowie-1",
+    active: false,
+    key: uuidv4(),
+    title: "zdrowie-1",
     id: 881,
   },
 
   {
-    alias: "edukacja-i-rozwoj-1",
+    active: false,
+    key: uuidv4(),
+    title: "edukacja-i-rozwoj-1",
     id: 882,
   },
 
   {
-    alias: "pomoc-spoleczna-1",
+    active: false,
+    key: uuidv4(),
+    title: "pomoc-spoleczna-1",
     id: 883,
   },
 
   {
-    alias: "sport-i-rekreacja-1",
+    active: false,
+    key: uuidv4(),
+    title: "sport-i-rekreacja-1",
     id: 884,
   },
 
   {
-    alias: "poradnictwo",
+    active: false,
+    key: uuidv4(),
+    title: "poradnictwo",
     id: 885,
   },
 
   {
-    alias: "kultura-1",
+    active: false,
+    key: uuidv4(),
+    title: "kultura-1",
     id: 886,
   },
 
   {
-    alias: "profilaktyka",
+    active: false,
+    key: uuidv4(),
+    title: "profilaktyka",
     id: 887,
   },
 
   {
-    alias: "uzaleznienia",
+    active: false,
+    key: uuidv4(),
+    title: "uzaleznienia",
     id: 888,
   },
 
   {
-    alias: "zdrowie-psychiczne",
+    active: false,
+    key: uuidv4(),
+    title: "zdrowie-psychiczne",
     id: 889,
   },
 
   {
-    alias: "cukrzyca",
+    active: false,
+    key: uuidv4(),
+    title: "cukrzyca",
     id: 890,
   },
 
   {
-    alias: "nowotwory",
+    active: false,
+    key: uuidv4(),
+    title: "nowotwory",
     id: 891,
   },
 
   {
-    alias: "pomoc-medyczna-1",
+    active: false,
+    key: uuidv4(),
+    title: "pomoc-medyczna-1",
     id: 892,
   },
 
   {
-    alias: "grupa-docelowa",
+    active: false,
+    key: uuidv4(),
+    title: "grupa-docelowa",
     id: 893,
   },
 
   {
-    alias: "seniorzy",
+    active: false,
+    key: uuidv4(),
+    title: "seniorzy",
     id: 894,
   },
 
   {
-    alias: "niepelnosprawni-1",
+    active: false,
+    key: uuidv4(),
+    title: "niepelnosprawni-1",
     id: 895,
   },
 
   {
-    alias: "dzieci-i-mlodziez",
+    active: false,
+    key: uuidv4(),
+    title: "dzieci-i-mlodziez",
     id: 896,
   },
 
   {
-    alias: "rodzice",
+    active: false,
+    key: uuidv4(),
+    title: "rodzice",
     id: 898,
   },
 
   {
-    alias: "obcokrajowcy",
+    active: false,
+    key: uuidv4(),
+    title: "obcokrajowcy",
     id: 899,
   },
 
   {
-    alias: "dzieci-0-3",
+    active: false,
+    key: uuidv4(),
+    title: "dzieci-0-3",
     id: 900,
   },
 
   {
-    alias: "dzieci-4-6",
+    active: false,
+    key: uuidv4(),
+    title: "dzieci-4-6",
     id: 901,
   },
 
   {
-    alias: "wolontariat",
+    active: false,
+    key: uuidv4(),
+    title: "wolontariat",
     id: 902,
   },
 
   {
-    alias: "czas-wolny",
+    active: false,
+    key: uuidv4(),
+    title: "czas-wolny",
     id: 903,
   },
 
   {
-    alias: "opieka-1",
+    active: false,
+    key: uuidv4(),
+    title: "opieka-1",
     id: 904,
   },
 
   {
-    alias: "porady-prawne",
+    active: false,
+    key: uuidv4(),
+    title: "porady-prawne",
     id: 905,
   },
 
   {
-    alias: "porady-psychologiczne",
+    active: false,
+    key: uuidv4(),
+    title: "porady-psychologiczne",
     id: 906,
   },
 
   {
-    alias: "porady-pedagogiczne",
+    active: false,
+    key: uuidv4(),
+    title: "porady-pedagogiczne",
     id: 907,
   },
 
   {
-    alias: "sporty-walki",
+    active: false,
+    key: uuidv4(),
+    title: "sporty-walki",
     id: 908,
   },
 
   {
-    alias: "koszykowka",
+    active: false,
+    key: uuidv4(),
+    title: "koszykowka",
     id: 909,
   },
 
   {
-    alias: "pilka-nozna",
+    active: false,
+    key: uuidv4(),
+    title: "pilka-nozna",
     id: 910,
   },
 
   {
-    alias: "siatkowka",
+    active: false,
+    key: uuidv4(),
+    title: "siatkowka",
     id: 911,
   },
 
   {
-    alias: "kardiologia",
+    active: false,
+    key: uuidv4(),
+    title: "kardiologia",
     id: 912,
   },
 
   {
-    alias: "stomatologia",
+    active: false,
+    key: uuidv4(),
+    title: "stomatologia",
     id: 913,
   },
 
   {
-    alias: "wady-postawy",
+    active: false,
+    key: uuidv4(),
+    title: "wady-postawy",
     id: 914,
   },
 
   {
-    alias: "zajecia-pozalekcyjne",
+    active: false,
+    key: uuidv4(),
+    title: "zajecia-pozalekcyjne",
     id: 915,
   },
 
   {
-    alias: "wsparcie",
+    active: false,
+    key: uuidv4(),
+    title: "wsparcie",
     id: 917,
   },
 
   {
-    alias: "tlumacze",
+    active: false,
+    key: uuidv4(),
+    title: "tlumacze",
     id: 918,
   },
 
   {
-    alias: "wypozyczalnie",
+    active: false,
+    key: uuidv4(),
+    title: "wypozyczalnie",
     id: 919,
   },
 
   {
-    alias: "integracja",
+    active: false,
+    key: uuidv4(),
+    title: "integracja",
     id: 920,
   },
 
   {
-    alias: "opieka-nad-dziecmi",
+    active: false,
+    key: uuidv4(),
+    title: "opieka-nad-dziecmi",
     id: 921,
   },
 
   {
-    alias: "dzieci-7-10",
+    active: false,
+    key: uuidv4(),
+    title: "dzieci-7-10",
     id: 922,
   },
 
   {
-    alias: "mlodziez-11-14",
+    active: false,
+    key: uuidv4(),
+    title: "mlodziez-11-14",
     id: 923,
   },
 
   {
-    alias: "mlodziez-15-18",
+    active: false,
+    key: uuidv4(),
+    title: "mlodziez-15-18",
     id: 924,
   },
 
   {
-    alias: "z-klubow-sportowych",
+    active: false,
+    key: uuidv4(),
+    title: "z-klubow-sportowych",
     id: 925,
   },
 
   {
-    alias: "noworodki-i-wczesniaki",
+    active: false,
+    key: uuidv4(),
+    title: "noworodki-i-wczesniaki",
     id: 926,
   },
 
   {
-    alias: "kobiety-w-ciazy",
+    active: false,
+    key: uuidv4(),
+    title: "kobiety-w-ciazy",
     id: 927,
   },
 
   {
-    alias: "rodziny-wielodzietne",
+    active: false,
+    key: uuidv4(),
+    title: "rodziny-wielodzietne",
     id: 928,
   },
 
   {
-    alias: "pozostale",
+    active: false,
+    key: uuidv4(),
+    title: "pozostale",
     id: 929,
   },
 
   {
-    alias: "wolontariusze",
+    active: false,
+    key: uuidv4(),
+    title: "wolontariusze",
     id: 930,
   },
 
   {
-    alias: "ngo",
+    active: false,
+    key: uuidv4(),
+    title: "ngo",
     id: 931,
   },
 
   {
-    alias: "rady-osiedli",
+    active: false,
+    key: uuidv4(),
+    title: "rady-osiedli",
     id: 932,
   },
 
   {
-    alias: "kibice-sportowi",
+    active: false,
+    key: uuidv4(),
+    title: "kibice-sportowi",
     id: 933,
   },
 
   {
-    alias: "szkoly-i-nauczyciele",
+    active: false,
+    key: uuidv4(),
+    title: "szkoly-i-nauczyciele",
     id: 934,
   },
 
   {
-    alias: "elektroniczna",
+    active: false,
+    key: uuidv4(),
+    title: "elektroniczna",
     id: 937,
   },
 
   {
-    alias: "folk",
+    active: false,
+    key: uuidv4(),
+    title: "folk",
     id: 938,
   },
 
   {
-    alias: "oprowadzanie",
+    active: false,
+    key: uuidv4(),
+    title: "oprowadzanie",
     id: 939,
   },
 
   {
-    alias: "walentynki",
+    active: false,
+    key: uuidv4(),
+    title: "walentynki",
     id: 1364,
   },
 
   {
-    alias: "oferty-pracy",
+    active: false,
+    key: uuidv4(),
+    title: "oferty-pracy",
     id: 1367,
   },
 
   {
-    alias: "zabawa",
+    active: false,
+    key: uuidv4(),
+    title: "zabawa",
     id: 1369,
   },
 
   {
-    alias: "pokaz-doswiadczenie",
+    active: false,
+    key: uuidv4(),
+    title: "pokaz-doswiadczenie",
     id: 1371,
   },
 
   {
-    alias: "instalacja",
+    active: false,
+    key: uuidv4(),
+    title: "instalacja",
     id: 1372,
   },
 
   {
-    alias: "wspiera-promowane",
+    active: false,
+    key: uuidv4(),
+    title: "wspiera-promowane",
     id: 1390,
   },
 
   {
-    alias: "konsultacje-spoleczne-1",
+    active: false,
+    key: uuidv4(),
+    title: "konsultacje-spoleczne-1",
     id: 1404,
   },
 
   {
-    alias: "grow-green",
+    active: false,
+    key: uuidv4(),
+    title: "grow-green",
     id: 1406,
   },
 
   {
-    alias: "100-lat-niepodleglosci",
+    active: false,
+    key: uuidv4(),
+    title: "100-lat-niepodleglosci",
     id: 1407,
   },
 
   {
-    alias: "dzien-zyczliwosci",
+    active: false,
+    key: uuidv4(),
+    title: "dzien-zyczliwosci",
     id: 1466,
   },
 
   {
-    alias: "kalendarz-prezydenta-wroclawia",
+    active: false,
+    key: uuidv4(),
+    title: "kalendarz-prezydenta-wroclawia",
     id: 1471,
   },
 
   {
-    alias: "www-wroclaw-pl",
+    active: false,
+    key: uuidv4(),
+    title: "www-wroclaw-pl",
     id: 1505,
   },
 
   {
-    alias: "spotkania-zmien-piec",
+    active: false,
+    key: uuidv4(),
+    title: "spotkania-zmien-piec",
     id: 1507,
   },
 
   {
-    alias: "prezydent-wroclawia-poleca",
+    active: false,
+    key: uuidv4(),
+    title: "prezydent-wroclawia-poleca",
     id: 1621,
   },
 ];

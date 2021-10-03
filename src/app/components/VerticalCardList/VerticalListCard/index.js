@@ -10,9 +10,10 @@ import { setId as setOfferId } from "../../../redux/singleOffer.slice";
 
 const VerticalListCard = ({ data, navigation, inFavorite = false }) => {
   const dispatch = useDispatch();
+  const { id, type, title, img } = data;
+
   const handlePress = () => {
-    //console.log(id);
-    if (type === "place") {
+    if (type === "places") {
       dispatch(setPlaceId(id));
       navigation.navigate(screensNames.placeSingle);
     } else {
@@ -20,15 +21,15 @@ const VerticalListCard = ({ data, navigation, inFavorite = false }) => {
       navigation.navigate(screensNames.eventSingle);
     }
   };
-  
+
   return (
     <ImageBackground
       style={style.container}
       imageStyle={style.image}
-      source={{ uri: data.img }}
+      source={{ uri: img }}
     >
       <TouchableOpacity style={style.box} onPress={handlePress}>
-        <VerticalCardLabel title={data.title} />
+        <VerticalCardLabel title={title} />
       </TouchableOpacity>
 
       <CardCTASection data={data} inFavorite={inFavorite} />

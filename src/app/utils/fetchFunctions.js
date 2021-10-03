@@ -12,8 +12,8 @@ const fomatDate = (date) => {
 };
 
 //type, page, types, pageSize
-export const fetchItemList = async (type, page = 1, types = null, pageSize = 10) => {
-  const URL = `http://go.wroclaw.pl/api/v1.0/${type}/?key=${API_KEY}&type-id=${types}&page-size=${pageSize}&page=${page}`;
+export const fetchItemList = async (type, page = 0, types = null, pageSize = 10) => {
+  const URL = `http://go.wroclaw.pl/api/v1.0/${type}/?key=${API_KEY}&type-id=${types.toString()}&page-size=${pageSize}&page=${page}`;
 
   try {
     const resp = await axios.get(URL);
@@ -124,7 +124,7 @@ export const getSingleOfferData = async (offerId) => {
       longDescription,
       pageLink,
       ticketing,
-      mainImage: { large: mainImage?.large },
+      mainImage: { large: mainImage?.large, standard: mainImage?.standard },
       startDate: fomatDate(startDate),
       location: getLocation(events),
       place: getPlace(place),
@@ -186,7 +186,7 @@ export const getSinglePlaceData = async (placeId) => {
       title,
       longDescription,
       pageLink,
-      mainImage: { large: mainImage?.large },
+      mainImage: { large: mainImage?.large, standard: mainImage?.standard },
       images: images.map(({ standard }) => ({ standard, id: uuidv4() })),
       venue: getVenue(venue),
       address: getAddress(address),

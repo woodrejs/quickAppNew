@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 //components
 import ScreenTitleSection from "../../components/ScreenTitleSection";
-import SortButtonsSection from "../../components/SortButtonsSection";
+import FilterSection from "../../components/FilterSection";
 import VerticalCardList from "../../components/VerticalCardList";
 import ListPaginationButton from "../../components/ListPaginationButton";
 import LoadingSection from "../../components/LoadingSection";
@@ -13,8 +13,9 @@ import { setIsLoaded, setData, addData } from "../../redux/listPlace.slice";
 import { useIsFocused } from "@react-navigation/native";
 
 const PlaceList = ({ navigation }) => {
-  const [paginationCounter, setPaginationCounter] = useState(1);
+  const [paginationCounter, setPaginationCounter] = useState(0);
   const placeListData = useSelector(({ listPlaceSlice }) => listPlaceSlice.data);
+  const placesFilters = useSelector(({ listPlaceSlice }) => listPlaceSlice.filters);
   const placeListDataLoaded = useSelector(({ listPlaceSlice }) => listPlaceSlice.loaded);
 
   const isFocused = useIsFocused();
@@ -23,7 +24,7 @@ const PlaceList = ({ navigation }) => {
 
   useEffect(() => {
     async function init() {
-      const data = await fetchItemList("places"); //type, page, types, pageSize
+      const data = await fetchItemList("places", 0, placesFilters); //type, page, types, pageSize
       dispatch(setData(data));
     }
 
@@ -32,10 +33,10 @@ const PlaceList = ({ navigation }) => {
 
   useEffect(() => {
     async function usePagination() {
-      const data = await fetchItemList("places", paginationCounter); //type, page, types, pageSize
+      const data = await fetchItemList("places", paginationCounter, placesFilters); //type, page, types, pageSize
       dispatch(addData(data));
     }
-    paginationCounter > 1 && usePagination();
+    paginationCounter > 0 && usePagination();
   }, [paginationCounter]);
 
   return placeListDataLoaded ? (
@@ -44,7 +45,7 @@ const PlaceList = ({ navigation }) => {
         title="Odkryj najciekawsze miejsca"
         text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       />
-      <SortButtonsSection />
+      <FilterSection variant="places" filters={placesFilters} />
       <VerticalCardList list={placeListData} navigation={navigation} />
       <ListPaginationButton handler={handlePagination} />
     </ScrollView>

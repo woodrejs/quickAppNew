@@ -32,10 +32,10 @@ const EventSingle = () => {
   }, []);
 
   if (offerDataLoaded) {
-    const { mainImage, title, ticketing, startDate, venue } = offerData;
+    const { id, mainImage, title, ticketing, startDate, venue } = offerData;
     const { longDescription, place, address, location } = offerData;
     const { images, name, longDescription: placeLongDescription } = place;
-    const { large } = mainImage;
+    const { large, standard } = mainImage;
 
     return (
       <>
@@ -49,7 +49,10 @@ const EventSingle = () => {
           <RenderHtmlSection source={placeLongDescription} style={style.description} />
           <LocalizationMapSection location={location} />
         </ScrollView>
-        <CTAButtonsSection title="dodaj do planu" />
+        <CTAButtonsSection
+          title="dodaj do planu"
+          data={{ id, img: standard, title, type: "offers" }}
+        />
       </>
     );
   } else return <LoadingSection />;

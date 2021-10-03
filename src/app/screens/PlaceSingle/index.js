@@ -33,9 +33,9 @@ const PlaceSingle = ({ navigation }) => {
   }, []);
 
   if (placeDataLoaded) {
-    const { images, title, location, venue } = placeData;
+    const { id, images, title, location, venue } = placeData;
     const { mainImage, address, longDescription } = placeData;
-    const { large } = mainImage;
+    const { large, standard } = mainImage;
     const { email, telephone } = venue;
 
     return (
@@ -50,7 +50,10 @@ const PlaceSingle = ({ navigation }) => {
           <ContactSection email={email} telephone={telephone} />
           <LocalizationMapSection location={location} />
         </ScrollView>
-        <CTAButtonsSection title="odwiedź stronę" />
+        <CTAButtonsSection
+          title="odwiedź stronę"
+          data={{ id, img: standard, title, type: "places" }}
+        />
       </>
     );
   } else return <LoadingSection />;

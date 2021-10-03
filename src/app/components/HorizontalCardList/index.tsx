@@ -13,10 +13,16 @@ const HorizontalCardList: React.FC<Props> = ({
   data,
   navigation,
   variant = "offers",
+  filters = [],
 }) => {
   return (
     <View style={style.container}>
-      <SubTitleHeader title={title} variant={variant} navigation={navigation} />
+      <SubTitleHeader
+        title={title}
+        variant={variant}
+        navigation={navigation}
+        filters={filters}
+      />
 
       <ScrollView style={style.list} horizontal>
         {data.map(({ id, img, title, type }) => {

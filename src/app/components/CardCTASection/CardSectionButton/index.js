@@ -16,20 +16,13 @@ const CardSectionButton = ({ data, variant, selected }) => {
   const favorites = useSelector(({ userSlice }) => userSlice.favorites);
   const dispatch = useDispatch();
 
-  //id -> strapi db id
-  //uid -> wroclaw go id
-  //createFavorite,deleteFavorite
   const handlePress = async () => {
-    // const resp = await createFavorite(data, jwt);
-    // const resp = await deleteFavorite(id, jwt);
-
     if (variant === "favorite") {
       if (isSelected) {
         try {
-          console.log("delete");
           await deleteFavorite(id, jwt);
           const filteredData = favorites.filter((item) => item.uid !== id);
-          console.log(filteredData);
+
           dispatch(setFavorites(filteredData));
           setIsSelected(false);
         } catch (error) {
@@ -37,7 +30,6 @@ const CardSectionButton = ({ data, variant, selected }) => {
         }
       } else {
         try {
-          console.log("create");
           const resp = await createFavorite(data, jwt);
           dispatch(setFavorites([...favorites, resp]));
           setIsSelected(true);

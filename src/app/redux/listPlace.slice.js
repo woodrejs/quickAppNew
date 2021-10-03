@@ -10,13 +10,6 @@ const listPlaceSlice = createSlice({
     loaded: false,
   },
   reducers: {
-    // setId(state, action) {
-    //   const { payload } = action;
-
-    //   if (typeof payload !== "number") return;
-
-    //   state.id = payload;
-    // },
     setIsLoaded(state, action) {
       const { payload } = action;
 
@@ -34,8 +27,36 @@ const listPlaceSlice = createSlice({
       const { payload } = action;
       state.data = [...state.data, ...payload];
     },
+    setFilters(state, action) {
+      const { payload } = action;
+      state.filters = payload;
+    },
+    // addFilter(state, action) {
+    //   const { payload } = action;
+    //   let filter = { isActive: false, index: null };
+
+    //   if (!state.filters.length) {
+    //     state.filters = [payload];
+    //     return;
+    //   }
+
+    //   state.filters.forEach((item, index) => {
+    //     if (item === payload) {
+    //       filter = { isActive: true, index };
+    //     }
+    //   });
+
+    //   if (filter.isActive) {
+    //     const filtersClone = [...state.filters];
+    //     filtersClone.splice(filter.index, 1);
+    //     state.filters = filtersClone;
+    //   } else {
+    //     state.filters = [...state.filters, payload];
+    //   }
+    // },
   },
 });
 
-export const { setIsLoaded, setData, addData } = listPlaceSlice.actions;
+export const { setIsLoaded, setData, addData, setFilters, addFilter } =
+  listPlaceSlice.actions;
 export default listPlaceSlice.reducer;

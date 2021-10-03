@@ -28,23 +28,23 @@ const App = () => {
       dispatch(setList(["main", main]));
 
       //movies
-      const movies = await fetchItemList("offers", 1, 1, 5); //fetchItemList(type, page, types, pageSize)
+      const movies = await fetchItemList("offers", 0, [1], 5);
       dispatch(setList(["movies", movies]));
 
       //plays
-      const plays = await fetchItemList("offers", 1, 2, 5);
+      const plays = await fetchItemList("offers", 0, [2], 5);
       dispatch(setList(["plays", plays]));
 
       //books
-      const books = await fetchItemList("offers", 1, 7, 5);
+      const books = await fetchItemList("offers", 0, [7], 5);
       dispatch(setList(["books", books]));
 
       //sport
-      const sport = await fetchItemList("offers", 1, 4, 5);
+      const sport = await fetchItemList("offers", 0, [4], 5);
       dispatch(setList(["sport", sport]));
 
       //places
-      const places = await fetchItemList("places", 1, null, 5);
+      const places = await fetchItemList("places", 0, [], 5);
       dispatch(setList(["places", places]));
     }
     init();
