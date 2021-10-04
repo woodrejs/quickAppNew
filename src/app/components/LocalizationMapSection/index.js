@@ -1,11 +1,11 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ImageBackground } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 const LocalizationMapSection = ({ location }) => {
   const { latitude, longitude } = location;
 
-  return (
+  return latitude && longitude ? (
     <View style={style.container}>
       <MapView
         style={style.map}
@@ -19,13 +19,12 @@ const LocalizationMapSection = ({ location }) => {
         <Marker coordinate={{ latitude, longitude }} />
       </MapView>
     </View>
-  );
+  ) : null;
 };
 export default LocalizationMapSection;
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: "red",
     height: 330,
     borderRadius: 20,
     marginBottom: 30,

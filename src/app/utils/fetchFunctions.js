@@ -12,7 +12,7 @@ const fomatDate = (date) => {
 };
 
 //type, page, types, pageSize
-export const fetchItemList = async (type, page = 0, types = null, pageSize = 10) => {
+export const fetchItemList = async (type, page = 0, types = [], pageSize = 10) => {
   const URL = `http://go.wroclaw.pl/api/v1.0/${type}/?key=${API_KEY}&type-id=${types.toString()}&page-size=${pageSize}&page=${page}`;
 
   try {
@@ -54,7 +54,6 @@ export const getMainCardData = async (types, pageSize) => {
   }
 };
 export const getSingleOfferData = async (offerId) => {
-  console.log(offerId);
   const URL = `http://go.wroclaw.pl/api/v1.0/offers/${offerId}/?key=${API_KEY}`;
 
   try {
@@ -69,15 +68,27 @@ export const getSingleOfferData = async (offerId) => {
           carParkAvailable: null,
           foodAndDrinkAvailable: null,
           disabledAccessAvailable: null,
+          telephone: null,
+          email: null,
+          facebook: null,
         };
 
-      const { carParkAvailable, foodAndDrinkAvailable, disabledAccessAvailable } =
-        place.venue;
+      const {
+        carParkAvailable,
+        foodAndDrinkAvailable,
+        disabledAccessAvailable,
+        telephone,
+        email,
+        facebook,
+      } = place.venue;
 
       return {
         carParkAvailable,
         foodAndDrinkAvailable,
         disabledAccessAvailable,
+        telephone,
+        email,
+        facebook,
       };
     }
     function getLocation(events) {
@@ -124,6 +135,7 @@ export const getSingleOfferData = async (offerId) => {
       longDescription,
       pageLink,
       ticketing,
+      type: "offers",
       mainImage: { large: mainImage?.large, standard: mainImage?.standard },
       startDate: fomatDate(startDate),
       location: getLocation(events),
@@ -186,6 +198,7 @@ export const getSinglePlaceData = async (placeId) => {
       title,
       longDescription,
       pageLink,
+      type: "places",
       mainImage: { large: mainImage?.large, standard: mainImage?.standard },
       images: images.map(({ standard }) => ({ standard, id: uuidv4() })),
       venue: getVenue(venue),

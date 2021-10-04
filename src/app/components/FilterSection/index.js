@@ -3,7 +3,7 @@ import { StyleSheet, ScrollView, View } from "react-native";
 import { useDispatch } from "react-redux";
 //components
 import FilterSectionButton from "./FilterSectionButton";
-import SmallButton from "../SmallButton";
+import IconButton from "../IconButton";
 //utils & styles
 import { offers, places } from "./index.data";
 import { setFilters as addOfferFilter } from "../../redux/listOffer.slice";
@@ -44,7 +44,7 @@ const FilterSection = ({ variant, filters }) => {
 
   return (
     <ScrollView style={style.container} horizontal>
-      <SmallButton handler={handleButton} />
+      <IconButton handler={handleButton} variant="plus" />
       <View style={style.box}>
         {checkIsActive(data, filters).map((item) => (
           <FilterSectionButton key={item.key} data={item} handler={handleItem} />

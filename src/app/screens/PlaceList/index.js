@@ -29,7 +29,7 @@ const PlaceList = ({ navigation }) => {
     }
 
     isFocused ? init() : dispatch(setIsLoaded(false));
-  }, [isFocused]);
+  }, [isFocused, placesFilters]);
 
   useEffect(() => {
     async function usePagination() {

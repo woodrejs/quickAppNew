@@ -49,10 +49,8 @@ const EventSingle = () => {
           <RenderHtmlSection source={placeLongDescription} style={style.description} />
           <LocalizationMapSection location={location} />
         </ScrollView>
-        <CTAButtonsSection
-          title="dodaj do planu"
-          data={{ id, img: standard, title, type: "offers" }}
-        />
+
+        <CTAButtonsSection data={offerData} />
       </>
     );
   } else return <LoadingSection />;
