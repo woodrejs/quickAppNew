@@ -5,11 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 import ScreenTitleSection from "../../components/ScreenTitleSection";
 import FilterSection from "../../components/FilterSection";
 import VerticalCardList from "../../components/VerticalCardList";
-import ListPaginationButton from "../../components/ListPaginationButton";
 import LoadingSection from "../../components/LoadingSection";
+import IconButton from "../../components/IconButton";
 //utils & styles
 import { fetchItemList } from "../../utils/fetchFunctions";
-import { setIsLoaded, setData, addData } from "../../redux/listPlace.slice";
+import { setIsLoaded, setData, addData, setStage } from "../../redux/listPlace.slice";
 import { useIsFocused } from "@react-navigation/native";
 
 const PlaceList = ({ navigation }) => {
@@ -17,6 +17,7 @@ const PlaceList = ({ navigation }) => {
   const placeListData = useSelector(({ listPlaceSlice }) => listPlaceSlice.data);
   const placesFilters = useSelector(({ listPlaceSlice }) => listPlaceSlice.filters);
   const placeListDataLoaded = useSelector(({ listPlaceSlice }) => listPlaceSlice.loaded);
+  const stage = useSelector(({ listPlaceSlice }) => listPlaceSlice.stage);
 
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
@@ -24,18 +25,29 @@ const PlaceList = ({ navigation }) => {
 
   useEffect(() => {
     async function init() {
-      const data = await fetchItemList("places", 0, placesFilters); //type, page, types, pageSize
-      dispatch(setData(data));
+      try {
+        const data = await fetchItemList("places", 0, placesFilters);
+        dispatch(setData(data));
+      } catch (error) {
+        dispatch(setError([true, "Błąd podczas ładowania aplikacji. Spróbuj ponownie."]));
+      }
     }
 
+    dispatch(setStage("pending"));
+    setPaginationCounter(0);
     isFocused ? init() : dispatch(setIsLoaded(false));
   }, [isFocused, placesFilters]);
 
   useEffect(() => {
     async function usePagination() {
-      const data = await fetchItemList("places", paginationCounter, placesFilters); //type, page, types, pageSize
-      dispatch(addData(data));
+      try {
+        const data = await fetchItemList("places", paginationCounter, placesFilters); //type, page, types, pageSize
+        dispatch(addData(data));
+      } catch (error) {
+        dispatch(setError([true, "Błąd podczas ładowania aplikacji. Spróbuj ponownie."]));
+      }
     }
+    dispatch(setStage("pending"));
     paginationCounter > 0 && usePagination();
   }, [paginationCounter]);
 
@@ -47,7 +59,12 @@ const PlaceList = ({ navigation }) => {
       />
       <FilterSection variant="places" filters={placesFilters} />
       <VerticalCardList list={placeListData} navigation={navigation} />
-      <ListPaginationButton handler={handlePagination} />
+      <IconButton
+        handler={handlePagination}
+        variant="plus"
+        customStyle={style.paginationButton}
+        stage={stage}
+      />
     </ScrollView>
   ) : (
     <LoadingSection />
@@ -60,5 +77,12 @@ const style = StyleSheet.create({
     height: "100%",
     width: "100%",
     padding: 10,
+  },
+  paginationButton: {
+    marginBottom: 20,
+    marginTop: -10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

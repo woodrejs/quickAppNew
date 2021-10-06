@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 //components
 import FilterSectionButton from "./FilterSectionButton";
 import IconButton from "../IconButton";
@@ -13,6 +13,10 @@ const FilterSection = ({ variant, filters }) => {
   const [filtersList, setFiltersList] = useState(filters);
   const dispatch = useDispatch();
   const data = variant === "offers" ? offers : places;
+  const stage =
+    variant === "offers"
+      ? useSelector(({ listOfferSlice }) => listOfferSlice.stage)
+      : useSelector(({ listPlaceSlice }) => listPlaceSlice.stage);
 
   const handleButton = () => {
     variant === "offers"
@@ -44,7 +48,7 @@ const FilterSection = ({ variant, filters }) => {
 
   return (
     <ScrollView style={style.container} horizontal>
-      <IconButton handler={handleButton} variant="plus" />
+      <IconButton handler={handleButton} variant="plus" stage={stage} />
       <View style={style.box}>
         {checkIsActive(data, filters).map((item) => (
           <FilterSectionButton key={item.key} data={item} handler={handleItem} />

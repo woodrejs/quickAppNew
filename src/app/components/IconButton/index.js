@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import {
   AntDesign,
   Entypo,
@@ -8,8 +8,15 @@ import {
   FontAwesome,
 } from "@expo/vector-icons";
 import { COLORS } from "../../style/colors";
+import * as Progress from "react-native-progress";
 
-const IconButton = ({ handler, variant, active = true }) => {
+const IconButton = ({
+  handler,
+  variant,
+  active = true,
+  customStyle = {},
+  stage = "waiting",
+}) => {
   const { white, black, lightExtra } = COLORS;
   const displayIcon = () => {
     switch (variant) {
@@ -35,11 +42,14 @@ const IconButton = ({ handler, variant, active = true }) => {
   };
 
   return (
-    <TouchableOpacity onPress={handler}>
-      <View
-        style={[style.container, { backgroundColor: active ? lightExtra : white }]}
-        children={displayIcon()}
-      />
+    <TouchableOpacity onPress={handler} style={customStyle}>
+      <View style={[style.container, { backgroundColor: active ? lightExtra : white }]}>
+        {stage === "waiting" ? (
+          displayIcon()
+        ) : (
+          <Progress.Circle size={30} indeterminate={true} color={white} />
+        )}
+      </View>
     </TouchableOpacity>
   );
 };
