@@ -50,10 +50,7 @@ const PlaceSingle = ({ navigation }) => {
           <ContactSection email={email} telephone={telephone} />
           <LocalizationMapSection location={location} />
         </ScrollView>
-        {/* <CTAButtonsSection
-          title="odwiedź stronę"
-          data={{ id, img: standard, title, type: "places" }}
-        /> */}
+        <CTAButtonsSection data={placeData} />
       </>
     );
   } else return <LoadingSection />;

@@ -7,6 +7,7 @@ import { COLORS } from "../../../style/colors";
 import { createFavorite, deleteFavorite } from "../../../utils/strapi";
 import { useSelector, useDispatch } from "react-redux";
 import { setFavorites } from "../../../redux/user.slice";
+import { setInfo } from "../../../redux/app.slice";
 
 const CardSectionButton = ({ data, variant, selected }) => {
   const [isSelected, setIsSelected] = useState(selected);
@@ -17,29 +18,35 @@ const CardSectionButton = ({ data, variant, selected }) => {
   const dispatch = useDispatch();
 
   const handlePress = async () => {
+    dispatch(setInfo(["pending"]));
     if (variant === "favorite") {
       if (isSelected) {
         try {
           await deleteFavorite(id, jwt);
           const filteredData = favorites.filter((item) => item.uid !== id);
-
           dispatch(setFavorites(filteredData));
+          dispatch(setInfo(["success", `"${title}" został usunięty z ulubionych.`]));
           setIsSelected(false);
         } catch (error) {
-          console.log({ message: error });
+          dispatch(
+            setInfo(["failed", `Błąd podczas usuwania "${title}". Spróbuj ponownie.`])
+          );
         }
       } else {
         try {
           const resp = await createFavorite(data, jwt);
           dispatch(setFavorites([...favorites, resp]));
+          dispatch(setInfo(["success", `"${title}" został dodany do ulubionych.`]));
           setIsSelected(true);
         } catch (error) {
-          console.log({ message: error });
+          dispatch(
+            setInfo(["failed", `Błąd podczas dodawania "${title}". Spróbuj ponownie.`])
+          );
         }
       }
     }
 
-    // //add or remove from db or schedule
+    //add or remove from db or schedule
     // if (variant === "schedule") {
     //   if (isSelected) {
     //     //delete

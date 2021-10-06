@@ -12,8 +12,6 @@ const GridCardList = () => {
   const userIsLogged = useSelector(({ userSlice }) => userSlice.logged);
   const favorites = useSelector(({ userSlice }) => userSlice.favorites);
 
-
-
   return userIsLogged ? (
     <View style={style.container}>
       {favorites.map((item) => (

@@ -5,6 +5,7 @@ import singleOfferSlice from "./singleOffer.slice";
 import listPlaceSlice from "./listPlace.slice";
 import listOfferSlice from "./listOffer.slice";
 import userSlice from "./user.slice";
+import appSlice from "./app.slice";
 
 export default configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
     listPlaceSlice: listPlaceSlice,
     listOfferSlice: listOfferSlice,
     userSlice: userSlice,
+    appSlice: appSlice,
   },
 });

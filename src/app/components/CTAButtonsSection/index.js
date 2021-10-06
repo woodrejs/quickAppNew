@@ -7,6 +7,7 @@ import { style } from "./index.style";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteFavorite, createFavorite } from "../../utils/strapi";
 import { setFavorites } from "../../redux/user.slice";
+import { setInfo } from "../../redux/app.slice";
 
 const CTAButtonsSection = ({ data }) => {
   const [inFavorites, setInFavorites] = useState(false);
@@ -17,7 +18,8 @@ const CTAButtonsSection = ({ data }) => {
   const dispatch = useDispatch();
 
   const { id, pageLink, location, venue, title, mainImage, type } = data;
-  const { email, telephone, facebook } = venue;
+  const { latitude, longitude } = location;
+  const { email, telephone } = venue;
   2;
 
   useEffect(() => {
@@ -27,13 +29,17 @@ const CTAButtonsSection = ({ data }) => {
   const handleWeb = () => Linking.openURL(pageLink);
   const handleMail = () => Linking.openURL(`mailto:${email}`);
   const handleFavorite = async () => {
+    dispatch(setInfo(["pending"]));
     if (inFavorites) {
       try {
         await deleteFavorite(data.id, jwt);
         const filteredData = favorites.filter((item) => item.uid !== data.id);
+        dispatch(setInfo(["success", `"${title}" został usunięty z ulubionych.`]));
         dispatch(setFavorites(filteredData));
       } catch (error) {
-        console.log({ message: error });
+        dispatch(
+          setInfo(["failed", `Błąd podczas usuwania "${title}". Spróbuj ponownie.`])
+        );
       }
     } else {
       try {
@@ -41,9 +47,12 @@ const CTAButtonsSection = ({ data }) => {
           { id, title, img: mainImage.standard, type },
           jwt
         );
+        dispatch(setInfo(["success", `"${title}" został dodany do ulubionych.`]));
         dispatch(setFavorites([...favorites, resp]));
       } catch (error) {
-        console.log({ message: error });
+        dispatch(
+          setInfo(["failed", `Błąd podczas dodawania "${title}". Spróbuj ponownie.`])
+        );
       }
     }
   };
@@ -73,7 +82,7 @@ const CTAButtonsSection = ({ data }) => {
       {isLogged && (
         <IconButton variant="schedule" active={false} handler={handleSchedule} />
       )}
-      {location && (
+      {latitude && longitude && (
         <IconButton variant="location" active={false} handler={handleLocation} />
       )}
       {pageLink && <IconButton variant="web" active={false} handler={handleWeb} />}

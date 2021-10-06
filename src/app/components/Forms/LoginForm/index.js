@@ -9,15 +9,20 @@ import { style } from "./index.style";
 import { userLogin, LoginSchema, findFavorites } from "../../../utils/strapi";
 import { setLoggedIn, setFavorites } from "../../../redux/user.slice";
 import { stacksNames } from "../../../utils/stacksNames";
+import { setInfo } from "../../../redux/app.slice";
 
 const LoginForm = ({ navigation }) => {
   const dispatch = useDispatch();
   const handleOnSubmit = async ({ email, password }) => {
-    const jwt = await userLogin(email, password);
-    dispatch(setLoggedIn(jwt));
-    const data = await findFavorites(jwt);
-    dispatch(setFavorites(data));
-    navigation.navigate(stacksNames.home);
+    dispatch(setInfo(["pending"]));
+    try {
+      const { jwt, user } = await userLogin(email, password);
+      dispatch(setLoggedIn(jwt));
+      dispatch(setInfo(["success", `${user.username} witaj w quick week app.`]));
+      navigation.navigate(stacksNames.home);
+    } catch (error) {
+      dispatch(setInfo(["failed", `Błąd podczas logowania. Spróbuj ponownie.`]));
+    }
   };
 
   return (

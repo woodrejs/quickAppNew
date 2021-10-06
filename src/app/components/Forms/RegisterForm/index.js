@@ -9,15 +9,22 @@ import { style } from "./index.style";
 import { userRegister, RegisterSchema, findFavorites } from "../../../utils/strapi";
 import { setLoggedIn, setFavorites } from "../../../redux/user.slice";
 import { stacksNames } from "../../../utils/stacksNames";
+import { setInfo } from "../../../redux/app.slice";
 
 const RegisterForm = ({ navigation }) => {
   const dispatch = useDispatch();
   const handleOnSubmit = async ({ username, email, password }) => {
-    const jwt = await userRegister(username, email, password);
-    dispatch(setLoggedIn(jwt));
-    const data = await findFavorites(jwt);
-    dispatch(setFavorites(data));
-    navigation.navigate(stacksNames.home);
+    dispatch(setInfo(["pending"]));
+    try {
+      const { jwt, user } = await userRegister(username, email, password);
+      dispatch(setLoggedIn(jwt));
+      dispatch(
+        setInfo(["success", `Witaj ${user.username}, Twoje konto zostało utworzone.`])
+      );
+      navigation.navigate(stacksNames.home);
+    } catch (error) {
+      dispatch(setInfo(["failed", `Błąd podczas rejestracji. Spróbuj ponownie.`]));
+    }
   };
 
   return (

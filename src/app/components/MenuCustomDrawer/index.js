@@ -7,6 +7,7 @@ import { AntDesign, Entypo } from "@expo/vector-icons";
 import { COLORS } from "../../style/colors";
 import { stacksNames } from "../../utils/stacksNames";
 import { setLoggedOut } from "../../redux/user.slice";
+import { setInfo } from "../../redux/app.slice";
 
 const MenuCustomDrawer = (props) => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const MenuCustomDrawer = (props) => {
   const handleLogOut = () => {
     dispatch(setLoggedOut());
     props.navigation.navigate(stacksNames.auth);
+    dispatch(setInfo(["success", "Zostałeś poprawnie wylogowany."]));
   };
 
   return (
@@ -38,7 +40,7 @@ const MenuCustomDrawer = (props) => {
           />
         );
       })}
-      
+
       {userIsLogged && (
         <DrawerItem
           label="Wyloguj"

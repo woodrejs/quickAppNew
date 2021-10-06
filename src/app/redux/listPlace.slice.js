@@ -8,6 +8,7 @@ const listPlaceSlice = createSlice({
   initialState: {
     list: [],
     loaded: false,
+    filters: [],
   },
   reducers: {
     setIsLoaded(state, action) {
