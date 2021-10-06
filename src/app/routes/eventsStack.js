@@ -4,7 +4,7 @@ import { screensNames } from "../utils/screensNames";
 import { screenOptions } from "./utils";
 
 import EventSingle from "../screens/EventSingle";
-import EventList from "../screens/EventList";
+import List from "../screens/List";
 
 const Stack = createStackNavigator();
 
@@ -12,7 +12,10 @@ const EventsStack = () => {
   const { eventList, eventSingle } = screensNames;
   return (
     <Stack.Navigator screenOptions={screenOptions}>
-      <Stack.Screen name={eventList} component={EventList} />
+      <Stack.Screen
+        name={eventList}
+        children={({ navigation }) => <List variant="offers" navigation={navigation} />}
+      />
       <Stack.Screen name={eventSingle} component={EventSingle} />
     </Stack.Navigator>
   );

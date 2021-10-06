@@ -6,23 +6,16 @@ import FilterSectionButton from "./FilterSectionButton";
 import IconButton from "../IconButton";
 //utils & styles
 import { offers, places } from "./index.data";
-import { setFilters as addOfferFilter } from "../../redux/listOffer.slice";
-import { setFilters as addPlaceFilter } from "../../redux/listPlace.slice";
+import { setFilters } from "../../redux/list.slice";
 
 const FilterSection = ({ variant, filters }) => {
   const [filtersList, setFiltersList] = useState(filters);
-  const dispatch = useDispatch();
+  const stage = useSelector(({ listSlice }) => listSlice[variant].stage);
   const data = variant === "offers" ? offers : places;
-  const stage =
-    variant === "offers"
-      ? useSelector(({ listOfferSlice }) => listOfferSlice.stage)
-      : useSelector(({ listPlaceSlice }) => listPlaceSlice.stage);
+  const dispatch = useDispatch();
 
-  const handleButton = () => {
-    variant === "offers"
-      ? dispatch(addOfferFilter(filtersList))
-      : dispatch(addPlaceFilter(filtersList));
-  };
+  const handleButton = () => dispatch(setFilters([variant, filtersList]));
+
   const handleItem = (id) => {
     let filter = { isActive: false, index: null };
 

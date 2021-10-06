@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Linking } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { userUpdate, userDelete } from "../../utils/strapi";
 import axios from "axios";
-import { setIsLoaded } from "../../redux/singleOffer.slice";
+
 import { SUPPORT_MAIL } from "@env";
 import { setInfo } from "../../redux/app.slice";
 //components
@@ -11,7 +11,7 @@ import SettingsButton from "../../components/SettingsButton";
 
 const Settings = () => {
   const jwt = useSelector(({ userSlice }) => userSlice.jwt);
-
+  const dispatch = useDispatch();
   const handleAvatarChange = () => {};
   const handleSupportContact = () => Linking.openURL(`mailto:${SUPPORT_MAIL}`);
   const handleEmailChange = async (val) => {
@@ -20,10 +20,12 @@ const Settings = () => {
       const resp = await userUpdate(val, jwt);
       dispatch(setInfo(["success", `Mail został poprawnie zmieniony.`]));
     } catch (error) {
+      console.log(error);
       dispatch(setInfo(["failed", `Błąd podczas zmiany adresu mail. Spróbuj ponownie.`]));
     }
   };
   const handleUsernameChange = async (val) => {
+    console.log(val);
     dispatch(setInfo(["pending"]));
     try {
       const resp = await userUpdate(val, jwt);

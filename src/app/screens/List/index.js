@@ -8,62 +8,65 @@ import VerticalCardList from "../../components/VerticalCardList";
 import LoadingSection from "../../components/LoadingSection";
 import IconButton from "../../components/IconButton";
 //utils & styles
+import { setIsLoaded, setData, addData, setStage } from "../../redux/list.slice";
 import { fetchItemList } from "../../utils/fetchFunctions";
-import { setIsLoaded, setData, addData, setStage } from "../../redux/listOffer.slice";
 import { useIsFocused } from "@react-navigation/native";
 import { setError } from "../../redux/app.slice";
 
 //todo: pozbyc sie img.standard na rzecz img
-const EventList = ({ navigation }) => {
+const List = ({ navigation, variant }) => {
   const [paginationCounter, setPaginationCounter] = useState(0);
-  const offerListData = useSelector(({ listOfferSlice }) => listOfferSlice.data);
-  const offersFilters = useSelector(({ listOfferSlice }) => listOfferSlice.filters);
-  const offerListDataLoaded = useSelector(({ listOfferSlice }) => listOfferSlice.loaded);
-  const stage = useSelector(({ listOfferSlice }) => listOfferSlice.stage);
+
+  const { list, filters, loaded, stage } = useSelector(
+    ({ listSlice }) => listSlice[variant]
+  );
 
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
+
   const handlePagination = () => setPaginationCounter((state) => state + 1);
 
   useEffect(() => {
     async function init() {
       try {
-        const data = await fetchItemList("offers", 0, offersFilters);
-        dispatch(setData(data));
+        const data = await fetchItemList(variant, 0, filters);
+        dispatch(setData([variant, data]));
       } catch (error) {
         dispatch(setError([true, "Błąd podczas ładowania aplikacji. Spróbuj ponownie."]));
       }
     }
-    dispatch(setStage("pending"));
+    dispatch(setStage([variant, "pending"]));
     setPaginationCounter(0);
-    isFocused ? init() : dispatch(setIsLoaded(false));
-  }, [isFocused, offersFilters]);
+    isFocused ? init() : dispatch(setIsLoaded([variant, false]));
+  }, [isFocused, filters]);
 
   useEffect(() => {
     async function usePagination() {
       try {
-        const data = await fetchItemList("offers", paginationCounter, offersFilters); //type, page, types, pageSize
-        dispatch(addData(data));
+        const data = await fetchItemList(variant, paginationCounter, filters); //type, page, types, pageSize
+        dispatch(addData([variant, data]));
       } catch (error) {
         dispatch(setError([true, "Błąd podczas ładowania aplikacji. Spróbuj ponownie."]));
       }
     }
-    dispatch(setStage("pending"));
+    dispatch(setStage([variant, "pending"]));
     paginationCounter > 0 && usePagination();
   }, [paginationCounter]);
 
-  console.log({ stage });
-
-  return offerListDataLoaded ? (
+  return loaded ? (
     <ScrollView style={style.container}>
       <ScreenTitleSection
-        title="Zobacz najnowsze wydarzenia"
-        text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        title={`Zobacz najnowsze ${variant === "offers" ? "wydarzenia" : "miejsca"}`}
+        text={`Zobacz najnowsze ${
+          variant === "offers"
+            ? "wydarzenia Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+            : "miejsca Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        }`}
       />
 
-      <FilterSection variant="offers" filters={offersFilters} />
+      <FilterSection variant={variant} filters={filters} />
 
-      <VerticalCardList list={offerListData} navigation={navigation} />
+      <VerticalCardList list={list} navigation={navigation} />
 
       <IconButton
         handler={handlePagination}
@@ -76,7 +79,7 @@ const EventList = ({ navigation }) => {
     <LoadingSection />
   );
 };
-export default EventList;
+export default List;
 
 const style = StyleSheet.create({
   container: {

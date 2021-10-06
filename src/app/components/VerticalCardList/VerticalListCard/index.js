@@ -5,21 +5,17 @@ import { screensNames } from "../../../utils/screensNames";
 import { COLORS } from "../../../style/colors";
 import VerticalCardLabel from "./VerticalCardLabel";
 import CardCTASection from "../../CardCTASection";
-import { setId as setPlaceId } from "../../../redux/singlePlace.slice";
-import { setId as setOfferId } from "../../../redux/singleOffer.slice";
+import { setId } from "../../../redux/single.slice";
 
 const VerticalListCard = ({ data, navigation, inFavorite = false }) => {
-  const dispatch = useDispatch();
   const { id, type, title, img } = data;
+  const dispatch = useDispatch();
 
   const handlePress = () => {
-    if (type === "places") {
-      dispatch(setPlaceId(id));
-      navigation.navigate(screensNames.placeSingle);
-    } else {
-      dispatch(setOfferId(id));
-      navigation.navigate(screensNames.eventSingle);
-    }
+    dispatch(setId([type, id]));
+    type === "places"
+      ? navigation.navigate(screensNames.placeSingle)
+      : navigation.navigate(screensNames.eventSingle);
   };
 
   return (

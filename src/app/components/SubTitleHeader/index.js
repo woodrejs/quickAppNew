@@ -6,8 +6,7 @@ import { Fontisto } from "@expo/vector-icons";
 import { stacksNames } from "../../utils/stacksNames";
 import { style } from "./index.style";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilters as setOffersFilters } from "../../redux/listOffer.slice";
-import { setFilters as setPlacesFilters } from "../../redux/listPlace.slice";
+import { setFilters } from "../../redux/list.slice";
 
 const SubTitleHeader = ({ navigation, variant, title, filters }) => {
   const dispatch = useDispatch();
@@ -15,14 +14,14 @@ const SubTitleHeader = ({ navigation, variant, title, filters }) => {
   const handlePress = () => {
     switch (variant) {
       case "places":
-        dispatch(setPlacesFilters(filters));
+        dispatch(setFilters([variant, filters]));
         navigation.navigate(stacksNames.places);
         break;
       case "schedule":
         navigation.navigate(stacksNames.schedule);
         break;
       case "offers":
-        dispatch(setOffersFilters(filters));
+        dispatch(setFilters([variant, filters]));
         navigation.navigate(stacksNames.events);
         break;
       default:

@@ -13,28 +13,26 @@ import RenderHtmlSection from "../../components/RenderHtmlSection";
 //utils & styles
 import { style } from "./index.style";
 import { getSinglePlaceData } from "../../utils/fetchFunctions";
-import { setData, setIsLoaded } from "../../redux/singlePlace.slice";
+import { setData, setIsLoaded } from "../../redux/single.slice";
 
 const PlaceSingle = ({ navigation }) => {
+  const variant = "places";
+  const { id, data, loaded } = useSelector(({ singleSlice }) => singleSlice[variant]);
   const dispatch = useDispatch();
-
-  const placeId = useSelector((state) => state.singlePlaceSlice.id);
-  const placeData = useSelector((state) => state.singlePlaceSlice.data);
-  const placeDataLoaded = useSelector((state) => state.singlePlaceSlice.loaded);
 
   useEffect(() => {
     async function init() {
-      const data = await getSinglePlaceData(placeId);
-      dispatch(setData(data));
+      const data = await getSinglePlaceData(id);
+      dispatch(setData([variant, data]));
     }
     init();
 
-    return () => dispatch(setIsLoaded(false));
+    return () => dispatch(setIsLoaded([variant, false]));
   }, []);
 
-  if (placeDataLoaded) {
-    const { id, images, title, location, venue } = placeData;
-    const { mainImage, address, longDescription } = placeData;
+  if (loaded) {
+    const { images, title, location, venue } = data;
+    const { mainImage, address, longDescription } = data;
     const { large, standard } = mainImage;
     const { email, telephone } = venue;
 
@@ -50,7 +48,7 @@ const PlaceSingle = ({ navigation }) => {
           <ContactSection email={email} telephone={telephone} />
           <LocalizationMapSection location={location} />
         </ScrollView>
-        <CTAButtonsSection data={placeData} />
+        <CTAButtonsSection data={data} />
       </>
     );
   } else return <LoadingSection />;

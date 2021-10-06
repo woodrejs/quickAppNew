@@ -6,16 +6,16 @@ import { style } from "./index.style";
 import { COLORS } from "../../../style/colors";
 import { screensNames } from "../../../utils/screensNames";
 import { useDispatch } from "react-redux";
-import { setId } from "../../../redux/singleOffer.slice";
+import { setId } from "../../../redux/single.slice";
 
-const LargeCardHeader = ({ title, navigation, id }) => {
+const LargeCardHeader = ({ title, navigation, id, variant }) => {
   const dispatch = useDispatch();
 
   const handlePress = () => {
-    dispatch(setId(id));
+    dispatch(setId([variant, id]));
     navigation.navigate(screensNames.eventSingle);
   };
-  
+
   return (
     <TouchableOpacity onPress={handlePress}>
       <View style={style.box}>

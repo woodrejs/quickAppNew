@@ -7,10 +7,11 @@ import LargeCardHeader from "./LargeCardHeader";
 import { useIsFocused } from "@react-navigation/native";
 import { style } from "./index.style";
 import { useDispatch } from "react-redux";
-import { setId } from "../../redux/singleOffer.slice";
+import { setId } from "../../redux/single.slice";
 import { screensNames } from "../../utils/screensNames";
 
 const LargeEventCard = ({ data, navigation }) => {
+  const variant = "offers";
   const [counter, setCounter] = useState(0);
   const [intervalId, setIntervalId] = useState();
   const isFocused = useIsFocused();
@@ -26,7 +27,7 @@ const LargeEventCard = ({ data, navigation }) => {
     );
   };
   const handlePress = () => {
-    dispatch(setId(id));
+    dispatch(setId([variant, id]));
     navigation.navigate(screensNames.eventSingle);
   };
 
@@ -36,7 +37,12 @@ const LargeEventCard = ({ data, navigation }) => {
 
   return (
     <View style={style.container}>
-      <LargeCardHeader id={id} navigation={navigation} title="Wybrane w tym tygodniu" />
+      <LargeCardHeader
+        id={id}
+        navigation={navigation}
+        title="Wybrane w tym tygodniu"
+        variant={variant}
+      />
 
       <TouchableOpacity onPress={handlePress}>
         <ImageBackground

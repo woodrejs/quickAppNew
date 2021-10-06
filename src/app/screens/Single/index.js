@@ -14,7 +14,7 @@ import { style } from "./index.style";
 import { getSingleOfferData } from "../../utils/fetchFunctions";
 import { setData, setIsLoaded } from "../../redux/single.slice";
 
-const EventSingle = () => {
+const Single = () => {
   const variant = "offers";
   const { id, data, loaded } = useSelector(({ singleSlice }) => singleSlice[variant]);
   const dispatch = useDispatch();
@@ -53,4 +53,4 @@ const EventSingle = () => {
     );
   } else return <LoadingSection />;
 };
-export default EventSingle;
+export default Single;

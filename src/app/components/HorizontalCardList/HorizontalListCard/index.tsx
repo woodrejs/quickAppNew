@@ -3,8 +3,7 @@ import { ImageBackground, TouchableOpacity, Text } from "react-native";
 import { useDispatch } from "react-redux";
 //utils & styles
 import { style } from "./index.style";
-import { setId as setPlaceId } from "../../../redux/singlePlace.slice";
-import { setId as setOfferId } from "../../../redux/singleOffer.slice";
+import { setId } from "../../../redux/single.slice";
 import { Props } from "./index.utils";
 import { screensNames } from "../../../utils/screensNames";
 
@@ -16,14 +15,13 @@ const HorizontalListCard: React.FC<Props> = ({
   title,
 }) => {
   const dispatch = useDispatch();
+
   const handlePress = () => {
-    if (type === "places") {
-      dispatch(setPlaceId(id));
-      navigation.navigate(screensNames.placeSingle);
-    } else if (type === "offers") {
-      dispatch(setOfferId(id));
-      navigation.navigate(screensNames.eventSingle);
-    }
+    dispatch(setId([type, id]));
+
+    type === "places"
+      ? navigation.navigate(screensNames.placeSingle)
+      : navigation.navigate(screensNames.eventSingle);
   };
 
   return (
