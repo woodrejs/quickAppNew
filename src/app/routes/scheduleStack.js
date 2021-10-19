@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { screensNames } from "../utils/screensNames";
 import { screenOptions } from "./utils";
 
-import EventSingle from "../screens/EventSingle";
+import Single from "../screens/Single";
 import Schedule from "../screens/Schedule";
 
 const Stack = createStackNavigator();
@@ -13,7 +13,10 @@ const ScheduleStack = () => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name={schedule} component={Schedule} />
-      <Stack.Screen name={eventSingle} component={EventSingle} />
+      <Stack.Screen
+        name={eventSingle}
+        children={({ navigation }) => <Single variant="offers" navigation={navigation} />}
+      />
     </Stack.Navigator>
   );
 };

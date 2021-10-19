@@ -12,6 +12,10 @@ const listSlice = createSlice({
       const variant = payload[0];
 
       state[variant].loaded = payload[1];
+
+      if (!payload[1]) {
+        state[variant].list = [];
+      }
     },
     setData(state, action) {
       const { payload } = action;

@@ -10,6 +10,12 @@ export const style = StyleSheet.create({
     justifyContent: "flex-end",
   },
   box: { display: "flex", flexDirection: "row" },
+  iconBox: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingRight: 30,
+  },
   title: {
     color: COLORS.white,
     fontFamily: "Montserrat700",
@@ -18,6 +24,14 @@ export const style = StyleSheet.create({
     lineHeight: 30,
     paddingBottom: 20,
     width: "90%",
+  },
+  subTitle: {
+    color: COLORS.white,
+    fontFamily: "Montserrat700",
+    fontWeight: "700",
+    fontSize: 12,
+    lineHeight: 12,
+    paddingLeft: 20,
   },
   price: {
     color: COLORS.white,

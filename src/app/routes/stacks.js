@@ -43,7 +43,7 @@ export const Stacks = [
     component: PlacesStack,
   },
   {
-    name: stacksNames.events,
+    name: stacksNames.offers,
     id: uuidv4(),
     icon: () => <Ionicons name="people" size={24} color={COLORS.black} />,
     component: EventsStack,

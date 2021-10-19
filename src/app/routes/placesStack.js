@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { screensNames } from "../utils/screensNames";
 import { screenOptions } from "./utils";
 
-import PlaceSingle from "../screens/PlaceSingle";
+import Single from "../screens/Single";
 import List from "../screens/List";
 
 const Stack = createStackNavigator();
@@ -16,7 +16,10 @@ const PlacesStack = () => {
         name={placeList}
         children={({ navigation }) => <List variant="places" navigation={navigation} />}
       />
-      <Stack.Screen name={placeSingle} component={PlaceSingle} />
+      <Stack.Screen
+        name={placeSingle}
+        children={({ navigation }) => <Single variant="places" navigation={navigation} />}
+      />
     </Stack.Navigator>
   );
 };

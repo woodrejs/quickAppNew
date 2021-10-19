@@ -1,9 +1,8 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
+//styles & utils
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../../../style/colors";
-
-import { Props } from "./index.utils";
 import { style } from "./index.style";
 
 const FormButton = ({ customStyle, label, press }) => {

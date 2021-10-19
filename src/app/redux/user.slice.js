@@ -6,6 +6,10 @@ const userSlice = createSlice({
     jwt: null,
     logged: false,
     favorites: [],
+    avatar: {
+      url: null,
+      public_id: null,
+    },
   },
   reducers: {
     setLoggedIn(state, action) {
@@ -18,14 +22,23 @@ const userSlice = createSlice({
       state.logged = false;
       state.jwt = null;
       state.favorites = [];
+      state.avatar = {
+        url: null,
+        public_id: null,
+      };
     },
     setFavorites(state, action) {
       const { payload } = action;
 
       state.favorites = payload;
     },
+    setAvatar(state, action) {
+      const { payload } = action;
+
+      state.avatar = payload;
+    },
   },
 });
 
-export const { setLoggedIn, setLoggedOut, setFavorites } = userSlice.actions;
+export const { setLoggedIn, setLoggedOut, setFavorites, setAvatar } = userSlice.actions;
 export default userSlice.reducer;

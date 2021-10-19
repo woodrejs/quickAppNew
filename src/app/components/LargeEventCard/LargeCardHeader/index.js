@@ -4,17 +4,12 @@ import { TouchableOpacity, View, Text } from "react-native";
 import { Fontisto } from "@expo/vector-icons";
 import { style } from "./index.style";
 import { COLORS } from "../../../style/colors";
-import { screensNames } from "../../../utils/screensNames";
-import { useDispatch } from "react-redux";
-import { setId } from "../../../redux/single.slice";
+import useId from "../../../hooks/useId";
 
 const LargeCardHeader = ({ title, navigation, id, variant }) => {
-  const dispatch = useDispatch();
+  const setId = useId();
 
-  const handlePress = () => {
-    dispatch(setId([variant, id]));
-    navigation.navigate(screensNames.eventSingle);
-  };
+  const handlePress = () => setId(id, variant, navigation);
 
   return (
     <TouchableOpacity onPress={handlePress}>

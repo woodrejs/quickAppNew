@@ -3,9 +3,8 @@ import { ImageBackground, TouchableOpacity, Text } from "react-native";
 import { useDispatch } from "react-redux";
 //utils & styles
 import { style } from "./index.style";
-import { setId } from "../../../redux/single.slice";
 import { Props } from "./index.utils";
-import { screensNames } from "../../../utils/screensNames";
+import useId from "../../../hooks/useId";
 
 const HorizontalListCard: React.FC<Props> = ({
   img,
@@ -14,15 +13,9 @@ const HorizontalListCard: React.FC<Props> = ({
   type = "offers",
   title,
 }) => {
-  const dispatch = useDispatch();
+  const setId = useId();
 
-  const handlePress = () => {
-    dispatch(setId([type, id]));
-
-    type === "places"
-      ? navigation.navigate(screensNames.placeSingle)
-      : navigation.navigate(screensNames.eventSingle);
-  };
+  const handlePress = () => setId(id, type, navigation);
 
   return (
     <TouchableOpacity onPress={handlePress}>

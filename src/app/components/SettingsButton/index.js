@@ -4,9 +4,9 @@ import { Entypo, FontAwesome, AntDesign } from "@expo/vector-icons";
 import { TextInput } from "react-native-gesture-handler";
 import { Formik } from "formik";
 import { EmailSchema, DeleteSchema, UsernameSchema } from "../../utils/strapi";
+import FormInput from "../Forms/FormInput";
 
 import { COLORS } from "../../style/colors";
-import MobileCamera from "../MobileCamera";
 
 const SettingsButton = ({ variant, text, handler = null, submit }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -61,13 +61,12 @@ const SettingsButton = ({ variant, text, handler = null, submit }) => {
             >
               {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                 <View style={styles.formBox}>
-                  <TextInput
-                    onChangeText={handleChange(variant)}
-                    onBlur={handleBlur(variant)}
-                    value={values[variant]}
-                    style={styles.formInput}
+                  <FormInput
+                    val={values[variant]}
+                    change={handleChange(variant)}
+                    blur={handleBlur(variant)}
+                    error={errors}
                   />
-                  {errors && <Text style={styles.inputErrors}>{errors[variant]}</Text>}
                   <Button
                     title={text.buttonTitle}
                     onPress={handleSubmit}
@@ -78,8 +77,6 @@ const SettingsButton = ({ variant, text, handler = null, submit }) => {
             </Formik>
           )}
       </View>
-      {/* camera */}
-      {variant === "avatar" && <MobileCamera isOpen={isOpen} handler={setIsOpen} />}
     </>
   );
 };

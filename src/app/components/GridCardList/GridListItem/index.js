@@ -6,50 +6,55 @@ import {
   Dimensions,
   TouchableHighlight,
 } from "react-native";
-
+//components
+import AddToFavoriteButton from "../../AddToFavoriteButton";
+//style & utils
 import { COLORS } from "../../../style/colors";
-import CardCTASection from "../../CardCTASection";
+import { STYLES } from "../../../style/styles";
+import useId from "../../../hooks/useId";
 
-const GridListItem = ({ data }) => {
-  const { uid, img, title, type } = data;
+export default function GridListItem({ data, navigation }) {
+  const { img, title, type, id } = data;
+  const setId = useId();
+
+  const handlePress = () => setId(id, type, navigation);
+
   return (
     <ImageBackground
       style={style.container}
       imageStyle={style.image}
       source={img ? { uri: img } : require("../../../../../assets/img/no_img.jpg")}
     >
-      <TouchableHighlight style={style.box}>
-        <Text style={style.title}>{title}</Text>
+      <TouchableHighlight style={style.box} onPress={handlePress}>
+        <Text style={style.title} children={title} />
       </TouchableHighlight>
 
-      <CardCTASection data={{ id: uid, img, title, type }} inFavorite />
+      <AddToFavoriteButton data={data} active />
     </ImageBackground>
   );
-};
-
-export default GridListItem;
+}
 
 const style = StyleSheet.create({
   container: {
     position: "relative",
     height: 200,
     width: Dimensions.get("window").width / 2 - 15,
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.dark,
     marginBottom: 10,
-    borderRadius: 20,
+    borderRadius: 10,
+    ...STYLES.shadow,
   },
+  image: { width: "100%", borderRadius: 10, opacity: 0.5 },
   box: {
     padding: 10,
     height: "100%",
     display: "flex",
     justifyContent: "flex-end",
   },
-  image: { width: "100%", borderRadius: 20, opacity: 0.7 },
   title: {
-    color: COLORS.white,
+    ...STYLES.fonts.bold,
+    color: COLORS.lightnest,
     fontSize: 14,
-    fontFamily: "Montserrat700",
-    fontWeight: "700",
     paddingTop: 5,
     width: "90%",
   },

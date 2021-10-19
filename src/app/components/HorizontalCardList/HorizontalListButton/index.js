@@ -1,21 +1,19 @@
 import React from "react";
 import { View, TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
 //utils & styles
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../../../style/colors";
 import { style } from "./index.style";
 import { stacksNames } from "../../../utils/stacksNames";
+import useFilters from "../../../hooks/useFilters";
 
-const HorizontalListButton = ({ navigation, variant }) => {
+const HorizontalListButton = ({ navigation, variant, filters }) => {
+  const setFilters = useFilters();
+
   const handlePress = () => {
-    switch (variant) {
-      case "places":
-        navigation.navigate(stacksNames.places);
-        break;
-      default:
-        navigation.navigate(stacksNames.events);
-        break;
-    }
+    setFilters(variant, filters);
+    navigation.navigate(stacksNames[variant]);
   };
   return (
     <TouchableOpacity style={style.container} onPress={handlePress}>

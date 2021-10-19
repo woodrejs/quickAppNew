@@ -1,40 +1,32 @@
-import React, { useEffect } from "react";
-import { ScrollView, StyleSheet } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
-import ScreenTitleSection from "../../components/ScreenTitleSection";
+import React from "react";
+import { ScrollView, StyleSheet, View, Text } from "react-native";
+import { useSelector } from "react-redux";
+//components
+import TitleSection from "./TitleSection";
 import GridCardList from "../../components/GridCardList";
-import { findFavorites } from "../../utils/strapi";
-import { setFavorites } from "../../redux/user.slice";
-import LoadingSection from "../../components/LoadingSection";
-import { setError } from "../../redux/app.slice";
+//styles & utils
+import { COLORS } from "../../style/colors";
+import { STYLES } from "../../style/styles";
 
-const FavoritesList = () => {
-  const jwt = useSelector(({ userSlice }) => userSlice.jwt);
-  const favorites = useSelector(({ userSlice }) => userSlice.favorites);
-  const dispatch = useDispatch();
+const FavoritesList = ({ navigation }) => {
+  const { logged } = useSelector(({ userSlice }) => userSlice);
 
-  useEffect(() => {
-    async function init() {
-      try {
-        const data = await findFavorites(jwt);
-        dispatch(setFavorites(data));
-      } catch (error) {
-        dispatch(setError([true, "Błąd podczas pobierania danych."]));
-      }
-    }
-    console.log("tutaj");
-    jwt && init();
-  }, [jwt]);
+  if (!logged)
+    return (
+      <View style={style.box}>
+        <Text style={style.text}>Żeby dodawać do ulubionych, musisz być zalogowany.</Text>
+      </View>
+    );
 
-  return favorites.lenght ? (
-    <LoadingSection />
-  ) : (
+  return (
     <ScrollView style={style.container}>
-      <ScreenTitleSection
+      <TitleSection
+        styles={style.titleBox}
         title="Twoje ulubione wydarzenia i miejsca"
         text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       />
-      <GridCardList />
+
+      <GridCardList navigation={navigation} />
     </ScrollView>
   );
 };
@@ -42,8 +34,21 @@ export default FavoritesList;
 
 const style = StyleSheet.create({
   container: {
-    height: "100%",
-    width: "100%",
     padding: 10,
+    backgroundColor: COLORS.extra,
   },
+  box: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
+  text: {
+    ...STYLES.fonts.bold,
+    fontSize: 16,
+    color: COLORS.grey,
+    textAlign: "center",
+    maxWidth: 300,
+  },
+  titleBox: { paddingVertical: 40 },
 });

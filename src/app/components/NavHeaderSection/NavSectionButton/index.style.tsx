@@ -10,7 +10,7 @@ export const style = StyleSheet.create({
     paddingHorizontal: 5,
   },
   sphere: {
-    backgroundColor: COLORS.grey,
+    backgroundColor: COLORS.lightnest,
     height: 6,
     width: 6,
     borderRadius: 50,

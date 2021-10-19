@@ -4,55 +4,24 @@ import { createSlice } from "@reduxjs/toolkit";
 const homeSlice = createSlice({
   name: "homeSlice",
   initialState: {
-    movies: {
-      list: [],
-      loaded: false,
-    },
-    plays: {
-      list: [],
-      loaded: false,
-    },
-    books: {
-      list: [],
-      loaded: false,
-    },
-    sport: {
-      list: [],
-      loaded: false,
-    },
-    places: {
-      list: [],
-      loaded: false,
-    },
-    main: {
-      list: [],
-      loaded: false,
-    },
+    lists: {},
+    // stage: "pending",
   },
   reducers: {
-    //action:{name,value}
     setList(state, action) {
-      const name = action.payload[0];
-      const value = action.payload[1];
+      const { payload } = action;
 
-      if (typeof value !== "object") return;
-      // if (name !== "movies" && name !== "places" && name !== "plays") return;
-
-      state[name].list = value;
-      state[name].loaded = true;
+      state.lists = payload;
+      // state.stage = "success";
     },
-    //action:{name,value}
-    setListLoaded(state, action) {
-      const name = action.payload[0];
-      const value = action.payload[1];
+    // setStage(state, action) {
+    //   const { payload } = action;
 
-      if (typeof value !== "boolean") return;
-      // if (name !== "movies" && name !== "places" && name !== "plays") return;
-
-      state[name].loaded = true;
-    },
+    //   state.stage = payload;
+    // },
   },
 });
 
-export const { setListLoaded, setList } = homeSlice.actions;
+export const { setList } = homeSlice.actions;
+// export const {  setList, setStage } = homeSlice.actions;
 export default homeSlice.reducer;

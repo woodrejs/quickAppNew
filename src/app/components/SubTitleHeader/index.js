@@ -5,37 +5,26 @@ import { COLORS } from "../../style/colors";
 import { Fontisto } from "@expo/vector-icons";
 import { stacksNames } from "../../utils/stacksNames";
 import { style } from "./index.style";
-import { useSelector, useDispatch } from "react-redux";
-import { setFilters } from "../../redux/list.slice";
+import useFilters from "../../hooks/useFilters";
 
-const SubTitleHeader = ({ navigation, variant, title, filters }) => {
-  const dispatch = useDispatch();
+const SubTitleHeader = ({ navigation, variant, title, filters, children }) => {
+  const setFilters = useFilters();
 
   const handlePress = () => {
-    switch (variant) {
-      case "places":
-        dispatch(setFilters([variant, filters]));
-        navigation.navigate(stacksNames.places);
-        break;
-      case "schedule":
-        navigation.navigate(stacksNames.schedule);
-        break;
-      case "offers":
-        dispatch(setFilters([variant, filters]));
-        navigation.navigate(stacksNames.events);
-        break;
-      default:
-        return null;
-    }
+    setFilters(variant, filters);
+    navigation.navigate(stacksNames[variant]);
   };
 
   return (
-    <TouchableOpacity onPress={handlePress} style={style.container}>
-      <View style={style.box}>
-        <Text style={style.title}>{title}</Text>
-        <Fontisto name="eye" size={14} color={COLORS.lightExtra} />
-      </View>
-    </TouchableOpacity>
+    <>
+      <TouchableOpacity onPress={handlePress} style={style.container}>
+        <View style={style.box}>
+          <Text style={style.title}>{title}</Text>
+          <Fontisto name="eye" size={14} color={COLORS.lightExtra} />
+        </View>
+      </TouchableOpacity>
+      <Text style={style.text}>{children}</Text>
+    </>
   );
 };
 

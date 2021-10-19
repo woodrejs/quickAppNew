@@ -7,11 +7,8 @@ import { v4 as uuidv4 } from "uuid";
     +handle errors
 */
 
-const fomatDate = (date) => {
-  return date.slice(0, 10);
-};
 
-//type, page, types, pageSize
+
 export const fetchItemList = async (type, page = 0, types = [], pageSize = 10) => {
   const URL = `http://go.wroclaw.pl/api/v1.0/${type}/?key=${API_KEY}&type-id=${types.toString()}&page-size=${pageSize}&page=${page}`;
 
@@ -43,6 +40,7 @@ export const getMainCardData = async (types, pageSize) => {
     title,
     startDate: fomatDate(events[0].startDate),
     ticketing: events[0].ticketing,
+    address: `${events[0].placeName} ul. ${events[0].place.address.street}`,
   }));
 };
 export const getSingleOfferData = async (offerId) => {
@@ -112,8 +110,8 @@ export const getSingleOfferData = async (offerId) => {
   function getAddress(place) {
     if (!place) return null;
 
-    return place?.street && place?.zipCode && place?.city
-      ? `ul. ${place?.street} ${place?.zipCode} ${place?.city}`
+    return place?.address.street && place?.address.zipCode && place?.address.city
+      ? `ul. ${place?.address.street} ${place?.address.zipCode} ${place?.address.city}`
       : null;
   }
 
@@ -194,23 +192,8 @@ export const getSinglePlaceData = async (placeId) => {
     console.log({ getSinglePlaceData: error });
   }
 };
-// --------------------------------
-//tmp
-//offer types list
-export const offertypeslist = async (pageSize, types) => {
-  const URL = `http://go.wroclaw.pl/api/v1.0/types/for-offers/?key=${API_KEY}`;
 
-  const resp = await axios.get(URL);
-  const tmpArr = [];
-  resp.data.items.map((item) => {
-    console.log({ alias: item.alias, id: item.id });
-  });
+function fomatDate(date){
+  return date.slice(0, 10);
+}
 
-  // const data = resp.data.items.map(({ alias, id }) => {
-  //   tmpArr.push({
-  //     alias,
-  //     id,
-  //   });
-  // });
-  // console.log(data);
-};

@@ -2,7 +2,7 @@ export const stacksNames = {
   home: "Strona główna",
   favorites: "Ulubione",
   places: "Miejsca",
-  events: "Wydarzenia",
+  offers: "Wydarzenia",
   schedule: "Terminarz",
   settings: "Ustawienia",
   auth: "Logowanie",

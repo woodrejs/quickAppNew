@@ -1,59 +1,25 @@
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-
 import { AntDesign } from "@expo/vector-icons";
 import { Fontisto } from "@expo/vector-icons";
 import { COLORS } from "../../../style/colors";
-import { createFavorite, deleteFavorite } from "../../../utils/strapi";
-import { useSelector, useDispatch } from "react-redux";
-import { setFavorites } from "../../../redux/user.slice";
-import { setInfo } from "../../../redux/app.slice";
+import useFavorites from "../../../hooks/useFavorites";
 
 const CardSectionButton = ({ data, variant, selected }) => {
   const [isSelected, setIsSelected] = useState(selected);
+  const [__, createFavorite, deleteFavorite] = useFavorites();
   const { black, white, lightExtra } = COLORS;
-  const { id, uid, type, title, img } = data;
-  const jwt = useSelector(({ userSlice }) => userSlice.jwt);
-  const favorites = useSelector(({ userSlice }) => userSlice.favorites);
-  const dispatch = useDispatch();
 
   const handlePress = async () => {
-    dispatch(setInfo(["pending"]));
     if (variant === "favorite") {
       if (isSelected) {
-        try {
-          await deleteFavorite(id, jwt);
-          const filteredData = favorites.filter((item) => item.uid !== id);
-          dispatch(setFavorites(filteredData));
-          dispatch(setInfo(["success", `"${title}" został usunięty z ulubionych.`]));
-          setIsSelected(false);
-        } catch (error) {
-          dispatch(
-            setInfo(["failed", `Błąd podczas usuwania "${title}". Spróbuj ponownie.`])
-          );
-        }
+        deleteFavorite(data.id);
+        setIsSelected(false);
       } else {
-        try {
-          const resp = await createFavorite(data, jwt);
-          dispatch(setFavorites([...favorites, resp]));
-          dispatch(setInfo(["success", `"${title}" został dodany do ulubionych.`]));
-          setIsSelected(true);
-        } catch (error) {
-          dispatch(
-            setInfo(["failed", `Błąd podczas dodawania "${title}". Spróbuj ponownie.`])
-          );
-        }
+        createFavorite(data);
+        setIsSelected(true);
       }
     }
-
-    //add or remove from db or schedule
-    // if (variant === "schedule") {
-    //   if (isSelected) {
-    //     //delete
-    //   } else {
-    //     //create
-    //   }
-    // }
   };
 
   return (
@@ -86,4 +52,3 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
 });
-// "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxNTMwMGQ0MmU5ZWJlNDUyOGQ2NGMyNCIsImlhdCI6MTYzMjk4OTQzNSwiZXhwIjoxNjM1NTgxNDM1fQ.jHk1exuEgH1MWfrj0pBrLWlwu8GOkgkNzU-v9531vaw"

@@ -1,82 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { ScrollView, StyleSheet } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 //components
-import ScreenTitleSection from "../../components/ScreenTitleSection";
-import FilterSection from "../../components/FilterSection";
-import VerticalCardList from "../../components/VerticalCardList";
+import FilterSection from "./FilterSection";
+import VerticalCardList from "./VerticalCardList";
 import LoadingSection from "../../components/LoadingSection";
-import IconButton from "../../components/IconButton";
+import ListButton from "./ListButton";
 //utils & styles
-import { setIsLoaded, setData, addData, setStage } from "../../redux/list.slice";
-import { fetchItemList } from "../../utils/fetchFunctions";
-import { useIsFocused } from "@react-navigation/native";
-import { setError } from "../../redux/app.slice";
+import usePagination from "../../hooks/usePagination";
+import { COLORS } from "../../style/colors";
+import { STYLES } from "../../style/styles";
+import TitleSection from "./TitleSection";
+import useWroclawGO from "../../hooks/useWroclawGO";
 
 //todo: pozbyc sie img.standard na rzecz img
 const List = ({ navigation, variant }) => {
-  const [paginationCounter, setPaginationCounter] = useState(0);
-
-  const { list, filters, loaded, stage } = useSelector(
-    ({ listSlice }) => listSlice[variant]
-  );
-
-  const isFocused = useIsFocused();
-  const dispatch = useDispatch();
+  const [paginationCounter, setPaginationCounter] = usePagination(variant);
+  const [setItemList] = useWroclawGO(variant);
+  const { list, filters, loaded } = useSelector(({ listSlice }) => listSlice[variant]);
 
   const handlePagination = () => setPaginationCounter((state) => state + 1);
 
   useEffect(() => {
-    async function init() {
-      try {
-        const data = await fetchItemList(variant, 0, filters);
-        dispatch(setData([variant, data]));
-      } catch (error) {
-        dispatch(setError([true, "Błąd podczas ładowania aplikacji. Spróbuj ponownie."]));
-      }
-    }
-    dispatch(setStage([variant, "pending"]));
-    setPaginationCounter(0);
-    isFocused ? init() : dispatch(setIsLoaded([variant, false]));
-  }, [isFocused, filters]);
+    setItemList(paginationCounter);
+  }, [paginationCounter, filters]);
 
-  useEffect(() => {
-    async function usePagination() {
-      try {
-        const data = await fetchItemList(variant, paginationCounter, filters); //type, page, types, pageSize
-        dispatch(addData([variant, data]));
-      } catch (error) {
-        dispatch(setError([true, "Błąd podczas ładowania aplikacji. Spróbuj ponownie."]));
-      }
-    }
-    dispatch(setStage([variant, "pending"]));
-    paginationCounter > 0 && usePagination();
-  }, [paginationCounter]);
+  if (!loaded) return <LoadingSection />;
 
-  return loaded ? (
+  return (
     <ScrollView style={style.container}>
-      <ScreenTitleSection
-        title={`Zobacz najnowsze ${variant === "offers" ? "wydarzenia" : "miejsca"}`}
-        text={`Zobacz najnowsze ${
-          variant === "offers"
-            ? "wydarzenia Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-            : "miejsca Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-        }`}
-      />
+      {/* Title Section*/}
+      <TitleSection variant={variant} />
 
+      {/* Filter Section */}
       <FilterSection variant={variant} filters={filters} />
 
-      <VerticalCardList list={list} navigation={navigation} />
+      {/* List Section*/}
+      {list && <VerticalCardList list={list} navigation={navigation} />}
 
-      <IconButton
+      {/* Pagination button */}
+      <ListButton
         handler={handlePagination}
-        variant="plus"
+        variant={variant}
+        icon="plus"
         customStyle={style.paginationButton}
-        stage={stage}
       />
     </ScrollView>
-  ) : (
-    <LoadingSection />
   );
 };
 export default List;
@@ -86,9 +55,14 @@ const style = StyleSheet.create({
     height: "100%",
     width: "100%",
     padding: 10,
+    backgroundColor: COLORS.extra,
+    paddingTop: 40,
   },
+  title: { ...STYLES.fonts.bold, fontSize: 28, paddingBottom: 15 },
+  text: { ...STYLES.fonts.regular, fontSize: 12, opacity: 0.8, lineHeight: 16 },
+
   paginationButton: {
-    marginBottom: 20,
+    marginBottom: 60,
     marginTop: -10,
     display: "flex",
     justifyContent: "center",

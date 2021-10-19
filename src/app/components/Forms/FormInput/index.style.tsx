@@ -21,4 +21,10 @@ export const style = StyleSheet.create({
     fontFamily: "Montserrat400",
     fontWeight: "400",
   },
+  error: {
+    color: COLORS.warning,
+    fontSize: 11,
+    fontFamily: "Montserrat400",
+    fontWeight: "400",
+  },
 });

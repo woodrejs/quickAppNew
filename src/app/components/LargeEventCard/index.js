@@ -6,29 +6,25 @@ import LargeCardHeader from "./LargeCardHeader";
 //utils & styles
 import { useIsFocused } from "@react-navigation/native";
 import { style } from "./index.style";
-import { useDispatch } from "react-redux";
-import { setId } from "../../redux/single.slice";
-import { screensNames } from "../../utils/screensNames";
+import useId from "../../hooks/useId";
 
-const LargeEventCard = ({ data, navigation }) => {
-  const variant = "offers";
+//!!important!!
+const LargeEventCard = ({ list, navigation, variant = "offers" }) => {
   const [counter, setCounter] = useState(0);
   const [intervalId, setIntervalId] = useState();
   const isFocused = useIsFocused();
-  const dispatch = useDispatch();
-  const { id, title, img, startDate, ticketing } = data[counter];
+  const setId = useId();
 
+  const { id, img } = list[counter];
+
+  const handlePress = () => setId(id, variant, navigation);
   const stopRace = () => clearInterval(intervalId, 5000);
   const startRace = () => {
     setIntervalId(
       setInterval(() => {
-        setCounter((prevState) => (prevState < data.length - 1 ? prevState + 1 : 0));
+        setCounter((prevState) => (prevState < list.length - 1 ? prevState + 1 : 0));
       }, 5000)
     );
-  };
-  const handlePress = () => {
-    dispatch(setId([variant, id]));
-    navigation.navigate(screensNames.eventSingle);
   };
 
   useEffect(() => {
@@ -50,7 +46,7 @@ const LargeEventCard = ({ data, navigation }) => {
           imageStyle={style.image}
           source={{ uri: img }}
         >
-          <CardHeaderSection title={title} ticketing={ticketing} date={startDate} />
+          <CardHeaderSection data={list[counter]} />
         </ImageBackground>
       </TouchableOpacity>
     </View>
