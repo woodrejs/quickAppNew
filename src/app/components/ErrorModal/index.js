@@ -65,38 +65,3 @@ const style = StyleSheet.create({
     width: Dimensions.get("window").width * 0.8,
   },
 });
-
-// import React from "react";
-// import { Text, View, StyleSheet, Button } from "react-native";
-// import { useSelector } from "react-redux";
-// import useError from "../../hooks/useError";
-
-// //components
-// import Icon from "../../components/Icon";
-// //utils & styles
-// import { COLORS } from "../../style/colors";
-// import { STYLES } from "../../style/styles";
-
-// const ErrorModal = () => {
-//   const message = useSelector(({ appSlice }) => appSlice.error.message);
-//   const setError = useError();
-//   const handlePress = () => setError(false, "");
-
-//   return (
-//     <View style={styles.container}>
-//       <Text>{message}</Text>
-//       <Button title="Spróbuj ponownie" onPress={handlePress} />
-//     </View>
-//   );
-// };
-
-// export default ErrorModal;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     height: "100%",
-//     display: "flex",
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-// });

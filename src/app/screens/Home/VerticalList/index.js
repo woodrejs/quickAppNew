@@ -4,26 +4,29 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useSelector } from "react-redux";
 //components
 import Badge from "../Badge";
-//utils & styles
+//utils 
+import useId from "../../../hooks/useId";
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 import { getTicketingTitle } from "../../../utils/functions";
 
-export default function VerticalList({ styles = {} }) {
-  const { list } = useSelector((state) => state.homeSlice.lists.main);
+export default function VerticalList({ styles = {}, navigation }) {
+  const list = useSelector(({ listSlice }) => listSlice.recommended.list);
 
   return (
     <ScrollView style={styles}>
       {list.map((card) => (
-        <Card key={card.id} data={card} />
+        <Card key={card.id} data={card} navigation={navigation} />
       ))}
     </ScrollView>
   );
 }
-function Card({ data }) {
-  const { img, ticketing, title } = data;
-  const handler = () => console.log("handler");
-  
+function Card({ data, navigation }) {
+  const { id, img, ticketing, title } = data;
+  const setId = useId();
+
+  const handler = () => setId(id, "offers", navigation);
+
   return (
     <TouchableOpacity style={style.container} onPress={handler}>
       {/* west */}

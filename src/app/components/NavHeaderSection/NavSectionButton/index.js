@@ -1,14 +1,14 @@
 import React from "react";
 import { View, TouchableWithoutFeedback, StyleSheet } from "react-native";
 //style & utils
-import { Props } from "./index.utils";
 import { COLORS } from "../../../style/colors";
 
-const NavSectionButton: React.FC<Props> = ({ navigation }) => {
+export default function NavSectionButton({ navigation }) {
   const handlePress = () => navigation.openDrawer();
 
-  const screen =
-    navigation.getState().routes[navigation.getState().routes.length - 1].name;
+  //!!!important!!!
+  // const screen =
+  //   navigation.getState().routes[navigation.getState().routes.length - 1].name;
 
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
@@ -26,8 +26,7 @@ const NavSectionButton: React.FC<Props> = ({ navigation }) => {
       </View>
     </TouchableWithoutFeedback>
   );
-};
-export default NavSectionButton;
+}
 
 const style = StyleSheet.create({
   box: {

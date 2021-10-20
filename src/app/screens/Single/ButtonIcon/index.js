@@ -1,16 +1,18 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
+//components
 import Icon from "../../../components/Icon";
+//utils
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 
-const ButtonIcon = ({
+export default function ButtonIcon({
   name,
   size = "sm",
   handler = null,
   active = false,
   styles = {},
-}) => {
+}) {
   const { extra, lightnest, dark } = COLORS;
   return (
     <TouchableOpacity
@@ -27,9 +29,7 @@ const ButtonIcon = ({
       children={<Icon name={name} size={size === "sm" ? 21 : 28} color={dark} />}
     />
   );
-};
-
-export default ButtonIcon;
+}
 
 const style = StyleSheet.create({
   container: {

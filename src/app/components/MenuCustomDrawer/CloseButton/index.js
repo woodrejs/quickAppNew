@@ -1,5 +1,6 @@
 import React from "react";
 import { View, TouchableWithoutFeedback, StyleSheet } from "react-native";
+//utils & styles
 import { COLORS } from "../../../style/colors";
 
 export default function CloseButton({ handler }) {

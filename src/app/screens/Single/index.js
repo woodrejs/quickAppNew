@@ -17,7 +17,7 @@ import LocalizationMapSection from "../../components/LocalizationMapSection";
 import LoadingSection from "../../components/LoadingSection";
 import RenderHtmlSection from "../../components/RenderHtmlSection";
 import Icon from "../../components/Icon";
-//utils & styles
+//utils 
 import useWroclawGO from "../../hooks/useWroclawGO";
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";

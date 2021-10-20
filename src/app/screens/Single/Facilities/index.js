@@ -1,9 +1,11 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+//components
 import ButtonIcon from "../ButtonIcon";
+//utils
 import { STYLES } from "../../../style/styles";
 
-const Facilities = ({ venue }) => {
+export default function Facilities({ venue }) {
   const { carParkAvailable, foodAndDrinkAvailable, disabledAccessAvailable } = venue;
 
   return (
@@ -28,9 +30,7 @@ const Facilities = ({ venue }) => {
       />
     </View>
   );
-};
-
-export default Facilities;
+}
 
 function FacilitieIcon({ name, title }) {
   return (
@@ -40,12 +40,12 @@ function FacilitieIcon({ name, title }) {
     </View>
   );
 }
+
 function setFacilitiesTitle(title, available, unavailable) {
   if (title === null) return "nieokreślono";
 
   return title ? available : unavailable;
 }
-
 const style = StyleSheet.create({
   container: {
     display: "flex",

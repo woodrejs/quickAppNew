@@ -14,7 +14,7 @@ import TitleSection from "./TitleSection";
 import useWroclawGO from "../../hooks/useWroclawGO";
 
 //todo: pozbyc sie img.standard na rzecz img
-const List = ({ navigation, variant }) => {
+export default function List({ navigation, variant }) {
   const [paginationCounter, setPaginationCounter] = usePagination(variant);
   const [setItemList] = useWroclawGO(variant);
   const { list, filters, loaded } = useSelector(({ listSlice }) => listSlice[variant]);
@@ -47,8 +47,7 @@ const List = ({ navigation, variant }) => {
       />
     </ScrollView>
   );
-};
-export default List;
+}
 
 const style = StyleSheet.create({
   container: {

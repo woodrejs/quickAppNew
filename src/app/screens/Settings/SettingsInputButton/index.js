@@ -5,7 +5,7 @@ import { DeleteSchema, EmailSchema, UsernameSchema } from "../../../utils/strapi
 import { Formik } from "formik";
 //components
 import Icon from "../../../components/Icon";
-//styles & utils
+//utils
 import { STYLES } from "../../../style/styles";
 import { COLORS } from "../../../style/colors";
 

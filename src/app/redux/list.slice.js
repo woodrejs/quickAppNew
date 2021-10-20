@@ -5,6 +5,7 @@ const listSlice = createSlice({
   initialState: {
     offers: { stage: "waiting", list: [], filters: [], loaded: false },
     places: { stage: "waiting", list: [], filters: [], loaded: false },
+    recommended: { stage: "waiting", list: [], filters: [], loaded: false },
   },
   reducers: {
     setIsLoaded(state, action) {

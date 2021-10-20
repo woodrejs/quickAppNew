@@ -19,7 +19,7 @@ export default function useAuth() {
 
       try {
         const resp = await userLogin(email, password);
-        setUser(resp.user);
+        setUser(resp);
 
         dispatch(setLoggedIn(resp.jwt));
         setInfo("success", `${resp.user.username} witaj w quick week app.`);
@@ -36,7 +36,6 @@ export default function useAuth() {
     },
     //register
     async (username, email, password, navigation) => {
-      console.log({ username, email, password, navigation });
       setInfo("pending");
       try {
         const { jwt, user } = await userRegister(username, email, password);
@@ -50,35 +49,3 @@ export default function useAuth() {
     },
   ];
 }
-
-// export default function useLoginUser() {
-//   const dispatch = useDispatch();
-//   const setInfo = useInfo();
-//   return async (email, password, navigation) => {
-//     setInfo("pending");
-//     try {
-//       const { jwt, user } = await userLogin(email, password);
-
-//       const { avatar, favorites, username } = user;
-
-//       if (avatar.id && jwt) {
-//         const { public_id, url } = await findOneAvatar(avatar.id, jwt);
-//         dispatch(setAvatar({ public_id, url }));
-//       }
-
-//       const formatedFavorites = favorites.map(({ uid, type, img, title }) => ({
-//         id: uid,
-//         type,
-//         img,
-//         title,
-//       }));
-
-//       dispatch(setFavorites(formatedFavorites));
-//       dispatch(setLoggedIn(jwt));
-//       setInfo("success", `${username} witaj w quick week app.`);
-//       navigation.navigate(stacksNames.home);
-//     } catch (error) {
-//       setInfo("failed", `Błąd podczas logowania. Spróbuj ponownie.`);
-//     }
-//   };
-// }

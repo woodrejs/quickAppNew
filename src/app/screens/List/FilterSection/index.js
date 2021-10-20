@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
-import { useSelector } from "react-redux";
 //components
 import FilterSectionButton from "./FilterSectionButton";
 import ListButton from "../ListButton";
-//utils & styles
+//utils
+import useFilters from "../../../hooks/useFilters";
 import { offers, places } from "./index.data";
 
-import useFilters from "../../../hooks/useFilters";
-
-const FilterSection = ({ variant, filters }) => {
+export default function FilterSection({ variant, filters }) {
   const [setFilters, updateFilters] = useFilters(variant, filters);
   const data = variant === "offers" ? offers : places;
 
@@ -26,23 +24,8 @@ const FilterSection = ({ variant, filters }) => {
       </View>
     </ScrollView>
   );
-};
-
-export default FilterSection;
-
-const style = StyleSheet.create({
-  container: {
-    paddingTop: 40,
-    paddingBottom: 20,
-  },
-  box: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    marginLeft: 10,
-  },
-});
+}
+//!!!important!!! dosent work
 function checkIsActive(arr1, arr2) {
   let counter = {};
 
@@ -57,3 +40,16 @@ function checkIsActive(arr1, arr2) {
     return item;
   });
 }
+const style = StyleSheet.create({
+  container: {
+    paddingTop: 40,
+    paddingBottom: 20,
+  },
+  box: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 10,
+  },
+});

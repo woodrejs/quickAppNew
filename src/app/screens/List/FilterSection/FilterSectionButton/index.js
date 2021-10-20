@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-//utils & styles
+//utils
 import { COLORS } from "../../../../style/colors";
 import { STYLES } from "../../../../style/styles";
 
-const FilterSectionButton = ({ data: { id, title, active }, handler }) => {
+export default function FilterSectionButton({ data: { id, title, active }, handler }) {
   const [isActive, setIsActive] = useState(active);
   const { lightnest, extra, dark } = COLORS;
 
@@ -21,9 +21,7 @@ const FilterSectionButton = ({ data: { id, title, active }, handler }) => {
       <Text style={[style.title, { color: isActive ? lightnest : dark }]}>{title}</Text>
     </TouchableOpacity>
   );
-};
-
-export default FilterSectionButton;
+}
 
 const style = StyleSheet.create({
   container: {

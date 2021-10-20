@@ -4,11 +4,17 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 //components
 import Icon from "../../../components/Icon";
-//utils & styles
+//utils
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 
-const ListButton = ({ handler, variant, icon, active = true, customStyle = {} }) => {
+export default function ListButton({
+  handler,
+  variant,
+  icon,
+  active = true,
+  customStyle = {},
+}) {
   const { dark, lightnest, extra } = COLORS;
   const stage = useSelector(({ listSlice }) => listSlice[variant].stage);
 
@@ -22,9 +28,7 @@ const ListButton = ({ handler, variant, icon, active = true, customStyle = {} })
       </View>
     </TouchableOpacity>
   );
-};
-
-export default ListButton;
+}
 
 const style = StyleSheet.create({
   container: {

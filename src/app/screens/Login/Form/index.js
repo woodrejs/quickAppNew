@@ -1,17 +1,42 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { Formik } from "formik";
 import { View, StyleSheet, Button, TouchableOpacity, Text } from "react-native";
+import { useDispatch } from "react-redux";
 //components
 import InputText from "../../../components/InputText";
-//utils & styles
-import { LoginSchema } from "../../../utils/strapi";
+//utils
 import useAuth from "../../../hooks/useAuth";
+import { LoginSchema, findOneAvatar } from "../../../utils/strapi";
+import { setAvatar, setFavorites } from "../../../redux/user.slice";
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 
 export default function Form({ navigation }) {
   const [user, logInUser] = useAuth();
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    async function init() {
+      const { avatar, favorites } = user.user;
+
+      if ("id" in avatar) {
+        const { public_id, url } = await findOneAvatar(avatar.id, user.jwt);
+        dispatch(setAvatar({ public_id, url }));
+      }
+
+      if (favorites.length) {
+        const formatedFavorites = favorites.map(({ uid, type, img, title }) => ({
+          id: uid,
+          type,
+          img,
+          title,
+        }));
+
+        dispatch(setFavorites(formatedFavorites));
+      }
+    }
+    user && init();
+  }, [user]);
 
   return (
     <Formik
@@ -50,6 +75,7 @@ export default function Form({ navigation }) {
     </Formik>
   );
 }
+//!!!important!!! add mechanics
 function RestoreButton() {
   const handler = () => console.log("handler");
 

@@ -3,15 +3,13 @@ import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import VerticalListCard from "./VerticalListCard";
 
-const VerticalCardList = ({ list, navigation }) => {
+export default function VerticalCardList({ list, navigation }) {
   const favorites = useSelector(({ userSlice }) => userSlice.favorites);
 
   return (
     <View style={style.container} children={isInArray(list, favorites, navigation)} />
   );
-};
-
-export default VerticalCardList;
+}
 
 const style = StyleSheet.create({
   container: {
@@ -20,6 +18,7 @@ const style = StyleSheet.create({
   },
 });
 
+//!!!important!!!
 function isInArray(arr1, arr2, navigation) {
   let counter = {};
 

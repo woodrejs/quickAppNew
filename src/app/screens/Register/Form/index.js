@@ -3,9 +3,9 @@ import { Formik } from "formik";
 import { View, StyleSheet, Button } from "react-native";
 //components
 import InputText from "../../../components/InputText";
-//utils & styles
-import { RegisterSchema } from "../../../utils/strapi";
+//utils 
 import useAuth from "../../../hooks/useAuth";
+import { RegisterSchema } from "../../../utils/strapi";
 import { COLORS } from "../../../style/colors";
 
 export default function Form({ navigation }) {

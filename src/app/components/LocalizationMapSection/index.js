@@ -1,9 +1,10 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
+//utils & styles
 import { STYLES } from "../../style/styles";
 
-const LocalizationMapSection = ({ latitude, longitude }) => {
+export default function LocalizationMapSection({ latitude, longitude }) {
   return (
     <View style={style.container}>
       <MapView
@@ -19,8 +20,7 @@ const LocalizationMapSection = ({ latitude, longitude }) => {
       </MapView>
     </View>
   );
-};
-export default LocalizationMapSection;
+}
 
 const style = StyleSheet.create({
   container: {

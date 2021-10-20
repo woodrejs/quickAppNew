@@ -7,11 +7,10 @@ import {
   FontAwesome5,
   MaterialCommunityIcons,
   Entypo,
-  Ionicons,
 } from "@expo/vector-icons";
 import { COLORS } from "../../style/colors";
 
-const Icon = ({ name, size = 24, color = COLORS.dark, styles = {} }) => {
+export default function Icon({ name, size = 24, color = COLORS.dark, styles = {} }) {
   switch (name) {
     case "key":
     case "password":
@@ -90,6 +89,4 @@ const Icon = ({ name, size = 24, color = COLORS.dark, styles = {} }) => {
     default:
       return null;
   }
-};
-
-export default Icon;
+}

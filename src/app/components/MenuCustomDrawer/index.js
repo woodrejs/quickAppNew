@@ -15,14 +15,13 @@ import { STYLES } from "../../style/styles";
 
 export default function MenuCustomDrawer(props) {
   const [__, ___, logoutUser] = useAuth();
+  const { navigation } = props;
   const isUserLogged = useSelector(({ userSlice }) => userSlice.logged);
 
-  const handlePress = (name) => props.navigation.navigate(name);
-  const handleCloseDrawer = () => props.navigation.closeDrawer();
+  const handlePress = (name) => navigation.navigate(name);
+  const handleCloseDrawer = () => navigation.closeDrawer();
   const handleLogOut = () =>
-    isUserLogged
-      ? logoutUser(props.navigation)
-      : props.navigation.navigate(stacksNames.auth);
+    isUserLogged ? logoutUser(navigation) : navigation.navigate(stacksNames.auth);
 
   return (
     <DrawerContentScrollView {...props}>
@@ -56,7 +55,6 @@ export default function MenuCustomDrawer(props) {
     </DrawerContentScrollView>
   );
 }
-
 function Tile({ name, title, handler }) {
   const handlePress = () => handler(stacksNames[title]);
 
@@ -108,57 +106,3 @@ const style = StyleSheet.create({
     color: COLORS.grey,
   },
 });
-// import React from "react";
-// import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
-// import { StyleSheet } from "react-native";
-// //components
-// import MenuDrawerUserSection from "./MenuDrawerUserSection";
-// //utils & styles
-// import { Stacks } from "../../routes/stacks";
-// import { Entypo } from "@expo/vector-icons";
-// import { COLORS } from "../../style/colors";
-// import { stacksNames } from "../../utils/stacksNames";
-
-
-// import useUserLogOut from "../../hooks/useUserLogOut";
-
-// const MenuCustomDrawer = (props) => {
-//   const [userIsLogged, setUserIsLogged] = useUserLogOut();
-
-//   const handlePress = (name) => props.navigation.navigate(name);
-//   const handleLogOut = () => setUserIsLogged(props.navigation);
-
-//   return (
-//     <DrawerContentScrollView {...props} style={style.container}>
-//       <MenuDrawerUserSection />
-
-//       {Stacks.map(({ name, icon, id }) => {
-//         if (name === stacksNames.auth && userIsLogged) {
-//           return (
-//             <DrawerItem
-//               key={id}
-//               label="Wyloguj"
-//               onPress={handleLogOut}
-//               icon={() => <Entypo name="lock-open" size={24} color={COLORS.black} />}
-//             />
-//           );
-//         }
-
-//         return (
-//           <DrawerItem
-//             key={id}
-//             label={name}
-//             onPress={() => handlePress(name)}
-//             icon={icon}
-//           />
-//         );
-//       })}
-//     </DrawerContentScrollView>
-//   );
-// };
-
-// export default MenuCustomDrawer;
-
-// const style = StyleSheet.create({
-//   container: { backgroundColor: COLORS.lightExtra },
-// });

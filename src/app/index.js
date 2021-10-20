@@ -3,89 +3,32 @@ import Navigation from "./routes";
 import { useSelector, useDispatch } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useFonts } from "@use-expo/font";
-import { v4 as uuidv4 } from "uuid";
 //screens
 import Intro from "./screens/Intro";
 import InfoModal from "./components/InfoModal";
 import ErrorModal from "./components/ErrorModal";
 //utils
 import { customFonts } from "./style/fonts";
-import { setList } from "./redux/home.slice";
-import { fetchItemList, getMainCardData } from "./utils/fetchFunctions";
+import { setData } from "./redux/list.slice";
+import { getMainCardData } from "./utils/fetchFunctions";
 import useModal from "./hooks/useModal";
-import LoadingSection from "./components/LoadingSection";
 
-const lists = {
-  main: {
-    title: "main",
-    filters: [3],
-    id: uuidv4(),
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    variant: "offers",
-  },
-  movies: {
-    title: "filmy",
-    filters: [1],
-    id: uuidv4(),
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    variant: "offers",
-  },
-  plays: {
-    title: "sztuki",
-    filters: [2],
-    id: uuidv4(),
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    variant: "offers",
-  },
-  books: {
-    title: "ksiazki",
-    filters: [7],
-    id: uuidv4(),
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    variant: "offers",
-  },
-  sport: {
-    title: "sport",
-    filters: [4],
-    id: uuidv4(),
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    variant: "offers",
-  },
-  places: {
-    title: "miejsca",
-    filters: [],
-    id: uuidv4(),
-    text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    variant: "places",
-  },
-};
-///!!!important!!! przeniesc pobieranie favorites i avatar tutaj po zalogowaniu.
 const App = () => {
   const [progress, setProgress] = useState(0);
   const [isLoaded] = useFonts(customFonts);
+  const [_, setError] = useModal();
   const { info, error } = useSelector(({ appSlice }) => appSlice);
   const dispatch = useDispatch();
-  const [_, setError] = useModal();
 
   useEffect(() => {
     async function init() {
       try {
         setProgress(1 / 3);
-        if (!isLoaded) return new Error("Nie udało się wczytać fontu.");
+        if (!isLoaded) return new Error("Nie udało się wczytać trzcionki.");
         setProgress(2 / 3);
-        const main = await getMainCardData(3, 5);
+        const recommended = await getMainCardData(3, 5);
+        dispatch(setData(["recommended", recommended]));
         setProgress(1);
-
-        dispatch(
-          setList({
-            main: { list: [...main], ...lists.main },
-            // movies: { list: [...movies], ...lists.movies },
-            // plays: { list: [...plays], ...lists.plays },
-            // books: { list: [...books], ...lists.books },
-            // sport: { list: [...sport], ...lists.sport },
-            // places: { list: [...places], ...lists.places },
-          })
-        );
       } catch (error) {
         setError(true, "Błąd podczas ładowania aplikacji. Spróbuj ponownie.");
       }

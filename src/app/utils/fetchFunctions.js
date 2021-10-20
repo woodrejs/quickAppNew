@@ -7,8 +7,6 @@ import { v4 as uuidv4 } from "uuid";
     +handle errors
 */
 
-
-
 export const fetchItemList = async (type, page = 0, types = [], pageSize = 10) => {
   const URL = `http://go.wroclaw.pl/api/v1.0/${type}/?key=${API_KEY}&type-id=${types.toString()}&page-size=${pageSize}&page=${page}`;
 
@@ -29,6 +27,8 @@ export const getMainCardData = async (types, pageSize) => {
   const URL = `http://go.wroclaw.pl/api/v1.0/offers/?key=${API_KEY}&page-size=${pageSize}&type-id=${types}`;
 
   const resp = await axios.get(URL);
+
+
 
   const filteredData = resp.data.items.filter((item) => {
     return "mainImage" in item && "id" in item && "title" in item && "events" in item;
@@ -193,7 +193,6 @@ export const getSinglePlaceData = async (placeId) => {
   }
 };
 
-function fomatDate(date){
+function fomatDate(date) {
   return date.slice(0, 10);
 }
-

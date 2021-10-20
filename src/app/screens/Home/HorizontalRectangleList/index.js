@@ -9,19 +9,26 @@ import {
 import DATA from "./index.data";
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
+import useFilters from "../../../hooks/useFilters";
+import { stacksNames } from "../../../utils/stacksNames";
 
-export default function HorizontalRectangleList() {
+export default function HorizontalRectangleList({ navigation }) {
   return (
     <ScrollView horizontal>
       {DATA.map((data) => (
-        <Rectangle key={data.id} data={data} />
+        <Rectangle key={data.id} data={data} navigation={navigation} />
       ))}
     </ScrollView>
   );
 }
-function Rectangle({ data }) {
-  const { url, title, tags } = data;
-  const handler = () => console.log("handler");
+function Rectangle({ data, navigation }) {
+  const { url, title, tags, variant, filters } = data;
+  const [setFilters] = useFilters(variant, filters);
+
+  const handler = () => {
+    setFilters();
+    navigation.navigate(stacksNames[variant]);
+  };
 
   return (
     <TouchableOpacity style={style.rectangleContainer} onPress={handler}>

@@ -1,21 +1,32 @@
 import React from "react";
 import { ImageBackground, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+//components
+import Badge from "../Badge";
+//styles & utils
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
-import Badge from "../Badge";
+import useFilters from "../../../hooks/useFilters";
+import { stacksNames } from "../../../utils/stacksNames";
 
-export default function HorizontalSquareList({ data }) {
+export default function HorizontalSquareList({ data, navigation }) {
   return (
     <ScrollView horizontal>
       {data.map((square) => (
-        <Square key={square.id} data={square} />
+        <Square key={square.id} data={square} navigation={navigation} />
       ))}
     </ScrollView>
   );
 }
-function Square({ data: { url, title } }) {
-  const handler = () => console.log("handler");
+function Square({ data, navigation }) {
+  const { url, title, variant, filters } = data;
+  const [setFilters] = useFilters(variant, filters);
+
+  const handler = () => {
+    setFilters();
+    navigation.navigate(stacksNames[variant]);
+  };
+
   return (
     <TouchableOpacity style={style.squareContainer} onPress={handler}>
       <ImageBackground

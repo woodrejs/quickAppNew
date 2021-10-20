@@ -9,9 +9,9 @@ import {
 //components
 import AddToFavoriteButton from "../../AddToFavoriteButton";
 //style & utils
+import useId from "../../../hooks/useId";
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
-import useId from "../../../hooks/useId";
 
 export default function GridListItem({ data, navigation }) {
   const { img, title, type, id } = data;

@@ -6,18 +6,17 @@ import {
   Image,
   Text,
   View,
+  StyleSheet,
 } from "react-native";
 //components
 import NavSectionButton from "./NavSectionButton";
 import Icon from "../Icon";
 //utils & style
-import { style } from "./index.style";
-import { Props } from "./index.utils";
 import { COLORS } from "../../style/colors";
-import { stacksNames } from "../../utils/stacksNames";
+import { STYLES } from "../../style/styles";
 import { screensNames } from "../../utils/screensNames";
 
-const NavHeader: React.FC<Props> = ({ route: { navigation } }, screenName) => {
+export default function NavHeader({ route: { navigation } }, screenName) {
   const { canGoBack, goBack } = navigation;
   const screen = getCurrScreen(navigation);
   const bckColor = setColor(screen);
@@ -46,8 +45,7 @@ const NavHeader: React.FC<Props> = ({ route: { navigation } }, screenName) => {
       <NavSectionButton navigation={navigation} />
     </SafeAreaView>
   );
-};
-export default NavHeader;
+}
 
 function setColor(screen) {
   return screen === screensNames.placeSingle || screen === screensNames.eventSingle
@@ -58,3 +56,31 @@ function getCurrScreen(navigation) {
   const routes = navigation.getState().routes;
   return routes[routes.length - 1].name;
 }
+
+const style = StyleSheet.create({
+  container: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    paddingHorizontal: 10,
+    paddingVertical: 15,
+    height: 80,
+    backgroundColor: COLORS.extra,
+  },
+  arrowBox: { paddingRight: 20, paddingVertical: 10 },
+  iconBox: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  icon: { height: 40, width: 40, borderRadius: 50 },
+  iconTitle: {
+    ...STYLES.fonts.bold,
+    fontSize: 12,
+    marginLeft: 10,
+    textTransform: "capitalize",
+    color: COLORS.lightnest,
+  },
+});

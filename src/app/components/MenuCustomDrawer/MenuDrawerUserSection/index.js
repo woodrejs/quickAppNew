@@ -1,11 +1,13 @@
 import React from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
+import { useSelector } from "react-redux";
+//components
+import Icon from "../../Icon";
+//utils & styles
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
-import { useSelector } from "react-redux";
-import Icon from "../../Icon";
 
-const MenuDrawerUserSection = () => {
+export default function MenuDrawerUserSection() {
   const { url } = useSelector(({ userSlice }) => userSlice.avatar);
   return (
     <View style={style.container}>
@@ -18,9 +20,7 @@ const MenuDrawerUserSection = () => {
       </View>
     </View>
   );
-};
-
-export default MenuDrawerUserSection;
+}
 
 const style = StyleSheet.create({
   container: {
@@ -61,53 +61,3 @@ const style = StyleSheet.create({
     textTransform: "capitalize",
   },
 });
-// import React from "react";
-// import { View, StyleSheet, Text, ImageBackground } from "react-native";
-// import { AntDesign } from "@expo/vector-icons";
-// import { COLORS } from "../../../style/colors";
-// import { useSelector } from "react-redux";
-
-// const MenuDrawerUserSection = () => {
-//   const { url } = useSelector(({ userSlice }) => userSlice.avatar);
-//   return (
-//     <View style={style.container}>
-//       <ImageBackground style={style.box} source={{ uri: url }} imageStyle={style.icon}>
-//         {!url && <AntDesign name="user" size={30} color="#616161" />}
-//       </ImageBackground>
-//       <Text style={style.title}>Witaj {"\n"}username</Text>
-//     </View>
-//   );
-// };
-
-// export default MenuDrawerUserSection;
-
-// const style = StyleSheet.create({
-//   container: {
-//     display: "flex",
-//     flexDirection: "row",
-//     justifyContent: "flex-start",
-//     alignItems: "center",
-//     paddingTop: 70,
-//     paddingBottom: 80,
-//   },
-//   box: {
-//     backgroundColor: COLORS.darkGrey,
-//     borderRadius: 50,
-//     height: 75,
-//     width: 75,
-//     marginLeft: 10,
-//     marginRight: 25,
-//     display: "flex",
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-//   icon: { borderRadius: 50 },
-//   title: {
-//     color: COLORS.black,
-//     fontFamily: "Montserrat700",
-//     fontWeight: "700",
-//     fontSize: 24,
-//     lineHeight: 22,
-//     textTransform: "capitalize",
-//   },
-// });

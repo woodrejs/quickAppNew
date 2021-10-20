@@ -4,7 +4,7 @@ import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
 import Icon from "../Icon";
 
-const InputText = ({
+export default function InputText({
   name,
   values,
   handleChange,
@@ -12,7 +12,7 @@ const InputText = ({
   placeholder = "",
   styles = {},
   error = null,
-}) => {
+}) {
   return (
     <View>
       <View style={[style.container, styles]}>
@@ -29,9 +29,7 @@ const InputText = ({
       {error && <Text style={style.error} children={error} />}
     </View>
   );
-};
-
-export default InputText;
+}
 
 const style = StyleSheet.create({
   container: {
@@ -54,6 +52,6 @@ const style = StyleSheet.create({
     fontSize: 11,
     color: COLORS.warning,
     position: "absolute",
-    bottom: -12
+    bottom: -12,
   },
 });

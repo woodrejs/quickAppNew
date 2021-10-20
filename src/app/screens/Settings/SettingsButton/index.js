@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 //components
 import Icon from "../../../components/Icon";
-//styles & utils
+//utils
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 

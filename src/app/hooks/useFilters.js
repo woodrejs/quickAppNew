@@ -6,6 +6,7 @@ export default function useFilters(variant, list) {
   const [filtersList, setFiltersList] = useState(list);
   const dispatch = useDispatch();
 
+
   return [
     //set filters
     () => dispatch(setFilters([variant, filtersList])),

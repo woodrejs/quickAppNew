@@ -1,12 +1,13 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
-import * as Progress from "react-native-progress";
+//components
+import ProgressSection from "../ProgressSection";
 //utils & styles
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
-import ProgressSection from "../ProgressSection";
 
-const LoadingSection = () => {
+//!!!important!!! add mechanic
+export default function LoadingSection() {
   const handler = () => console.log("close");
   return (
     <TouchableWithoutFeedback onPress={handler}>
@@ -19,9 +20,7 @@ const LoadingSection = () => {
       </View>
     </TouchableWithoutFeedback>
   );
-};
-
-export default LoadingSection;
+}
 
 const style = StyleSheet.create({
   container: {

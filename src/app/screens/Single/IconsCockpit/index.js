@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Linking, Platform } from "react-native";
-import ButtonIcon from "../ButtonIcon";
 import { useSelector } from "react-redux";
+//components
+import ButtonIcon from "../ButtonIcon";
+//utils
 import useFavorites from "../../../hooks/useFavorites";
 
-const IconsCockpit = ({ data }) => {
+export default function IconsCockpit({ data }) {
   const [inFavorites, setInFavorites] = useState(false);
   const { id, pageLink, location, venue, title, mainImage, type } = data;
   const { latitude, longitude } = location;
@@ -60,9 +62,7 @@ const IconsCockpit = ({ data }) => {
       )}
     </View>
   );
-};
-
-export default IconsCockpit;
+}
 
 function isActive(id, arr) {
   let result = false;

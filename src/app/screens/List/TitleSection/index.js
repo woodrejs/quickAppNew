@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
+//utils
 import { STYLES } from "../../../style/styles";
 
-const TitleSection = ({ variant }) => {
+export default function TitleSection({ variant }) {
   return (
     <>
       <Text style={style.title}>
@@ -15,9 +16,7 @@ const TitleSection = ({ variant }) => {
       </Text>
     </>
   );
-};
-
-export default TitleSection;
+}
 
 const style = StyleSheet.create({
   title: { ...STYLES.fonts.bold, fontSize: 28, paddingBottom: 15 },

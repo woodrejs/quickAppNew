@@ -1,10 +1,12 @@
 import React from "react";
 import { Formik } from "formik";
 import { View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+//components
+import Icon from "../../../components/Icon";
+//utils
 import { SearchSchema } from "../../../utils/strapi";
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
-import Icon from "../../../components/Icon";
 
 export default function SearchSection() {
   const handleSubmit = (val) => console.log("submit");

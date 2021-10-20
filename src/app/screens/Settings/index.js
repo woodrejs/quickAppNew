@@ -5,10 +5,9 @@ import { useSelector } from "react-redux";
 import { SUPPORT_MAIL } from "@env";
 //components
 import useUser from "../../hooks/useUser";
-
 import SettingsButton from "./SettingsButton";
 import SettingsInputButton from "./SettingsInputButton";
-//style & utils
+//utils
 import useAvatar from "../../hooks/useAvatar";
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
@@ -113,97 +112,3 @@ const style = StyleSheet.create({
   },
   title: { ...STYLES.fonts.bold, fontSize: 28, paddingVertical: 40 },
 });
-
-// import React, { useEffect } from "react";
-// import * as ImagePicker from "expo-image-picker";
-// import { StyleSheet, View, Linking, Platform } from "react-native";
-// import { useSelector } from "react-redux";
-// import { SUPPORT_MAIL } from "@env";
-// import useAvatar from "../../hooks/useAvatar";
-// //components
-// import SettingsButton from "../../components/SettingsButton";
-// //style & utils
-// import useUser from "../../hooks/useUser";
-// import useDeleteUser from "../../hooks/useDeleteUser";
-
-// const Settings = () => {
-//   const { avatar, logged } = useSelector(({ userSlice }) => userSlice);
-//   const deleteUser = useDeleteUser();
-//   const setUserData = useUser();
-//   const setAvatar = useAvatar();
-
-//   const handleSupportContact = () => Linking.openURL(`mailto:${SUPPORT_MAIL}`);
-//   const handleAvatarChange = () => setAvatar(avatar.public_id);
-
-//   const handleEmailChange = (val) => setUserData(val);
-//   const handleUsernameChange = (val) => setUserData(val);
-//   const handleDeleteAccount = () => deleteUser();
-
-//   useEffect(() => {
-//     (async () => {
-//       if (Platform.OS !== "web") {
-//         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-//         if (status !== "granted") {
-//           alert("Sorry, we need camera roll permissions to make this work!");
-//         }
-//       }
-//     })();
-//   }, []);
-
-//   return (
-//     <View style={styles.container}>
-//       {logged && (
-//         <>
-//           <SettingsButton
-//             variant="avatar"
-//             handler={handleAvatarChange}
-//             text={{ title: "Ustaw/zmień swoje zdjecie profilowe.", buttonTitle: "Zmień" }}
-//           />
-
-//           <SettingsButton
-//             variant="email"
-//             submit={handleEmailChange}
-//             text={{
-//               title: "Zmień swój adres mailowy.",
-//               buttonTitle: "Zamień",
-//             }}
-//           />
-
-//           <SettingsButton
-//             variant="username"
-//             submit={handleUsernameChange}
-//             text={{
-//               title: "Zmień swoją nazwę urzytkownika.",
-//               buttonTitle: "Zamień",
-//             }}
-//           />
-//           <SettingsButton
-//             variant="delete"
-//             submit={handleDeleteAccount}
-//             text={{
-//               title: "Usun konto.",
-//               buttonTitle: "Usuń",
-//             }}
-//           />
-//         </>
-//       )}
-
-//       <SettingsButton
-//         variant="support"
-//         handler={handleSupportContact}
-//         text={{
-//           title: "Skontaktuj się z administratorem strony.",
-//           buttonTitle: "Napisz",
-//         }}
-//       />
-//     </View>
-//   );
-// };
-// export default Settings;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     padding: 20,
-//   },
-// });

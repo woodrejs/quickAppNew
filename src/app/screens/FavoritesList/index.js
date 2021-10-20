@@ -8,7 +8,7 @@ import GridCardList from "../../components/GridCardList";
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
 
-const FavoritesList = ({ navigation }) => {
+export default function FavoritesList({ navigation }) {
   const { logged } = useSelector(({ userSlice }) => userSlice);
 
   if (!logged)
@@ -29,8 +29,7 @@ const FavoritesList = ({ navigation }) => {
       <GridCardList navigation={navigation} />
     </ScrollView>
   );
-};
-export default FavoritesList;
+}
 
 const style = StyleSheet.create({
   container: {
