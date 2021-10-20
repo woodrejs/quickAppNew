@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
-import { COLORS } from "../../style/colors";
+import { COLORS } from "../../../style/colors";
+import { STYLES } from "../../../style/styles";
 
 export const style = StyleSheet.create({
   container: {
@@ -15,9 +16,7 @@ export const style = StyleSheet.create({
   title: {
     paddingLeft: 10,
     paddingRight: 10,
-    color: COLORS.black,
-    fontFamily: "Montserrat700",
-    fontWeight: "700",
+    fontFamily: STYLES.fonts.bold,
     fontSize: 14,
     lineHeight: 14,
     textTransform: "capitalize",

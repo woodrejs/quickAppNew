@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 import { COLORS } from "../../../style/colors";
+import { STYLES } from "../../../style/styles";
 import ListItemButton from "./ListItemButton";
 
 const ScheduleListItem = () => {
@@ -27,8 +28,7 @@ const style = StyleSheet.create({
     color: COLORS.grey,
     paddingBottom: 5,
     fontSize: 14,
-    fontFamily: "Montserrat700",
-    fontWeight: "700",
+    fontFamily: STYLES.fonts.bold,
   },
   box: {
     backgroundColor: COLORS.lightgrey,
@@ -45,14 +45,12 @@ const style = StyleSheet.create({
   title: {
     color: COLORS.black,
     fontSize: 18,
-    fontFamily: "Montserrat700",
-    fontWeight: "700",
+    fontFamily: STYLES.fonts.bold,
     textTransform: "capitalize",
   },
   subTitle: {
     color: COLORS.black,
     fontSize: 10,
-    fontFamily: "Montserrat400",
-    fontWeight: "400",
+    fontFamily: STYLES.fonts.regular,
   },
 });

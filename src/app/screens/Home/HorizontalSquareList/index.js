@@ -54,7 +54,7 @@ const style = StyleSheet.create({
   squareImage: { borderRadius: 10, opacity: 0.7 },
   squareTitle: {
     ...STYLES.fonts.bold,
-    color: COLORS.grey,
+    color: COLORS.dark,
     fontSize: 12,
     textAlign: "center",
     paddingTop: 15,

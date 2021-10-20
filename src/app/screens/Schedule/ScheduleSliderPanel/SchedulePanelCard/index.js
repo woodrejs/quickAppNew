@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 import { COLORS } from "../../../style/colors";
+import { STYLES } from "../../../style/styles";
 
 const SchedulePanelCard = ({ date, day }) => {
   return (
@@ -26,16 +27,12 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   date: {
-    color: COLORS.black,
     fontSize: 24,
-    fontFamily: "Montserrat700",
-    fontWeight: "700",
+    fontFamily: STYLES.fonts.bold,
   },
   day: {
-    color: COLORS.black,
     fontSize: 14,
-    fontFamily: "Montserrat400",
-    fontWeight: "400",
+    fontFamily: STYLES.fonts.regular,
     textTransform: "uppercase",
   },
 });

@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
+import { STYLES } from "../../style/styles";
 
 // import ScheduleSliderPanel from "../../components/ScheduleSliderPanel";
 // import ScheduleCardsList from "../../components/ScheduleCardsList";
@@ -11,10 +12,8 @@ const Schedule = () => {
       <View style={{ width: "90%" }}>
         <Text
           style={{
-            color: COLORS.black,
             fontSize: 30,
-            fontFamily: "Montserrat700",
-            fontWeight: "700",
+            fontFamily: STYLES.fonts.bold,
             paddingTop: 5,
           }}
         >
@@ -23,11 +22,10 @@ const Schedule = () => {
         <Text
           style={{
             paddingTop: 15,
-            color: COLORS.black,
+
             fontSize: 12,
             lineHeight: 18,
-            fontFamily: "Montserrat400",
-            fontWeight: "400",
+            fontFamily: STYLES.fonts.regular,
           }}
         >
           {children}

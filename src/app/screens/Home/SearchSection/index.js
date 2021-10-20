@@ -8,6 +8,7 @@ import { SearchSchema } from "../../../utils/strapi";
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 
+///!!!important!!! add mechanics
 export default function SearchSection() {
   const handleSubmit = (val) => console.log("submit");
   const handleClear = () => console.log("clear");

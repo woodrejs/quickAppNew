@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 
 import { COLORS } from "../../style/colors";
+import { STYLES } from "../../style/styles";
 import ScheduleListItem from "./ScheduleListItem";
 
 const ScheduleCardsList = () => {
@@ -22,25 +23,23 @@ export default ScheduleCardsList;
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.lightnest,
     paddingHorizontal: 20,
     paddingTop: 40,
     borderTopLeftRadius: 20,
     borderTopEndRadius: 20,
   },
   title: {
-    color: COLORS.black,
+    color: COLORS.dark,
     fontSize: 24,
-    fontFamily: "Montserrat700",
-    fontWeight: "700",
+    fontFamily: STYLES.fonts.bold,
     textTransform: "capitalize",
     paddingBottom: 40,
   },
   subTitle: {
     color: COLORS.grey,
     fontSize: 14,
-    fontFamily: "Montserrat700",
-    fontWeight: "700",
+    fontFamily: STYLES.fonts.bold,
     textTransform: "capitalize",
     textAlign: "center",
 

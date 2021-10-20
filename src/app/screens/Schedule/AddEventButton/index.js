@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { COLORS } from "../../../style/colors";
+import { STYLES } from "../../../style/styles";
 
 const AddEventButton = () => {
   return (
@@ -18,7 +19,7 @@ export default AddEventButton;
 
 const style = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.lightnest,
     paddingHorizontal: 20,
     paddingVertical: 25,
     display: "flex",
@@ -35,8 +36,7 @@ const style = StyleSheet.create({
   title: {
     color: COLORS.grey,
     fontSize: 14,
-    fontFamily: "Montserrat700",
-    fontWeight: "700",
+    fontFamily: STYLES.fonts.bold,
     textTransform: "uppercase",
     paddingLeft: 15,
   },

@@ -2,6 +2,7 @@ import React from "react";
 import { Text, StyleSheet, View } from "react-native";
 
 import { COLORS } from "../../../style/colors";
+import { STYLES } from "../../../style/styles";
 
 const WeekSliderButton = ({ title }) => {
   return (
@@ -21,10 +22,9 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    color: COLORS.grey,
     fontSize: 14,
-    fontFamily: "Montserrat700",
-    fontWeight: "700",
+    fontFamily: STYLES.fonts.bold,
+    color: COLORS.grey,
     textTransform: "uppercase",
   },
 });

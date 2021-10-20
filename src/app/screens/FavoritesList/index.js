@@ -45,9 +45,9 @@ const style = StyleSheet.create({
   text: {
     ...STYLES.fonts.bold,
     fontSize: 16,
-    color: COLORS.grey,
     textAlign: "center",
     maxWidth: 300,
+    opacity: 0.5
   },
   titleBox: { paddingVertical: 40 },
 });
