@@ -7,8 +7,14 @@ import { v4 as uuidv4 } from "uuid";
     +handle errors
 */
 
-export const fetchItemList = async (type, page = 0, types = [], pageSize = 10) => {
-  const URL = `http://go.wroclaw.pl/api/v1.0/${type}/?key=${API_KEY}&type-id=${types.toString()}&page-size=${pageSize}&page=${page}`;
+export const fetchItemList = async (
+  type,
+  page = 0,
+  types = [],
+  pageSize = 10,
+  q = ""
+) => {
+  const URL = `http://go.wroclaw.pl/api/v1.0/${type}/?key=${API_KEY}&type-id=${types.toString()}&page-size=${pageSize}&page=${page}&q=${q}`;
 
   const resp = await axios.get(URL);
 
@@ -16,11 +22,12 @@ export const fetchItemList = async (type, page = 0, types = [], pageSize = 10) =
     return "mainImage" in item && "id" in item && "title" in item;
   });
 
-  return filteredData.map(({ id, title, mainImage }) => ({
+  return filteredData.map(({ id, title, mainImage, events }) => ({
     id: `${id}`,
     title,
     img: mainImage?.standard,
     type,
+    ticketing: events[0].ticketing,
   }));
 };
 export const getMainCardData = async (types, pageSize) => {
@@ -28,12 +35,9 @@ export const getMainCardData = async (types, pageSize) => {
 
   const resp = await axios.get(URL);
 
-
-
   const filteredData = resp.data.items.filter((item) => {
     return "mainImage" in item && "id" in item && "title" in item && "events" in item;
   });
-
   return filteredData.map(({ id, mainImage, title, events }) => ({
     id: `${id}`,
     img: mainImage.standard,

@@ -1,10 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Text, View, ScrollView, StyleSheet } from "react-native";
 //components
-import SearchSection from "./SearchSection";
 import HorizontalRectangleList from "./HorizontalRectangleList";
 import HorizontalSquareList from "./HorizontalSquareList";
-import VerticalList from "./VerticalList";
+import SearchSection from "../../components/SearchSection";
+import VerticalList from "../../components/VerticalList";
 import Icon from "../../components/Icon";
 //styles
 import { placesData, offersData } from "./index.data";
@@ -12,6 +13,8 @@ import { STYLES } from "../../style/styles";
 import { COLORS } from "../../style/colors";
 
 export default function Home({ navigation }) {
+  const list = useSelector(({ listSlice }) => listSlice.recommended.list);
+
   return (
     <ScrollView style={style.container}>
       {/* Search Section */}
@@ -31,7 +34,7 @@ export default function Home({ navigation }) {
 
       {/* Offers Categories Section*/}
       <TitleSection title="polecane w tym tygodniu" />
-      <VerticalList styles={style.verticalList} navigation={navigation} />
+      <VerticalList list={list} styles={style.verticalList} />
     </ScrollView>
   );
 }

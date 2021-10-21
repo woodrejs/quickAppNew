@@ -6,11 +6,12 @@ import { screenOptions } from "./utils";
 import Home from "../screens/Home";
 import Single from "../screens/Single";
 import Schedule from "../screens/Schedule";
+import Search from "../screens/Search";
 
 const Stack = createStackNavigator();
 
 const HomeStack = () => {
-  const { home, eventSingle, placeSingle, schedule } = screensNames;
+  const { home, eventSingle, placeSingle, schedule, search } = screensNames;
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen name={home} component={Home} />
@@ -23,6 +24,7 @@ const HomeStack = () => {
         children={({ navigation }) => <Single variant="offers" navigation={navigation} />}
       />
       <Stack.Screen name={schedule} component={Schedule} />
+      <Stack.Screen name={search} component={Search} />
     </Stack.Navigator>
   );
 };

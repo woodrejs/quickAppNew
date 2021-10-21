@@ -2,7 +2,7 @@ import React from "react";
 import { ImageBackground, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 //components
-import Badge from "../Badge";
+import Badge from "../../../components/Badge";
 //styles & utils
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";

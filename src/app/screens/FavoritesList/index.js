@@ -9,7 +9,7 @@ import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
 
 export default function FavoritesList({ navigation }) {
-  const { logged } = useSelector(({ userSlice }) => userSlice);
+  resp
 
   if (!logged)
     return (

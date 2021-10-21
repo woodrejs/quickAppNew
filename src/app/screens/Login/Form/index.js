@@ -94,3 +94,5 @@ const style = StyleSheet.create({
   restoreBox: { padding: 10 },
   restoreText: { ...STYLES.fonts.regular, opacity: 0.8 },
 });
+
+

@@ -134,7 +134,7 @@ export const RegisterSchema = Yup.object().shape({
     .required("Pole nie może być puste."),
 });
 export const SearchSchema = Yup.object().shape({
-  username: Yup.string()
-    .min(3, "Login musi mieć conajmniej 5 znaków.")
+  search: Yup.string()
+    .min(3, "Wyszukiwanie musi mieć conajmniej 3 znaki.")
     .required("Pole nie może być puste."),
 });

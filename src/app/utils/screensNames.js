@@ -9,4 +9,5 @@ export const screensNames = {
   settings: "ustawienia",
   placeSingle: "miejsce",
   eventSingle: "wydarzenie",
+  search: "wyszukiwanie",
 };

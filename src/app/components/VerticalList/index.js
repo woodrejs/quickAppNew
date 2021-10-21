@@ -1,17 +1,17 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import { ImageBackground, StyleSheet, TouchableOpacity, View, Text } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { useSelector } from "react-redux";
 //components
 import Badge from "../Badge";
-//utils 
-import useId from "../../../hooks/useId";
-import { COLORS } from "../../../style/colors";
-import { STYLES } from "../../../style/styles";
-import { getTicketingTitle } from "../../../utils/functions";
+//utils
+import useId from "../../hooks/useId";
+import { COLORS } from "../../style/colors";
+import { STYLES } from "../../style/styles";
+import { getTicketingTitle } from "../../utils/functions";
 
-export default function VerticalList({ styles = {}, navigation }) {
-  const list = useSelector(({ listSlice }) => listSlice.recommended.list);
+export default function VerticalList({ list, styles = {} }) {
+  const navigation = useNavigation();
 
   return (
     <ScrollView style={styles}>
