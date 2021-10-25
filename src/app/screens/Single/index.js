@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import {
   ScrollView,
   Text,
@@ -7,35 +7,35 @@ import {
   Dimensions,
   View,
   TouchableOpacity,
+  Linking,
 } from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 //components
 import IconsCockpit from "./IconsCockpit";
 import ButtonIcon from "./ButtonIcon";
 import Facilities from "./Facilities";
 import LocalizationMapSection from "../../components/LocalizationMapSection";
-import LoadingSection from "../../components/LoadingSection";
 import RenderHtmlSection from "../../components/RenderHtmlSection";
 import Icon from "../../components/Icon";
-//utils 
+//utils
 import useWroclawGO from "../../hooks/useWroclawGO";
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
 import { getTicketingTitle } from "../../utils/functions";
-import { setIsLoaded } from "../../redux/single.slice";
 
-export default function Single({ variant }) {
-  const { id, loaded, data } = useSelector(({ singleSlice }) => singleSlice[variant]);
+export default React.memo(function Single({ variant }) {
+  //hooks
+  const { id, data } = useSelector(({ singleSlice }) => singleSlice[variant]);
   const [_, fetchSingleData] = useWroclawGO(variant);
-  const dispatch = useDispatch();
 
+  //effects
   useEffect(() => {
     (async () => await fetchSingleData(id))();
-    return () => dispatch(setIsLoaded([variant, false]));
-  }, []);
+  }, [id]);
 
-  if (!loaded) return <LoadingSection />;
+  if (!data) return null;
 
+  //const
   const { mainImage, title, ticketing, venue } = data;
   const { longDescription, address, location } = data;
   const { latitude, longitude } = location;
@@ -64,7 +64,7 @@ export default function Single({ variant }) {
         )}
 
         {/* Button CTA */}
-        <CTAButton />
+        <CTAButton data={data} />
       </View>
 
       {/* Map google */}
@@ -84,23 +84,31 @@ export default function Single({ variant }) {
       </View>
     </ScrollView>
   );
-}
-function InfoItem({ name, title }) {
+});
+
+const InfoItem = React.memo(({ name, title }) => {
   return (
     <View style={style.infoBox}>
       <Icon name={name} color={COLORS.grey} />
       <Text style={style.info} children={title} />
     </View>
   );
-}
-function CTAButton() {
+});
+const CTAButton = React.memo(({ data }) => {
+  if (!data?.pageLink) return null;
+
   return (
     <TouchableOpacity style={style.buttonContainer}>
-      <ButtonIcon name="rightArrow" size="md" active handler={() => {}} />
+      <ButtonIcon
+        name="rightArrow"
+        size="md"
+        active
+        handler={() => Linking.openURL(data.pageLink)}
+      />
       <Text style={style.buttonTitle}>Czytaj dalej</Text>
     </TouchableOpacity>
   );
-}
+});
 
 const style = StyleSheet.create({
   container: {

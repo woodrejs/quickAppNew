@@ -3,14 +3,14 @@ import { View, Text, StyleSheet } from "react-native";
 //utils
 import { STYLES } from "../../../style/styles";
 
-export default function TitleSection({ title, text = "", styles = {} }) {
+export default React.memo(function TitleSection({ title, text = "", styles = {} }) {
   return (
     <View style={[style.container, styles]}>
       <Text style={style.title}>{title}</Text>
       <Text style={style.text}>{text}</Text>
     </View>
   );
-}
+});
 
 const style = StyleSheet.create({
   container: { width: "90%" },

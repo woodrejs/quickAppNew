@@ -10,7 +10,12 @@ import {
 } from "@expo/vector-icons";
 import { COLORS } from "../../style/colors";
 
-export default function Icon({ name, size = 24, color = COLORS.dark, styles = {} }) {
+export default React.memo(function Icon({
+  name,
+  size = 24,
+  color = COLORS.dark,
+  styles = {},
+}) {
   switch (name) {
     case "key":
     case "password":
@@ -51,6 +56,8 @@ export default function Icon({ name, size = 24, color = COLORS.dark, styles = {}
       return <AntDesign name="arrowright" size={size} color={color} style={styles} />;
     case "leftArrow":
       return <AntDesign name="arrowleft" size={size} color={color} style={styles} />;
+    case "downArrow":
+      return <AntDesign name="arrowdown" size={size} color={color} style={styles} />;
     case "cutlery":
       return <FontAwesome name="cutlery" size={size} color={color} style={styles} />;
     case "wheelchair":
@@ -89,4 +96,4 @@ export default function Icon({ name, size = 24, color = COLORS.dark, styles = {}
     default:
       return null;
   }
-}
+});

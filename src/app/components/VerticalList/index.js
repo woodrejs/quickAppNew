@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { ImageBackground, StyleSheet, TouchableOpacity, View, Text } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  View,
+  Text,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 //components
 import Badge from "../Badge";
@@ -11,40 +17,46 @@ import { STYLES } from "../../style/styles";
 import { getTicketingTitle } from "../../utils/functions";
 
 export default function VerticalList({ list, styles = {} }) {
-  const navigation = useNavigation();
-
   return (
     <ScrollView style={styles}>
       {list.map((card) => (
-        <Card key={card.id} data={card} navigation={navigation} />
+        <Card key={card.id} data={card} />
       ))}
     </ScrollView>
   );
 }
-function Card({ data, navigation }) {
-  const { id, img, ticketing, title } = data;
+
+const Card = React.memo(({ data }) => {
+  //hooks
+  const navigation = useNavigation();
   const setId = useId();
 
-  const handler = () => setId(id, "offers", navigation);
+  //const
+  const { id, img, ticketing, title } = useMemo(() => data);
+
+  //handlers
+  const handler = useCallback(() => setId(id, "offers", navigation), [id]);
 
   return (
-    <TouchableOpacity style={style.container} onPress={handler}>
-      {/* west */}
-      <View style={style.titleBox}>
-        <Text style={style.ticketing} children={getTicketingTitle(ticketing)} />
-        <Text style={style.title} children={title} />
+    <TouchableWithoutFeedback onPress={handler}>
+      <View style={style.container}>
+        {/* west */}
+        <View style={style.titleBox}>
+          <Text style={style.ticketing} children={getTicketingTitle(ticketing)} />
+          <Text style={style.title} children={title} />
+        </View>
+        {/* east */}
+        <ImageBackground
+          style={style.imageBox}
+          imageStyle={style.image}
+          source={{ uri: img }}
+        >
+          <Badge name="star" styles={style.badge} />
+        </ImageBackground>
       </View>
-      {/* east */}
-      <ImageBackground
-        style={style.imageBox}
-        imageStyle={style.image}
-        source={{ uri: img }}
-      >
-        <Badge name="star" styles={style.badge} />
-      </ImageBackground>
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
   );
-}
+});
 
 const style = StyleSheet.create({
   container: {
@@ -68,7 +80,8 @@ const style = StyleSheet.create({
   imageBox: {
     backgroundColor: COLORS.dark,
     width: "40%",
-    borderRadius: 10,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
     position: "relative",
   },
   image: {

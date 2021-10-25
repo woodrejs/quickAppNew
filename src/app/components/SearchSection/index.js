@@ -9,31 +9,36 @@ import Icon from "../Icon";
 //utils
 import useModal from "../../hooks/useModal";
 import { SearchSchema } from "../../utils/strapi";
-import { setData, setStage } from "../../redux/list.slice";
+import { setData } from "../../redux/list.slice";
 import { fetchItemList } from "../../utils/fetchFunctions";
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
 import { screensNames } from "../../utils/screensNames";
 
+//!!!important!!! add serach hooks
 export default function SearchSection() {
-  const [_, setError] = useModal();
+  //hooks
+  const { setInfo, setStage } = useModal();
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const route = useRoute();
 
+  //handlers
   const handleOnSubmit = async (values, { resetForm }) => {
-    dispatch(setStage(["search", "pending"]));
+    setStage("pending");
     try {
       const search = await fetchItemList("offers", 0, [], 20, values.search);
       dispatch(setData(["search", search]));
       resetForm({ search: "" });
 
+      setStage("waiting");
+
       if (route.name === "start") {
         navigation.navigate(screensNames.search);
       }
     } catch (error) {
-      dispatch(setStage(["search", "waiting"]));
-      setError(true, "Błąd podczas wyszukiwania.");
+      setStage("waiting");
+      setInfo(false, "Błąd podczas wyszukiwania.");
     }
   };
 
@@ -76,7 +81,7 @@ function ClearButton({ handler }) {
   );
 }
 function SubmitButton({ handler }) {
-  const { stage } = useSelector(({ listSlice }) => listSlice.search);
+  const { stage } = useSelector(({ appSlice }) => appSlice);
 
   return (
     <TouchableOpacity style={style.submit} onPress={handler}>

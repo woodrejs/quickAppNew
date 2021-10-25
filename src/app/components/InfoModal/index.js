@@ -9,30 +9,23 @@ import {
 import { useSelector } from "react-redux";
 //components
 import Icon from "../../components/Icon";
-import LoadingSection from "../LoadingSection";
 //utils & styles
+import useModal from "../../hooks/useModal";
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
-import useModal from "../../hooks/useModal";
 
 export default function InfoModal() {
-  const [setInfo] = useModal();
-  const { message, stage } = useSelector(({ appSlice }) => appSlice.info);
+  const { closeInfo } = useModal();
+  const { message, success, isOpen } = useSelector(({ appSlice }) => appSlice.info);
 
-  const handlePress = () => setInfo("waiting");
-
-  if (stage === "waiting" || stage === "pending") return <LoadingSection />;
+  if (!isOpen) return null;
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
+    <TouchableWithoutFeedback onPress={closeInfo}>
       <View style={style.container}>
         <View style={style.mask} />
         <View style={style.icon}>
-          <Icon
-            name={stage === "success" ? "check" : "failed"}
-            size={70}
-            color={COLORS.extra}
-          />
+          <Icon name={success ? "check" : "failed"} size={70} color={COLORS.extra} />
         </View>
         <Text style={style.message} children={message} />
       </View>

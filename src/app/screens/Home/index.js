@@ -11,8 +11,9 @@ import Icon from "../../components/Icon";
 import { placesData, offersData } from "./index.data";
 import { STYLES } from "../../style/styles";
 import { COLORS } from "../../style/colors";
+import { mainData } from "./index.data";
 
-export default function Home({ navigation }) {
+export default React.memo(function Home() {
   const list = useSelector(({ listSlice }) => listSlice.recommended.list);
 
   return (
@@ -22,30 +23,31 @@ export default function Home({ navigation }) {
 
       {/* Featured Categories Section*/}
       <TitleSection title="Popularne kategorie" />
-      <HorizontalRectangleList navigation={navigation} />
+      <HorizontalRectangleList list={mainData} />
 
       {/* Places Categories Section*/}
       <TitleSection title="Wybrane Miejsca" />
-      <HorizontalSquareList data={placesData} navigation={navigation} />
+      <HorizontalSquareList list={placesData} />
 
       {/* Offers Categories Section*/}
       <TitleSection title="Wybrane Wydarzenia" />
-      <HorizontalSquareList data={offersData} navigation={navigation} />
+      <HorizontalSquareList list={offersData} />
 
       {/* Offers Categories Section*/}
       <TitleSection title="polecane w tym tygodniu" />
       <VerticalList list={list} styles={style.verticalList} />
     </ScrollView>
   );
-}
-function TitleSection({ title }) {
+});
+
+const TitleSection = React.memo(({ title }) => {
   return (
     <View style={style.titleContainer}>
       <Text style={style.titleText} children={title} />
       <Icon name="rightArrow" size={15} color={COLORS.extra} styles={style.titleIcon} />
     </View>
   );
-}
+});
 
 const style = StyleSheet.create({
   container: {

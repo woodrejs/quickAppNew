@@ -6,14 +6,14 @@ import Icon from "../../../components/Icon";
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 
-export default function SettingsButton({ name, title, handler }) {
+export default React.memo(function SettingsButton({ name, title, handler }) {
   return (
     <TouchableOpacity style={style.container} onPress={handler}>
       <Icon styles={style.icon} name={name} size={18} color={COLORS.grey} />
       <Text style={style.text} children={title} />
     </TouchableOpacity>
   );
-}
+});
 
 const style = StyleSheet.create({
   container: {

@@ -4,36 +4,37 @@ import { setFavorites } from "../redux/user.slice";
 import useModal from "./useModal";
 
 export default function useFavorites() {
-  const [setInfo] = useModal();
+  const { setInfo, setStage } = useModal();
   const { jwt, favorites } = useSelector(({ userSlice }) => userSlice);
   const dispatch = useDispatch();
 
   return [
     favorites,
     //createFavorite
-    async (data) => {
-      setInfo("pending");
+    async (obj) => {
+      setStage("pending");
 
       try {
-        const createdObj = await createFavorite(data, jwt);
-        const updatedList = [...favorites, createdObj];
+        const { data } = await createFavorite(obj, jwt);
+        const updatedList = [...favorites, data];
         dispatch(setFavorites(updatedList));
-        setInfo("success", `"${data.title}" został dodany do ulubionych.`);
+        setInfo(true, `"${obj.title}" został dodany do ulubionych.`);
       } catch (error) {
-        setInfo("failed", `Błąd podczas dodawania "${data.title}". Spróbuj ponownie.`);
+        setInfo(false, `Błąd podczas dodawania "${obj.title}". Spróbuj ponownie.`);
       }
     },
     //deleteFavorite
     async (id) => {
-      setInfo("pending");
+      setStage("pending");
 
       try {
-        const { id: deletedID, title } = await deleteFavorite(id, jwt);
+        const { data } = await deleteFavorite(id, jwt);
+        const { id: deletedID, title } = data;
         const updatedList = favorites.filter((item) => item.id !== `${deletedID}`);
         dispatch(setFavorites(updatedList));
-        setInfo("success", `"${title}" został usunięty z ulubionych.`);
+        setInfo(true, `"${title}" został usunięty z ulubionych.`);
       } catch (error) {
-        setInfo("failed", `Błąd podczas usuwania z servera. Spróbuj ponownie.`);
+        setInfo(false, `Błąd podczas usuwania z servera. Spróbuj ponownie.`);
       }
     },
   ];

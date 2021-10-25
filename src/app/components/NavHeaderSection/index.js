@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   TouchableWithoutFeedback,
@@ -8,27 +8,40 @@ import {
   View,
   StyleSheet,
 } from "react-native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 //components
 import NavSectionButton from "./NavSectionButton";
 import Icon from "../Icon";
+import Logo from "./Logo";
 //utils & style
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
 import { screensNames } from "../../utils/screensNames";
 
-export default function NavHeader({ route: { navigation } }, screenName) {
-  const { canGoBack, goBack } = navigation;
-  const screen = getCurrScreen(navigation);
-  const bckColor = setColor(screen);
+export default React.memo(function NavHeader() {
+  //hooks
+  const navigation = useNavigation();
+  const route = useRoute();
 
-  const handleArrow = () => goBack();
-  const handleLogo = () => navigation.navigate(screensNames.home, null);
+  //const
+  const { canGoBack, goBack } = navigation;
+
+  //handlers
+  const handleLogo = useCallback(() => navigation.navigate(screensNames.home, null));
+
+  //utils
+  const setStyle = useCallback(() => {
+    return route.name === screensNames.placeSingle ||
+      route.name === screensNames.eventSingle
+      ? { backgroundColor: "rgba(0, 0, 0, 0.2)" }
+      : { backgroundColor: COLORS.extra, ...STYLES.shadow };
+  }, [route.name]);
 
   return (
-    <SafeAreaView style={[style.container, { backgroundColor: bckColor }]}>
+    <SafeAreaView style={[style.container, setStyle(route.name)]}>
       {/* Arrow */}
       {canGoBack() && (
-        <TouchableOpacity onPress={handleArrow} style={style.arrowBox}>
+        <TouchableOpacity onPress={goBack} style={style.arrowBox}>
           <Icon name="leftArrow" color={COLORS.lightnest} />
         </TouchableOpacity>
       )}
@@ -36,7 +49,7 @@ export default function NavHeader({ route: { navigation } }, screenName) {
       {/* Logo */}
       <TouchableWithoutFeedback onPress={handleLogo}>
         <View style={style.iconBox}>
-          <Image source={require("./logo.jpg")} style={style.icon} />
+          <Logo />
           {!canGoBack() && <Text style={style.iconTitle}>quick week</Text>}
         </View>
       </TouchableWithoutFeedback>
@@ -45,17 +58,7 @@ export default function NavHeader({ route: { navigation } }, screenName) {
       <NavSectionButton navigation={navigation} />
     </SafeAreaView>
   );
-}
-
-function setColor(screen) {
-  return screen === screensNames.placeSingle || screen === screensNames.eventSingle
-    ? "transparent"
-    : COLORS.extra;
-}
-function getCurrScreen(navigation) {
-  const routes = navigation.getState().routes;
-  return routes[routes.length - 1].name;
-}
+});
 
 const style = StyleSheet.create({
   container: {
@@ -75,7 +78,6 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  icon: { height: 40, width: 40, borderRadius: 50 },
   iconTitle: {
     ...STYLES.fonts.bold,
     fontSize: 12,

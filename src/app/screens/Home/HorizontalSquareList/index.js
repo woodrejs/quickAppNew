@@ -1,6 +1,13 @@
-import React from "react";
-import { ImageBackground, StyleSheet, Text, TouchableOpacity } from "react-native";
+import React, { useMemo, useCallback } from "react";
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 //components
 import Badge from "../../../components/Badge";
 //styles & utils
@@ -9,40 +16,49 @@ import { STYLES } from "../../../style/styles";
 import useFilters from "../../../hooks/useFilters";
 import { stacksNames } from "../../../utils/stacksNames";
 
-export default function HorizontalSquareList({ data, navigation }) {
+export default React.memo(function HorizontalSquareList({ list }) {
   return (
     <ScrollView horizontal>
-      {data.map((square) => (
-        <Square key={square.id} data={square} navigation={navigation} />
+      {list.map((square) => (
+        <Square key={square.id} data={square} />
       ))}
     </ScrollView>
   );
-}
-function Square({ data, navigation }) {
-  const { url, title, variant, filters } = data;
-  const [setFilters] = useFilters(variant, filters);
+});
 
-  const handler = () => {
+const Square = React.memo(({ data }) => {
+  //const
+  const { url, title, variant, filters } = useMemo(() => data);
+
+  //hooks
+  const [setFilters] = useFilters(variant, filters);
+  const navigation = useNavigation();
+
+  //handlers
+  const handler = useCallback(() => {
     setFilters();
     navigation.navigate(stacksNames[variant]);
-  };
+  }, [variant]);
 
   return (
-    <TouchableOpacity style={style.squareContainer} onPress={handler}>
-      <ImageBackground
-        style={style.squareBox}
-        imageStyle={style.squareImage}
-        source={url}
-      >
-        <Badge name="eye" styles={style.badge} />
-      </ImageBackground>
-      <Text style={style.squareTitle}>{title}</Text>
-    </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={handler}>
+      <View style={style.squareContainer}>
+        <ImageBackground
+          style={style.squareBox}
+          imageStyle={style.squareImage}
+          source={url}
+        >
+          <Badge name="eye" styles={style.badge} />
+        </ImageBackground>
+
+        <Text style={style.squareTitle}>{title}</Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
-}
+});
 
 const style = StyleSheet.create({
-  squareContainer: { marginRight: 5, paddingBottom: 5 },
+  squareContainer: {},
   squareBox: {
     height: 120,
     width: 120,
@@ -50,6 +66,8 @@ const style = StyleSheet.create({
     borderRadius: 10,
     position: "relative",
     ...STYLES.shadow,
+    marginRight: 5,
+    marginBottom: 5,
   },
   squareImage: { borderRadius: 10, opacity: 0.7 },
   squareTitle: {

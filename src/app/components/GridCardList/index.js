@@ -1,22 +1,17 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
 //components
 import GridListItem from "./GridListItem";
 
-const GridCardList = ({ navigation }) => {
-  const favorites = useSelector(({ userSlice }) => userSlice.favorites);
-
+export default React.memo(function GridCardList({ list }) {
   return (
     <View style={style.container}>
-      {favorites.map((item) => (
-        <GridListItem key={item.id} data={item} navigation={navigation} />
+      {list.map((item) => (
+        <GridListItem key={item.id} data={item} />
       ))}
     </View>
   );
-};
-
-export default GridCardList;
+});
 
 const style = StyleSheet.create({
   container: {

@@ -3,7 +3,7 @@ import { View, TouchableWithoutFeedback, StyleSheet } from "react-native";
 //utils & styles
 import { COLORS } from "../../../style/colors";
 
-export default function CloseButton({ handler }) {
+export default React.memo(function CloseButton({ handler }) {
   return (
     <TouchableWithoutFeedback onPress={handler}>
       <View style={style.box}>
@@ -20,7 +20,7 @@ export default function CloseButton({ handler }) {
       </View>
     </TouchableWithoutFeedback>
   );
-}
+});
 
 const style = StyleSheet.create({
   box: {

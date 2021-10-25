@@ -16,19 +16,29 @@ export const fetchItemList = async (
 ) => {
   const URL = `http://go.wroclaw.pl/api/v1.0/${type}/?key=${API_KEY}&type-id=${types.toString()}&page-size=${pageSize}&page=${page}&q=${q}`;
 
+
   const resp = await axios.get(URL);
 
   const filteredData = resp.data.items.filter((item) => {
     return "mainImage" in item && "id" in item && "title" in item;
   });
 
-  return filteredData.map(({ id, title, mainImage, events }) => ({
-    id: `${id}`,
-    title,
-    img: mainImage?.standard,
-    type,
-    ticketing: events[0].ticketing,
-  }));
+  if (type === "places") {
+    return filteredData.map(({ id, title, mainImage }) => ({
+      id: `${id}`,
+      title,
+      img: mainImage?.standard,
+      type,
+    }));
+  } else {
+    return filteredData.map(({ id, title, mainImage, events }) => ({
+      id: `${id}`,
+      title,
+      img: mainImage?.standard,
+      type,
+      ticketing: events[0]?.ticketing,
+    }));
+  }
 };
 export const getMainCardData = async (types, pageSize) => {
   const URL = `http://go.wroclaw.pl/api/v1.0/offers/?key=${API_KEY}&page-size=${pageSize}&type-id=${types}`;

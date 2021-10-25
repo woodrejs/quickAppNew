@@ -1,45 +1,101 @@
-import React from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import React, { useCallback } from "react";
+import { StyleSheet, View, Dimensions, Text, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+//coponents
+import List from "./List";
+import ButtonIcon from "../Single/ButtonIcon";
+//utils
+import { useSelector } from "react-redux";
 import { STYLES } from "../../style/styles";
+import { stacksNames } from "../../utils/stacksNames";
 
-// import ScheduleSliderPanel from "../../components/ScheduleSliderPanel";
-// import ScheduleCardsList from "../../components/ScheduleCardsList";
-// import AddEventButton from "./AddEventButton";
+//!!!important!!! move up ButtonIcon
+export default React.memo(function Schedule() {
+  //hooks
+  const { schedules, logged } = useSelector(({ userSlice }) => userSlice);
+  const navigation = useNavigation();
 
-const Schedule = () => {
-  return (
-    <ScrollView style={style.container}>
-      <View style={{ width: "90%" }}>
-        <Text
-          style={{
-            fontSize: 30,
-            fontFamily: STYLES.fonts.bold,
-            paddingTop: 5,
-          }}
-        >
-          Zaplanuj swój tydzień
-        </Text>
-        <Text
-          style={{
-            paddingTop: 15,
+  //const
+  const [todayList, restList] = filterSchedules(schedules);
 
-            fontSize: 12,
-            lineHeight: 18,
-            fontFamily: STYLES.fonts.regular,
-          }}
-        >
-          {children}
+  //handlers
+  const handleButton = useCallback(() => navigation.navigate(stacksNames.offers));
+
+  if (!logged)
+    return (
+      <View style={style.box}>
+        <Text style={style.subText}>
+          Żeby dodawać do ulubionych, musisz być zalogowany.
         </Text>
       </View>
+    );
 
-      {/* <ScheduleSliderPanel />
-      <ScheduleCardsList />
-      <AddEventButton /> */}
+  return (
+    <ScrollView style={style.container}>
+      <Text style={style.title}>Twój Terminarz</Text>
+
+      <List title="Dzisiaj" list={todayList} />
+      <List title="Pozostałe" list={restList} />
+
+      <View style={style.buttonBox}>
+        <ButtonIcon
+          name="plus"
+          size="md"
+          handler={handleButton}
+          active
+          styles={style.button}
+        />
+      </View>
     </ScrollView>
   );
-};
-export default Schedule;
-
-const style = StyleSheet.create({
-  container: { padding: 10 },
 });
+
+const { width, height } = Dimensions.get("window");
+const style = StyleSheet.create({
+  container: {
+    width,
+    height,
+    padding: 10,
+  },
+  box: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
+  subText: {
+    ...STYLES.fonts.bold,
+    fontSize: 16,
+    textAlign: "center",
+    maxWidth: 300,
+    opacity: 0.5,
+  },
+  title: { ...STYLES.fonts.bold, fontSize: 28, paddingBottom: 40, paddingTop: 20 },
+  buttonBox: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+  },
+  button: { marginBottom: 0 },
+});
+
+//!!!important!!!
+function filterSchedules(arr) {
+  let today = [];
+  let rest = [];
+
+  const todayDate = new Date().toISOString().slice(0, 10);
+
+  arr.forEach((schedule) => {
+    const date = schedule.date.slice(0, 10);
+
+    if (date === todayDate) {
+      today.push(schedule);
+    } else {
+      rest.push(schedule);
+    }
+  });
+
+  return [today, rest];
+}

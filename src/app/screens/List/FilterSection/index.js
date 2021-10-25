@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useCallback } from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
 //components
 import FilterSectionButton from "./FilterSectionButton";
@@ -7,16 +7,19 @@ import ListButton from "../ListButton";
 import useFilters from "../../../hooks/useFilters";
 import { offers, places } from "./index.data";
 
-export default function FilterSection({ variant, filters }) {
+export default React.memo(function FilterSection({ variant, filters }) {
+  //hooks
   const [setFilters, updateFilters] = useFilters(variant, filters);
-  const data = variant === "offers" ? offers : places;
 
-  const handleButton = () => setFilters();
-  const handleItem = (id) => updateFilters(id);
+  //const
+  const data = useMemo(() => (variant === "offers" ? offers : places), [variant]);
+
+  //handlers
+  const handleItem = useCallback((id) => updateFilters(id));
 
   return (
     <ScrollView style={style.container} horizontal>
-      <ListButton handler={handleButton} variant={variant} icon="filter" />
+      <ListButton handler={setFilters()} variant={variant} icon="filter" />
       <View style={style.box}>
         {checkIsActive(data, filters).map((item) => (
           <FilterSectionButton key={item.key} data={item} handler={handleItem} />
@@ -24,8 +27,9 @@ export default function FilterSection({ variant, filters }) {
       </View>
     </ScrollView>
   );
-}
-//!!!important!!! dosent work
+});
+
+//!!!important!!! is use somewhere else
 function checkIsActive(arr1, arr2) {
   let counter = {};
 

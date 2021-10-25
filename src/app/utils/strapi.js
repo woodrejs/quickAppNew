@@ -5,29 +5,26 @@ import * as ImagePicker from "expo-image-picker";
 
 // USER
 export async function userLogin(identifier, password) {
-  const { data } = await axios.post(`${STRAPI_DB}auth/local`, { identifier, password });
-  return data;
+  return await axios.post(`${STRAPI_DB}auth/local`, { identifier, password });
 }
 export async function userRegister(username, email, password) {
-  const { data } = await axios.post(`${STRAPI_DB}auth/local/register`, {
+  return await axios.post(`${STRAPI_DB}auth/local/register`, {
     username,
     email,
     password,
   });
-  return data;
 }
 export async function userDelete(jwt) {
-  const { data } = await axios({
+  return await axios({
     method: "delete",
     url: `${STRAPI_DB}users-permissions/users/me`,
     headers: {
       Authorization: `Bearer ${jwt}`,
     },
   });
-  return data;
 }
 export async function userUpdate(obj, jwt) {
-  const { data } = await axios({
+  return await axios({
     method: "put",
     url: `${STRAPI_DB}users-permissions/users/me`,
     data: obj,
@@ -35,22 +32,19 @@ export async function userUpdate(obj, jwt) {
       Authorization: `Bearer ${jwt}`,
     },
   });
-  return data;
 }
 // FAVORITES
 export async function deleteFavorite(id, jwt) {
-  const { data } = await axios({
+  return await axios({
     method: "delete",
     url: `${STRAPI_DB}favorites/${id}`,
     headers: {
       Authorization: `Bearer ${jwt}`,
     },
   });
-
-  return data;
 }
 export async function createFavorite(obj, jwt) {
-  const { data } = await axios({
+  return await axios({
     method: "post",
     url: `${STRAPI_DB}favorites`,
     data: obj,
@@ -58,28 +52,16 @@ export async function createFavorite(obj, jwt) {
       Authorization: `Bearer ${jwt}`,
     },
   });
-  return data;
-} //not use
-export async function findFavorites(jwt) {
-  const { data } = await axios({
-    method: "get",
-    url: `${STRAPI_DB}favoritesbyUser`,
-    headers: {
-      Authorization: `Bearer ${jwt}`,
-    },
-  });
-  return data;
 }
 //AVATARS
 export async function findOneAvatar(id, jwt) {
-  const { data } = await axios({
+  return await axios({
     method: "get",
     url: `${STRAPI_DB}avatars/${id}`,
     headers: {
       Authorization: `Bearer ${jwt}`,
     },
   });
-  return data;
 }
 export async function createAvatar(id, jwt) {
   const { base64 } = await ImagePicker.launchImageLibraryAsync({
@@ -92,9 +74,27 @@ export async function createAvatar(id, jwt) {
   const file = { base64: `data:image/png;base64,${base64}`, id };
   const URL = `${STRAPI_DB}avatars`;
   const options = { headers: { Authorization: `Bearer ${jwt}` } };
-  const { data } = await axios.post(URL, file, options);
-
-  return data;
+  return await axios.post(URL, file, options);
+}
+//SCHEDULE
+export async function createSchedule(obj, jwt) {
+  return await axios({
+    method: "post",
+    url: `${STRAPI_DB}schedules`,
+    data: obj,
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+    },
+  });
+}
+export async function deleteSchelude(id, date, jwt) {
+  return await axios({
+    method: "delete",
+    url: `${STRAPI_DB}schedules/${id}/${date}`,
+    headers: {
+      Authorization: `Bearer ${jwt}`,
+    },
+  });
 }
 //VALIDATIONS SCHEMES
 export const EmailSchema = Yup.object().shape({

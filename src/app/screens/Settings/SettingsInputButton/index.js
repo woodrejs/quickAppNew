@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TextInput } from "react-native";
 import { TouchableOpacity, View, Button } from "react-native";
-import { DeleteSchema, EmailSchema, UsernameSchema } from "../../../utils/strapi";
 import { Formik } from "formik";
 //components
 import Icon from "../../../components/Icon";
 //utils
+import { DeleteSchema, EmailSchema, UsernameSchema } from "../../../utils/strapi";
 import { STYLES } from "../../../style/styles";
 import { COLORS } from "../../../style/colors";
 
-export default function SettingsInputButton({ name, title, handler, subTitle = null }) {
+export default React.memo(function SettingsInputButton({
+  name,
+  title,
+  handler,
+  subTitle = null,
+}) {
+  //hooks
   const [isOpen, setIsOpen] = useState(false);
 
+  //handlers
   const handlePress = () => setIsOpen(!isOpen);
 
   return (
@@ -40,7 +47,7 @@ export default function SettingsInputButton({ name, title, handler, subTitle = n
                   <TextInput
                     onChangeText={handleChange(name)}
                     onBlur={handleBlur(name)}
-                    value={values}
+                    value={values[name]}
                     style={style.input}
                   />
 
@@ -48,7 +55,7 @@ export default function SettingsInputButton({ name, title, handler, subTitle = n
                   {errors[name] && <Text style={style.error} children={errors[name]} />}
 
                   {/* Button */}
-                  <Button title="ok" color={COLORS.extra} onSubmit={handleSubmit} />
+                  <Button title="ok" color={COLORS.extra} onPress={handleSubmit} />
                 </View>
               );
             }}
@@ -57,7 +64,7 @@ export default function SettingsInputButton({ name, title, handler, subTitle = n
       </View>
     </TouchableOpacity>
   );
-}
+});
 function getValidationSchema(name) {
   switch (name) {
     case "email":

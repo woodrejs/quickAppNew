@@ -1,11 +1,14 @@
 import { useDispatch } from "react-redux";
-import { setError, setInfo } from "../redux/app.slice";
+import { setError, closeError, setInfo, closeInfo, setStage } from "../redux/app.slice";
 
 export default function useModal() {
   const dispatch = useDispatch();
 
-  return [
-    (stage, message) => dispatch(setInfo([stage, message])),
-    (isOpen, message) => dispatch(setError(isOpen, message)),
-  ];
+  return {
+    setError: (message) => dispatch(setError(message)),
+    closeError: () => dispatch(closeError()),
+    setInfo: (success, message) => dispatch(setInfo([success, message])),
+    closeInfo: () => dispatch(closeInfo()),
+    setStage: (stage) => dispatch(setStage(stage)),
+  };
 }

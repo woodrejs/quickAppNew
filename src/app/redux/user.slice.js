@@ -6,6 +6,7 @@ const userSlice = createSlice({
     jwt: null,
     logged: false,
     favorites: [],
+    schedules: [],
     avatar: {
       url: null,
       public_id: null,
@@ -32,6 +33,11 @@ const userSlice = createSlice({
 
       state.favorites = payload;
     },
+    setSchedules(state, action) {
+      const { payload } = action;  
+
+      state.schedules = payload;
+    },
     setAvatar(state, action) {
       const { payload } = action;
 
@@ -40,5 +46,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setLoggedIn, setLoggedOut, setFavorites, setAvatar } = userSlice.actions;
+export const { setLoggedIn, setLoggedOut, setFavorites, setAvatar, setSchedules } =
+  userSlice.actions;
 export default userSlice.reducer;

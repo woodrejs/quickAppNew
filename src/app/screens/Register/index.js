@@ -3,27 +3,20 @@ import { View, Text, StyleSheet } from "react-native";
 //components
 import Form from "./Form";
 import AuthFooter from "../../components/AuthFooter";
-//utils 
+//utils
 import { STYLES } from "../../style/styles";
-import { screensNames } from "../../utils/screensNames";
 
-export default function Register({ navigation }) {
-  const handleFooter = () => navigation.navigate(screensNames.login);
-
+export default React.memo(function Register() {
   return (
     <View style={style.container}>
       <View>
         <Text style={style.title}>Rejestracja</Text>
-        <Form navigation={navigation} />
+        <Form />
       </View>
-      <AuthFooter
-        title="Logowanie"
-        text="Masz już założone konto?"
-        handler={handleFooter}
-      />
+      <AuthFooter name="login" title="Logowanie" text="Masz już założone konto?" />
     </View>
   );
-}
+});
 
 const style = StyleSheet.create({
   container: {

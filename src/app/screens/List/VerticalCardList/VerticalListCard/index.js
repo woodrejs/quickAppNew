@@ -1,5 +1,11 @@
-import React from "react";
-import { ImageBackground, TouchableOpacity, StyleSheet, View, Text } from "react-native";
+import React, { useMemo, useCallback } from "react";
+import {
+  ImageBackground,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  View,
+  Text,
+} from "react-native";
 //components
 import AddToFavoriteButton from "../../../../components/AddToFavoriteButton";
 //utils
@@ -7,11 +13,15 @@ import useId from "../../../../hooks/useId";
 import { COLORS } from "../../../../style/colors";
 import { STYLES } from "../../../../style/styles";
 
-export default function VerticalListCard({ data, navigation, inFavorite = false }) {
-  const { id, type, title, img } = data;
+export default React.memo(function VerticalListCard({ data, inFavorite = false }) {
+  //hooks
   const setId = useId();
 
-  const handlePress = () => setId(id, type, navigation);
+  //const
+  const { id, type, title, img } = useMemo(() => data);
+
+  //handlers
+  const handlePress = useCallback(() => setId(id, type), [id, type]);
 
   return (
     <ImageBackground
@@ -19,18 +29,18 @@ export default function VerticalListCard({ data, navigation, inFavorite = false 
       imageStyle={style.image}
       source={{ uri: img }}
     >
-      <TouchableOpacity style={style.titleContainer} onPress={handlePress}>
-        <View style={style.titleBox}>
-          <Text numberOfLines={1} style={style.title}>
-            {title}
-          </Text>
+      <TouchableWithoutFeedback onPress={handlePress}>
+        <View style={style.titleContainer}>
+          <View style={style.titleBox}>
+            <Text numberOfLines={1} style={style.title} children={title} />
+          </View>
         </View>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
 
       <AddToFavoriteButton data={data} active={inFavorite} />
     </ImageBackground>
   );
-}
+});
 
 const style = StyleSheet.create({
   container: {
@@ -40,6 +50,7 @@ const style = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 10,
     position: "relative",
+    ...STYLES.shadow,
   },
   titleContainer: {
     height: "100%",

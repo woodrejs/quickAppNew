@@ -3,19 +3,36 @@ import { StyleSheet, View, Linking, Platform } from "react-native";
 import { useSelector } from "react-redux";
 //components
 import ButtonIcon from "../ButtonIcon";
+import DateTimePicker from "@react-native-community/datetimepicker";
 //utils
 import useFavorites from "../../../hooks/useFavorites";
+import useDate from "../../../hooks/useDate";
+import useSchedules from "../../../hooks/useSchedules";
 
 export default function IconsCockpit({ data }) {
+  const [date, show, mode, setDate, setShow] = useDate(new Date());
   const [inFavorites, setInFavorites] = useState(false);
+  const { logged, favorites } = useSelector(({ userSlice }) => userSlice);
+  const [__, createFavorite, deleteFavorite] = useFavorites();
+  const [_, setSchedule] = useSchedules();
+
   const { id, pageLink, location, venue, title, mainImage, type } = data;
   const { latitude, longitude } = location;
   const { email, telephone } = venue;
-  const { logged, favorites } = useSelector(({ userSlice }) => userSlice);
-  const [__, createFavorite, deleteFavorite] = useFavorites();
 
+  const handlePicker = (event) => {
+    const action = event.type;
+
+    if (action === "set") {
+      setSchedule({ id, title, date: event.nativeEvent.timestamp, type });
+      setDate(event);
+    }
+
+    setShow(false);
+  };
   const handleWeb = () => Linking.openURL(pageLink);
   const handleMail = () => Linking.openURL(`mailto:${email}`);
+  const handleSchedule = () => setShow(true);
   const handleFavorite = async () => {
     if (inFavorites) {
       deleteFavorite(id);
@@ -33,7 +50,6 @@ export default function IconsCockpit({ data }) {
       ? Linking.openURL(`telprompt:${telephone}`)
       : Linking.openURL(`tel:${telephone}`);
   };
-  const handleSchedule = () => console.log("handleSchedule");
 
   useEffect(() => {
     setInFavorites(isActive(id, favorites));
@@ -59,6 +75,18 @@ export default function IconsCockpit({ data }) {
             active={inFavorites}
           />
         </>
+      )}
+      {/* tmp */}
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={mode}
+          is24Hour={true}
+          display="default"
+          onChange={handlePicker}
+          timeZoneOffsetInMinutes={0}
+        />
       )}
     </View>
   );

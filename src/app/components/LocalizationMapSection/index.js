@@ -7,6 +7,7 @@ import { STYLES } from "../../style/styles";
 export default function LocalizationMapSection({ latitude, longitude }) {
   return (
     <View style={style.container}>
+      
       <MapView
         style={style.map}
         initialRegion={{

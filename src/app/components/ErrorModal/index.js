@@ -15,12 +15,11 @@ import { STYLES } from "../../style/styles";
 import useModal from "../../hooks/useModal";
 
 export default function ErrorModal() {
+  const { closeError } = useModal();
   const message = useSelector(({ appSlice }) => appSlice.error.message);
-  const [_, setError] = useModal();
-  const handlePress = () => setError(false, "");
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
+    <TouchableWithoutFeedback onPress={closeError}>
       <View style={style.container}>
         <View style={style.mask} />
         <View style={style.icon}>

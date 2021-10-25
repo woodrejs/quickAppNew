@@ -4,18 +4,18 @@ import { setAvatar } from "../redux/user.slice";
 import useModal from "./useModal";
 
 export default function useAvatar() {
-  const [setInfo, setError] = useModal();
+  const { setInfo, setStage } = useModal();
   const dispatch = useDispatch();
   const jwt = useSelector(({ userSlice }) => userSlice.jwt);
 
   return async (id) => {
-    setInfo("pending");
+    setStage("pending");
     try {
-      const data = await createAvatar(id, jwt);
+      const { data } = await createAvatar(id, jwt);
       dispatch(setAvatar(data));
-      setInfo("success", "Zdjęcie profilowe zostało ustawione.");
+      setInfo(true, "Zdjęcie profilowe zostało ustawione.");
     } catch (error) {
-      setError(true, "Błąd podczas przesyłania zdjęcia.");
+      setInfo(false, "Błąd podczas przesyłania zdjęcia.");
     }
   };
 }

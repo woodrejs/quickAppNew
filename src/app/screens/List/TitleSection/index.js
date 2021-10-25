@@ -3,7 +3,7 @@ import { StyleSheet, Text } from "react-native";
 //utils
 import { STYLES } from "../../../style/styles";
 
-export default function TitleSection({ variant }) {
+export default React.memo(function TitleSection({ variant }) {
   return (
     <>
       <Text style={style.title}>
@@ -16,7 +16,7 @@ export default function TitleSection({ variant }) {
       </Text>
     </>
   );
-}
+});
 
 const style = StyleSheet.create({
   title: { ...STYLES.fonts.bold, fontSize: 28, paddingBottom: 15 },

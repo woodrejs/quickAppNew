@@ -6,13 +6,14 @@ import Icon from "../Icon";
 
 export default function InputText({
   name,
-  values,
+  value,
   handleChange,
   handleBlur,
   placeholder = "",
   styles = {},
   error = null,
 }) {
+
   return (
     <View>
       <View style={[style.container, styles]}>
@@ -21,7 +22,7 @@ export default function InputText({
           style={style.input}
           onChangeText={handleChange}
           onBlur={handleBlur}
-          value={values}
+          value={value}
           placeholder={placeholder}
           placeholderTextColor={COLORS.grey}
         />

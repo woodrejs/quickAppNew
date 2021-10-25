@@ -1,9 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { STYLES } from "../../style/styles";
 import { COLORS } from "../../style/colors";
+import { screensNames } from "../../utils/screensNames";
 
-const AuthFooter = ({ title, text, handler }) => {
+export default function AuthFooter({ name, title, text }) {
+  const navigation = useNavigation();
+
+  const handler = () => navigation.navigate(screensNames[name]);
+
+
   return (
     <View style={style.container}>
       <Text style={style.text} children={text} />
@@ -13,8 +20,6 @@ const AuthFooter = ({ title, text, handler }) => {
     </View>
   );
 };
-
-export default AuthFooter;
 
 const style = StyleSheet.create({
   container: { display: "flex", alignItems: "center" },

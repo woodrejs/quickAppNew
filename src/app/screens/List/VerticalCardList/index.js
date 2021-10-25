@@ -3,13 +3,14 @@ import { View, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import VerticalListCard from "./VerticalListCard";
 
-export default function VerticalCardList({ list, navigation }) {
+export default React.memo(function VerticalCardList({ list }) {
+  //hooks
   const favorites = useSelector(({ userSlice }) => userSlice.favorites);
 
-  return (
-    <View style={style.container} children={isInArray(list, favorites, navigation)} />
-  );
-}
+  if (!list.length) return null;
+
+  return <View style={style.container} children={isInArray(list, favorites)} />;
+});
 
 const style = StyleSheet.create({
   container: {
@@ -19,7 +20,7 @@ const style = StyleSheet.create({
 });
 
 //!!!important!!!
-function isInArray(arr1, arr2, navigation) {
+function isInArray(arr1, arr2) {
   let counter = {};
 
   arr2.forEach((item) => {
@@ -27,11 +28,6 @@ function isInArray(arr1, arr2, navigation) {
   });
 
   return arr1.map((item) => (
-    <VerticalListCard
-      data={item}
-      key={item.id}
-      navigation={navigation}
-      inFavorite={counter[item.id] ?? false}
-    />
+    <VerticalListCard data={item} key={item.id} inFavorite={counter[item.id] ?? false} />
   ));
 }

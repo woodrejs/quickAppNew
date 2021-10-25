@@ -3,20 +3,23 @@ import { Formik } from "formik";
 import { View, StyleSheet, Button } from "react-native";
 //components
 import InputText from "../../../components/InputText";
-//utils 
+//utils
 import useAuth from "../../../hooks/useAuth";
 import { RegisterSchema } from "../../../utils/strapi";
 import { COLORS } from "../../../style/colors";
 
-export default function Form({ navigation }) {
+export default function Form() {
   const [_, __, ___, registerUser] = useAuth();
+
+  const onSubmit = ({ email, password, username }, { resetForm }) => {
+    registerUser(username, email, password);
+    resetForm({});
+  };
 
   return (
     <Formik
       initialValues={{ username: "", email: "", password: "" }}
-      onSubmit={({ email, password, username }) =>
-        registerUser(username, email, password, navigation)
-      }
+      onSubmit={onSubmit}
       validationSchema={RegisterSchema}
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
@@ -26,7 +29,7 @@ export default function Form({ navigation }) {
             name="email"
             handleChange={handleChange("email")}
             handleBlur={handleBlur("email")}
-            values={values}
+            value={values.email}
             error={errors.email}
             placeholder="Email"
           />
@@ -35,7 +38,7 @@ export default function Form({ navigation }) {
             name="username"
             handleChange={handleChange("username")}
             handleBlur={handleBlur("username")}
-            values={values}
+            value={values.username}
             error={errors.username}
             placeholder="Nazwa"
           />
@@ -44,7 +47,7 @@ export default function Form({ navigation }) {
             name="password"
             handleChange={handleChange("password")}
             handleBlur={handleBlur("password")}
-            values={values}
+            value={values.password}
             error={errors.password}
             placeholder="Hasło"
           />

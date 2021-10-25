@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 //components
 import Icon from "../../../components/Icon";
@@ -13,7 +13,9 @@ export default function ButtonIcon({
   active = false,
   styles = {},
 }) {
-  const { extra, lightnest, dark } = COLORS;
+  //const
+  const { extra, lightnest, dark } = useMemo(() => COLORS);
+  
   return (
     <TouchableOpacity
       style={[

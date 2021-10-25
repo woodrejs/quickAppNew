@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
 //components
@@ -8,13 +8,20 @@ import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
 import useFavorites from "../../hooks/useFavorites";
 
-export default function AddToFavoriteButton({ data, active = false }) {
+//!!!important!!! useFavorites, arr => obj
+export default React.memo(function AddToFavoriteButton({ data, active = false }) {
   const [isSelected, setIsSelected] = useState(active);
-  const isLogged = useSelector(({ userSlice }) => userSlice.logged);
   const [__, createFavorite, deleteFavorite] = useFavorites();
-  const { extra, lightnest } = COLORS;
+  const isLogged = useSelector(({ userSlice }) => userSlice.logged);
 
-  const handlePress = async () => {
+  if (!isLogged) return null;
+
+  const backgroundColor = useMemo(
+    () => ({ backgroundColor: isSelected ? COLORS.extra : COLORS.lightnest }),
+    [isSelected]
+  );
+
+  const handlePress = useCallback(() => {
     if (isSelected) {
       deleteFavorite(data.id);
       setIsSelected(false);
@@ -22,19 +29,15 @@ export default function AddToFavoriteButton({ data, active = false }) {
       createFavorite(data);
       setIsSelected(true);
     }
-  };
-
-  if (!isLogged) return null;
+  }, [isSelected, data]);
 
   return (
-    <TouchableOpacity
-      style={[style.container, { backgroundColor: isSelected ? extra : lightnest }]}
-      onPress={handlePress}
-    >
+    <TouchableOpacity style={[style.container, backgroundColor]} onPress={handlePress}>
       <Icon name="heart" size={21} />
     </TouchableOpacity>
   );
-}
+});
+
 const style = StyleSheet.create({
   container: {
     position: "absolute",

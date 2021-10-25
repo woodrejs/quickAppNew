@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { View, TouchableWithoutFeedback, StyleSheet } from "react-native";
 //style & utils
 import { COLORS } from "../../../style/colors";
 
-export default function NavSectionButton({ navigation }) {
-  const handlePress = () => navigation.openDrawer();
-
-  //!!!important!!!
-  // const screen =
-  //   navigation.getState().routes[navigation.getState().routes.length - 1].name;
+export default React.memo(function NavSectionButton({ navigation }) {
+  //handlers
+  const handlePress = useCallback(() => navigation.openDrawer());
 
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
@@ -26,7 +23,7 @@ export default function NavSectionButton({ navigation }) {
       </View>
     </TouchableWithoutFeedback>
   );
-}
+});
 
 const style = StyleSheet.create({
   box: {

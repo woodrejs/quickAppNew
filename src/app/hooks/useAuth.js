@@ -1,50 +1,52 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 import { userLogin, userRegister } from "../utils/strapi";
 import { setLoggedIn, setLoggedOut } from "../redux/user.slice";
 import { stacksNames } from "../utils/stacksNames";
 import useModal from "./useModal";
 
-//!!!important!!! setLoggedIn & setLoggedOut in one function
 export default function useAuth() {
   const [user, setUser] = useState(null);
-  const [setInfo] = useModal();
+  const { setInfo, setStage } = useModal();
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   return [
     user,
     //login
-    async (email, password, navigation) => {
-      setInfo("pending");
+    async (email, password) => {
+      setStage("pending");
 
       try {
-        const resp = await userLogin(email, password);
-        setUser(resp);
+        const { data } = await userLogin(email, password);
+        setUser(data);
 
-        dispatch(setLoggedIn(resp.jwt));
-        setInfo("success", `${resp.user.username} witaj w quick week app.`);
+        dispatch(setLoggedIn(data.jwt));
+        setInfo(true, `${data.user.username} witaj w quick week app.`);
         navigation.navigate(stacksNames.home);
       } catch (error) {
-        setInfo("failed", `Błąd podczas logowania. Spróbuj ponownie.`);
+        setInfo(false, `Błąd podczas logowania. Spróbuj ponownie.`);
       }
     },
     //logout
-    (navigation) => {
+    () => {
       dispatch(setLoggedOut());
       navigation.navigate(stacksNames.home);
-      setInfo("success", "Zostałeś poprawnie wylogowany.");
+      setInfo(true, "Zostałeś poprawnie wylogowany.");
     },
     //register
-    async (username, email, password, navigation) => {
-      setInfo("pending");
+    async (username, email, password) => {
+      setStage("pending");
       try {
-        const { jwt, user } = await userRegister(username, email, password);
+        const { data } = await userRegister(username, email, password);
+        const { jwt, user } = data;
 
         dispatch(setLoggedIn(jwt));
-        setInfo("success", `Witaj ${user.username}, Twoje konto zostało utworzone.`);
+        setInfo(true, `Witaj ${user.username}, Twoje konto zostało utworzone.`);
         navigation.navigate(stacksNames.home);
       } catch (error) {
-        setInfo("failed", `Błąd podczas rejestracji. Spróbuj ponownie.`);
+        setInfo(false, `Błąd podczas rejestracji. Spróbuj ponownie.`);
       }
     },
   ];

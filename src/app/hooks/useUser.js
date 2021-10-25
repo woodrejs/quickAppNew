@@ -1,16 +1,18 @@
 import useModal from "./useModal";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { userUpdate, userDelete } from "../utils/strapi";
 import { setLoggedOut } from "../redux/user.slice";
 
 export default function useUser() {
-  const [setInfo] = useModal();
+  const { setInfo, setStage } = useModal();
+  const dispatch = useDispatch();
+
   const jwt = useSelector(({ userSlice }) => userSlice.jwt);
 
   return [
     //update user data
     async (val, variant) => {
-      setInfo("pending");
+      setStage("pending");
 
       const message =
         variant === "email"
@@ -26,15 +28,14 @@ export default function useUser() {
     },
     //delete user
     async () => {
-      setInfo("pending");
+      setStage("pending");
       try {
-        await userDelete(jwt);
-        dispath(setLoggedOut());
-        //!!!important!!! delete avatar from cloudinay
-        setInfo("success", `Konto zostało poprawnie usunięte.`);
+        const resp = await userDelete(jwt);
+        dispatch(setLoggedOut());
+        setInfo(true, `Konto zostało poprawnie usunięte.`);
       } catch (error) {
         setInfo(
-          "failed",
+          false,
           `Błąd podczas usuwania konta. Spróbuj ponownie lub skontaktuj się z administratorem strony.`
         );
       }

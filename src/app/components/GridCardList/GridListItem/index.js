@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import {
   Text,
   StyleSheet,
   ImageBackground,
   Dimensions,
-  TouchableHighlight,
+  View,
+  TouchableWithoutFeedback,
 } from "react-native";
 //components
 import AddToFavoriteButton from "../../AddToFavoriteButton";
@@ -13,11 +14,12 @@ import useId from "../../../hooks/useId";
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 
-export default function GridListItem({ data, navigation }) {
-  const { img, title, type, id } = data;
+export default React.memo(function GridListItem({ data }) {
   const setId = useId();
 
-  const handlePress = () => setId(id, type, navigation);
+  const { img, title, type, id } = useMemo(() => data, [data]);
+
+  const handlePress = useCallback(() => setId(id, type), [id, type]);
 
   return (
     <ImageBackground
@@ -25,14 +27,16 @@ export default function GridListItem({ data, navigation }) {
       imageStyle={style.image}
       source={img ? { uri: img } : require("../../../../../assets/img/no_img.jpg")}
     >
-      <TouchableHighlight style={style.box} onPress={handlePress}>
-        <Text style={style.title} children={title} />
-      </TouchableHighlight>
+      <TouchableWithoutFeedback onPress={handlePress}>
+        <View style={style.box}>
+          <Text style={style.title} children={title} />
+        </View>
+      </TouchableWithoutFeedback>
 
       <AddToFavoriteButton data={data} active />
     </ImageBackground>
   );
-}
+});
 
 const style = StyleSheet.create({
   container: {

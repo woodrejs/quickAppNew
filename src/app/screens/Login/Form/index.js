@@ -1,26 +1,33 @@
 import React, { useEffect } from "react";
 import { Formik } from "formik";
-import { View, StyleSheet, Button, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, Button, TouchableOpacity, Text, Linking } from "react-native";
 import { useDispatch } from "react-redux";
+import { SUPPORT_MAIL } from "@env";
 //components
 import InputText from "../../../components/InputText";
 //utils
 import useAuth from "../../../hooks/useAuth";
 import { LoginSchema, findOneAvatar } from "../../../utils/strapi";
-import { setAvatar, setFavorites } from "../../../redux/user.slice";
+import { setAvatar, setFavorites, setSchedules } from "../../../redux/user.slice";
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 
-export default function Form({ navigation }) {
+export default function Form() {
   const [user, logInUser] = useAuth();
   const dispatch = useDispatch();
 
+  const onSubmit = ({ email, password }, { resetForm }) => {
+    logInUser(email, password);
+    resetForm({});
+  };
+
   useEffect(() => {
     async function init() {
-      const { avatar, favorites } = user.user;
+      const { avatar, favorites, schedules } = user.user;
 
       if ("id" in avatar) {
-        const { public_id, url } = await findOneAvatar(avatar.id, user.jwt);
+        const { data } = await findOneAvatar(avatar.id, user.jwt);
+        const { public_id, url } = data;
         dispatch(setAvatar({ public_id, url }));
       }
 
@@ -34,6 +41,17 @@ export default function Form({ navigation }) {
 
         dispatch(setFavorites(formatedFavorites));
       }
+
+      if (schedules.length) {
+        const formatedSchedules = schedules.map(({ uid, date, title, _id }) => ({
+          id: uid,
+          date,
+          title,
+          _id,
+        }));
+
+        dispatch(setSchedules(formatedSchedules));
+      }
     }
     user && init();
   }, [user]);
@@ -41,7 +59,7 @@ export default function Form({ navigation }) {
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
-      onSubmit={({ email, password }) => logInUser(email, password, navigation)}
+      onSubmit={onSubmit}
       validationSchema={LoginSchema}
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
@@ -51,7 +69,7 @@ export default function Form({ navigation }) {
             name="email"
             handleChange={handleChange("email")}
             handleBlur={handleBlur("email")}
-            values={values}
+            value={values.email}
             error={errors.email}
             placeholder="Email"
           />
@@ -60,7 +78,7 @@ export default function Form({ navigation }) {
             name="password"
             handleChange={handleChange("password")}
             handleBlur={handleBlur("password")}
-            values={values}
+            value={values.password}
             error={errors.password}
             placeholder="Hasło"
           />
@@ -75,9 +93,9 @@ export default function Form({ navigation }) {
     </Formik>
   );
 }
-//!!!important!!! add mechanics
+
 function RestoreButton() {
-  const handler = () => console.log("handler");
+  const handler = () => Linking.openURL(`mailto:${SUPPORT_MAIL}`);
 
   return (
     <View style={style.restoreContainer}>
@@ -92,7 +110,5 @@ const style = StyleSheet.create({
   button: { paddingTop: 25 },
   restoreContainer: { display: "flex", alignItems: "flex-end", marginBottom: 60 },
   restoreBox: { padding: 10 },
-  restoreText: { ...STYLES.fonts.regular, opacity: 0.8 },
+  restoreText: { ...STYLES.fonts.regular, opacity: 0.8, color: COLORS.extra },
 });
-
-

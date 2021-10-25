@@ -8,8 +8,9 @@ import GridCardList from "../../components/GridCardList";
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
 
-export default function FavoritesList({ navigation }) {
-  resp
+export default React.memo(function FavoritesList() {
+  //hooks
+  const { favorites, logged } = useSelector(({ userSlice }) => userSlice);
 
   if (!logged)
     return (
@@ -26,15 +27,15 @@ export default function FavoritesList({ navigation }) {
         text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       />
 
-      <GridCardList navigation={navigation} />
+      <GridCardList list={favorites} />
     </ScrollView>
   );
-}
+});
 
 const style = StyleSheet.create({
   container: {
     padding: 10,
-    backgroundColor: COLORS.extra,
+    backgroundColor: COLORS.extraLight,
   },
   box: {
     display: "flex",
@@ -47,7 +48,7 @@ const style = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     maxWidth: 300,
-    opacity: 0.5
+    opacity: 0.5,
   },
   titleBox: { paddingVertical: 40 },
 });

@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 //components
 import FilterSection from "./FilterSection";
 import VerticalCardList from "./VerticalCardList";
-import LoadingSection from "../../components/LoadingSection";
 import ListButton from "./ListButton";
 //utils & styles
 import usePagination from "../../hooks/usePagination";
@@ -13,19 +12,19 @@ import { STYLES } from "../../style/styles";
 import TitleSection from "./TitleSection";
 import useWroclawGO from "../../hooks/useWroclawGO";
 
-//todo: pozbyc sie img.standard na rzecz img
-export default function List({ navigation, variant }) {
+export default React.memo(function List({ variant }) {
+  //hooks
   const [paginationCounter, setPaginationCounter] = usePagination(variant);
   const [setItemList] = useWroclawGO(variant);
-  const { list, filters, loaded } = useSelector(({ listSlice }) => listSlice[variant]);
+  const { list, filters } = useSelector(({ listSlice }) => listSlice[variant]);
 
-  const handlePagination = () => setPaginationCounter((state) => state + 1);
+  //handlers
+  const handlePagination = useCallback(() => setPaginationCounter((state) => state + 1));
 
+  //effects
   useEffect(() => {
     setItemList(paginationCounter);
   }, [paginationCounter, filters]);
-
-  if (!loaded) return <LoadingSection />;
 
   return (
     <ScrollView style={style.container}>
@@ -36,7 +35,7 @@ export default function List({ navigation, variant }) {
       <FilterSection variant={variant} filters={filters} />
 
       {/* List Section*/}
-      {list && <VerticalCardList list={list} navigation={navigation} />}
+      {<VerticalCardList list={list} />}
 
       {/* Pagination button */}
       <ListButton
@@ -47,14 +46,14 @@ export default function List({ navigation, variant }) {
       />
     </ScrollView>
   );
-}
+});
 
 const style = StyleSheet.create({
   container: {
     height: "100%",
     width: "100%",
     padding: 10,
-    backgroundColor: COLORS.extra,
+    backgroundColor: COLORS.extraLight,
     paddingTop: 40,
   },
   title: { ...STYLES.fonts.bold, fontSize: 28, paddingBottom: 15 },

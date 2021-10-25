@@ -4,28 +4,29 @@ import { StyleSheet, View } from "react-native";
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
 
+//!!!important!!! add mechanics
 export default function ProgressSection({ progress, styles }) {
+  const active = true;
   return (
     <View style={[style.container, styles]}>
       <View style={style.row}>
-        <Sphere active={isActive(progress, 0.2)} />
-        <Sphere active={isActive(progress, 0.6)} />
-        <Sphere active={isActive(progress, 0.8)} />
+        <Sphere active={active} />
+        <Sphere active={active} />
+        <Sphere active={active} />
       </View>
       <View style={style.row}>
-        <Sphere active={isActive(progress, 0.3)} />
-        <Sphere active={isActive(progress, 0.9)} />
-        <Sphere active={isActive(progress, 0.4)} />
+        <Sphere active={active} />
+        <Sphere active={active} />
+        <Sphere active={active} />
       </View>
     </View>
   );
 }
-function Sphere({ active = false }) {
+
+const Sphere = React.memo(({ active }) => {
   return <View style={style.sphereLg}>{active && <View style={style.sphereSm} />}</View>;
-}
-function isActive(progress, val) {
-  return val <= progress ? true : false;
-}
+});
+
 const style = StyleSheet.create({
   container: {
     position: "absolute",

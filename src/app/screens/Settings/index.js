@@ -1,29 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useCallback } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { StyleSheet, View, Linking, Platform, Button, Text } from "react-native";
 import { useSelector } from "react-redux";
 import { SUPPORT_MAIL } from "@env";
 //components
-import useUser from "../../hooks/useUser";
 import SettingsButton from "./SettingsButton";
 import SettingsInputButton from "./SettingsInputButton";
 //utils
+import useAuth from "../../hooks/useAuth";
+import useUser from "../../hooks/useUser";
 import useAvatar from "../../hooks/useAvatar";
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
 
-export default function Settings() {
+export default React.memo(function Settings() {
+  //hooks
   const { avatar, logged } = useSelector(({ userSlice }) => userSlice);
   const [updateUser, deleteUser] = useUser();
+  const [_, __, logOutUser] = useAuth();
   const setAvatar = useAvatar();
 
-  const handleSupportContact = () => Linking.openURL(`mailto:${SUPPORT_MAIL}`);
-  const handleAvatarChange = () => setAvatar(avatar.public_id);
-  const handleEmailChange = (val) => updateUser(val);
-  const handleUsernameChange = (val) => updateUser(val);
-  const handleDeleteAccount = () => deleteUser();
-  const handleLogOut = () => console.log("logOut");
+  //handlers
+  const handleLogOut = useCallback(() => logOutUser());
+  const handleAvatarChange = useCallback(() => setAvatar(avatar.public_id));
+  const handleEmailChange = useCallback((val) => updateUser(val));
+  const handleUsernameChange = useCallback((val) => updateUser(val));
+  const handleDeleteAccount = useCallback(() => deleteUser());
+  const handleSupportContact = useCallback(() =>
+    Linking.openURL(`mailto:${SUPPORT_MAIL}`)
+  );
 
+  //effects
   useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
@@ -35,7 +42,6 @@ export default function Settings() {
     })();
   }, []);
 
-  //!!!important!!! same in FavoritesList
   if (!logged)
     return (
       <View style={style.box}>
@@ -87,7 +93,7 @@ export default function Settings() {
       <Button title="wyloguj" color={COLORS.extra} onPress={handleLogOut} />
     </View>
   );
-}
+});
 
 const style = StyleSheet.create({
   container: {

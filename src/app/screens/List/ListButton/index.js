@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import * as Progress from "react-native-progress";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useSelector } from "react-redux";
@@ -8,19 +8,27 @@ import Icon from "../../../components/Icon";
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 
-export default function ListButton({
+export default React.memo(function ListButton({
   handler,
-  variant,
   icon,
   active = true,
   customStyle = {},
 }) {
-  const { dark, lightnest, extra } = COLORS;
-  const stage = useSelector(({ listSlice }) => listSlice[variant].stage);
+  //hooks
+  const stage = useSelector(({ appSlice }) => appSlice.stage);
+
+  //const
+  const { dark, lightnest, extra } = useMemo(() => COLORS);
+  const backgroundColor = useMemo(
+    () => ({
+      backgroundColor: active ? lightnest : extra,
+    }),
+    [active]
+  );
 
   return (
     <TouchableOpacity onPress={handler} style={customStyle}>
-      <View style={[style.container, { backgroundColor: active ? lightnest : extra }]}>
+      <View style={[style.container, backgroundColor]}>
         {stage === "waiting" && <Icon name={icon} size={26} />}
         {stage === "pending" && (
           <Progress.Circle size={30} indeterminate={true} color={dark} />
@@ -28,7 +36,7 @@ export default function ListButton({
       </View>
     </TouchableOpacity>
   );
-}
+});
 
 const style = StyleSheet.create({
   container: {

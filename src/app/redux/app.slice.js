@@ -3,39 +3,41 @@ import { createSlice } from "@reduxjs/toolkit";
 const appSlice = createSlice({
   name: "appSlice",
   initialState: {
-    info: { stage: "waiting", message: null, isOpen: false },
-    error: { message: null, isOpen: false },
+    stage: "waiting",
+    info: { message: null, isOpen: false, success: false },
+    error: { message: null, isOpen: false, success: false },
   },
   reducers: {
     setError(state, action) {
-      const isOpen = action.payload[0];
-      const message = action.payload[1];
+      const message = action.payload;
 
+      state.stage = "waiting";
       state.error.message = message;
-      state.error.isOpen = isOpen;
+      state.error.isOpen = true;
+    },
+    closeError(state, action) {
+      state.error.message = null;
+      state.error.isOpen = false;
     },
     setInfo(state, action) {
-      const message = action.payload[1] ?? null;
-      const stage = action.payload[0];
+      const success = action.payload[0];
+      const message = action.payload[1];
 
-      state.info.stage = stage;
-
-      switch (stage) {
-        case "waiting":
-          state.info.message = null;
-          state.info.isOpen = false;
-          break;
-        case "pending":
-          state.info.isOpen = true;
-          break;
-        default:
-          state.info.isOpen = true;
-          state.info.message = message;
-          break;
-      }
+      state.stage = "waiting";
+      state.info.message = message;
+      state.info.isOpen = true;
+      state.info.success = success;
+    },
+    closeInfo(state, action) {
+      state.info.message = null;
+      state.info.isOpen = false;
+      state.info.success = false;
+    },
+    setStage(state, action) {
+      state.stage = action.payload;
     },
   },
 });
 
-export const { setInfo, setError } = appSlice.actions;
+export const { setInfo, closeInfo, setError, closeError, setStage } = appSlice.actions;
 export default appSlice.reducer;

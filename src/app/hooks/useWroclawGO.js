@@ -12,27 +12,30 @@ import useModal from "./useModal";
 export default function useWroclawGO(variant) {
   const dispatch = useDispatch();
   const { filters, list } = useSelector(({ listSlice }) => listSlice[variant]);
-  const [_, setError] = useModal();
+  const { setInfo, setStage } = useModal();
 
   return [
     //fetch list
     async (pagination) => {
-      dispatch(setStage([variant, "pending"]));
+      setStage("pending");
 
       try {
         const data = await fetchItemList(variant, pagination, filters);
+
         if (pagination) {
           dispatch(setListData([variant, [...list, ...data]]));
         } else {
           dispatch(setListData([variant, data]));
         }
+        setStage("waiting");
       } catch (error) {
-        setError(true, "Błąd podczas ładowania aplikacji. Spróbuj ponownie.");
+        setStage("waiting");
+        setInfo(false, "Błąd podczas ładowania aplikacji. Spróbuj ponownie.");
       }
     },
     //fetch single
     async (id) => {
-      dispatch(setIsLoaded([variant, false]));
+      setStage("pending");
 
       try {
         const resp =
@@ -41,8 +44,10 @@ export default function useWroclawGO(variant) {
             : await getSinglePlaceData(id);
 
         dispatch(setSingleData([variant, resp]));
+        setStage("waiting");
       } catch (error) {
-        setError(true, "Błąd podczas pobierania danych.");
+        setStage("waiting");
+        setInfo(false, "Błąd podczas pobierania danych.");
       }
     },
   ];

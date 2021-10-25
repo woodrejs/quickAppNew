@@ -1,19 +1,21 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet } from "react-native";
 //components
-import ProgressSection from "../../components/ProgressSection";
+import Logo from "./Logo";
 //utils
+import { STYLES } from "../../style/styles";
 import { COLORS } from "../../style/colors";
 
-export default function Intro({ progress }) {
+export default React.memo(function Intro() {
   return (
     <View style={style.container}>
-      <Image style={style.box} source={require("./tower.jpg")} />
-      <Image style={style.logo} source={require("./logo.png")} />
-      <ProgressSection progress={progress} />
+      <View style={style.box}>
+        <Logo />
+      </View>
     </View>
   );
-}
+});
+
 const style = StyleSheet.create({
   container: {
     display: "flex",
@@ -24,9 +26,14 @@ const style = StyleSheet.create({
     backgroundColor: COLORS.extra,
     position: "relative",
   },
-  title: {
-    textTransform: "uppercase",
+  box: {
+    ...STYLES.shadow,
+    borderRadius: 100,
+    backgroundColor: COLORS.extra,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 85,
+    width: 85,
   },
-  box: { height: "100%", width: "100%", opacity: 0.2 },
-  logo: { position: "absolute", top: 50, left: 30 },
 });
