@@ -3,6 +3,7 @@ import { createAvatar } from "../utils/strapi";
 import { setAvatar } from "../redux/user.slice";
 import useModal from "./useModal";
 
+//!!!important!!! lower down img size 
 export default function useAvatar() {
   const { setInfo, setStage } = useModal();
   const dispatch = useDispatch();

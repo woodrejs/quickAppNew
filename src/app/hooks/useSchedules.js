@@ -3,15 +3,13 @@ import { createSchedule, deleteSchelude } from "../utils/strapi";
 import { useSelector, useDispatch } from "react-redux";
 import { setSchedules } from "../redux/user.slice";
 
-export default function useSchedules() {
+export default function useSchedules(schedules) {
   const { setInfo, setStage } = useModal();
-  const { jwt, schedules } = useSelector(({ userSlice }) => userSlice);
+  const jwt = useSelector(({ userSlice }) => userSlice.jwt);
   const dispatch = useDispatch();
 
-  return [
-    schedules,
-    // create
-    async (obj) => {
+  return {
+    createSchedule: async (obj) => {
       setStage("pending");
       try {
         const { data } = await createSchedule(obj, jwt);
@@ -22,8 +20,7 @@ export default function useSchedules() {
         setInfo(false, "Błąd podczas dodawania terminu.");
       }
     },
-    // delete
-    async (id, date) => {
+    deleteSchedule: async (id, date) => {
       setStage("pending");
       try {
         const { data } = await deleteSchelude(id, date, jwt);
@@ -35,5 +32,5 @@ export default function useSchedules() {
         setInfo(false, "Błąd podczas usuwania terminu.");
       }
     },
-  ];
+  };
 }

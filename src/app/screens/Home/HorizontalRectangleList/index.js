@@ -8,9 +8,10 @@ import {
 } from "react-native";
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
-import useFilters from "../../../hooks/useFilters";
+import { setFilters } from "../../../redux/list.slice";
 import { stacksNames } from "../../../utils/stacksNames";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
 
 export default React.memo(function HorizontalRectangleList({ list }) {
   return (
@@ -27,12 +28,12 @@ const Rectangle = React.memo(({ data }) => {
   const { url, title, tags, variant, filters } = useMemo(() => data);
 
   //hooks
-  const [setFilters] = useFilters(variant, filters);
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   //handlers
   const handler = useCallback(() => {
-    setFilters();
+    setFilters([variant, filters]);
     navigation.navigate(stacksNames[variant]);
   }, [variant]);
 

@@ -5,7 +5,8 @@ import ButtonIcon from "../ButtonIcon";
 //utils
 import { STYLES } from "../../../style/styles";
 
-export default function Facilities({ venue }) {
+export default React.memo(function Facilities({ venue }) {
+  //const
   const { carParkAvailable, foodAndDrinkAvailable, disabledAccessAvailable } = venue;
 
   return (
@@ -30,16 +31,15 @@ export default function Facilities({ venue }) {
       />
     </View>
   );
-}
-
-function FacilitieIcon({ name, title }) {
+});
+const FacilitieIcon = React.memo(({ name, title }) => {
   return (
     <View style={style.box}>
       <ButtonIcon name={name} size="md" />
       <Text style={style.title} children={title} />
     </View>
   );
-}
+});
 
 function setFacilitiesTitle(title, available, unavailable) {
   if (title === null) return "nieokreślono";

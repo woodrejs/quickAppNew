@@ -81,7 +81,7 @@ export const mainData = [
     title: "Literatura",
     tags: "Książki, Księgarnie, Spotkania autorskie",
     variant: "offers",
-    filters: [7, 132],
+    filters: [7],
   },
   {
     id: uuidv4(),
@@ -89,7 +89,7 @@ export const mainData = [
     title: "Sport i rekreacja",
     tags: "Zawody, Kluby sportowe, Spotkania na świeżym powietrzu",
     variant: "offers",
-    filters: [4, 120, 119, 118],
+    filters: [4],
   },
   {
     id: uuidv4(),
@@ -97,7 +97,7 @@ export const mainData = [
     title: "Jedzenie",
     tags: "Restauracje, Knajpy, Bary, Bistra",
     variant: "places",
-    filters: [14, 210, 208],
+    filters: [14],
   },
   {
     id: uuidv4(),
@@ -105,7 +105,7 @@ export const mainData = [
     title: "Sztuka",
     tags: "Muzea, Galerie sztuki, Spotkania z artystami, Warsztaty",
     variant: "offers",
-    filters: [3, 117],
+    filters: [3],
   },
   {
     id: uuidv4(),
@@ -113,6 +113,6 @@ export const mainData = [
     title: "Noclegi",
     tags: "Hptele, Schroniska, Motele, Hostele ",
     variant: "places",
-    filters: [13, 293, 294],
+    filters: [13],
   },
 ];

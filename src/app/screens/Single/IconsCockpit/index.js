@@ -12,9 +12,9 @@ import useSchedules from "../../../hooks/useSchedules";
 export default function IconsCockpit({ data }) {
   const [date, show, mode, setDate, setShow] = useDate(new Date());
   const [inFavorites, setInFavorites] = useState(false);
-  const { logged, favorites } = useSelector(({ userSlice }) => userSlice);
-  const [__, createFavorite, deleteFavorite] = useFavorites();
-  const [_, setSchedule] = useSchedules();
+  const { logged, favorites, schedules } = useSelector(({ userSlice }) => userSlice);
+  const [createFavorite, deleteFavorite] = useFavorites(favorites);
+  const { createSchedule } = useSchedules(schedules);
 
   const { id, pageLink, location, venue, title, mainImage, type } = data;
   const { latitude, longitude } = location;
@@ -24,7 +24,7 @@ export default function IconsCockpit({ data }) {
     const action = event.type;
 
     if (action === "set") {
-      setSchedule({ id, title, date: event.nativeEvent.timestamp, type });
+      createSchedule({ id, title, date: event.nativeEvent.timestamp, type });
       setDate(event);
     }
 

@@ -15,15 +15,15 @@ import useWroclawGO from "../../hooks/useWroclawGO";
 export default React.memo(function List({ variant }) {
   //hooks
   const [paginationCounter, setPaginationCounter] = usePagination(variant);
-  const [setItemList] = useWroclawGO(variant);
   const { list, filters } = useSelector(({ listSlice }) => listSlice[variant]);
+  const { fetchList } = useWroclawGO(variant);
 
   //handlers
   const handlePagination = useCallback(() => setPaginationCounter((state) => state + 1));
 
   //effects
   useEffect(() => {
-    setItemList(paginationCounter);
+    fetchList(paginationCounter);
   }, [paginationCounter, filters]);
 
   return (

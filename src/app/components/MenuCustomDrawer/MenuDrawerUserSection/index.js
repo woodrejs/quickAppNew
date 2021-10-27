@@ -9,6 +9,7 @@ import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 import { stacksNames } from "../../../utils/stacksNames";
 
+//!!!important!!! set username
 export default React.memo(function MenuDrawerUserSection() {
   //hooks
   const navigation = useNavigation();

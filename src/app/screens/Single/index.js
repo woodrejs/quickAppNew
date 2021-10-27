@@ -26,11 +26,11 @@ import { getTicketingTitle } from "../../utils/functions";
 export default React.memo(function Single({ variant }) {
   //hooks
   const { id, data } = useSelector(({ singleSlice }) => singleSlice[variant]);
-  const [_, fetchSingleData] = useWroclawGO(variant);
+  const { fetchSingle } = useWroclawGO(variant);
 
   //effects
   useEffect(() => {
-    (async () => await fetchSingleData(id))();
+    (async () => await fetchSingle(id))();
   }, [id]);
 
   if (!data) return null;

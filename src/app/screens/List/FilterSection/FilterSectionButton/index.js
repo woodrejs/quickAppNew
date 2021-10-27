@@ -1,29 +1,25 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useMemo } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+
 //utils
 import { COLORS } from "../../../../style/colors";
 import { STYLES } from "../../../../style/styles";
 
-export default React.memo(function FilterSectionButton({ data, handler }) {
-  //hooks
-  const [isActive, setIsActive] = useState(active);
-
+export default React.memo(function FilterSectionButton({ data, handler, active }) {
   //const
   const { lightnest, extra, dark } = useMemo(() => COLORS);
-  const { id, title, active } = useMemo(() => data);
 
   //handlers
-  const handlePress = useCallback(() => {
-    handler(id);
-    setIsActive(!isActive);
-  }, [isActive, id]);
+  const handlePress = () => handler(data.id, !active);
 
   return (
     <TouchableOpacity
       onPress={handlePress}
-      style={[style.container, { backgroundColor: isActive ? dark : extra }]}
+      style={[style.container, { backgroundColor: active ? dark : extra }]}
     >
-      <Text style={[style.title, { color: isActive ? lightnest : dark }]}>{title}</Text>
+      <Text style={[style.title, { color: active ? lightnest : dark }]}>
+        {data.title}
+      </Text>
     </TouchableOpacity>
   );
 });

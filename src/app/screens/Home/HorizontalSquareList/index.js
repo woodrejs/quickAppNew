@@ -13,7 +13,7 @@ import Badge from "../../../components/Badge";
 //styles & utils
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
-import useFilters from "../../../hooks/useFilters";
+import { setFilters } from "../../../redux/list.slice";
 import { stacksNames } from "../../../utils/stacksNames";
 
 export default React.memo(function HorizontalSquareList({ list }) {
@@ -28,15 +28,14 @@ export default React.memo(function HorizontalSquareList({ list }) {
 
 const Square = React.memo(({ data }) => {
   //const
-  const { url, title, variant, filters } = useMemo(() => data);
+  const { url, title, variant, filters } = data;
 
   //hooks
-  const [setFilters] = useFilters(variant, filters);
   const navigation = useNavigation();
 
   //handlers
   const handler = useCallback(() => {
-    setFilters();
+    setFilters([variant, filters]);
     navigation.navigate(stacksNames[variant]);
   }, [variant]);
 

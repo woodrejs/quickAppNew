@@ -14,9 +14,8 @@ export default function useWroclawGO(variant) {
   const { filters, list } = useSelector(({ listSlice }) => listSlice[variant]);
   const { setInfo, setStage } = useModal();
 
-  return [
-    //fetch list
-    async (pagination) => {
+  return {
+    fetchList: async (pagination) => {
       setStage("pending");
 
       try {
@@ -33,8 +32,7 @@ export default function useWroclawGO(variant) {
         setInfo(false, "Błąd podczas ładowania aplikacji. Spróbuj ponownie.");
       }
     },
-    //fetch single
-    async (id) => {
+    fetchSingle: async (id) => {
       setStage("pending");
 
       try {
@@ -50,5 +48,5 @@ export default function useWroclawGO(variant) {
         setInfo(false, "Błąd podczas pobierania danych.");
       }
     },
-  ];
+  };
 }

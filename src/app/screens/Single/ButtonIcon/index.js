@@ -6,7 +6,7 @@ import Icon from "../../../components/Icon";
 import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 
-export default function ButtonIcon({
+export default React.memo(function ButtonIcon({
   name,
   size = "sm",
   handler = null,
@@ -15,7 +15,7 @@ export default function ButtonIcon({
 }) {
   //const
   const { extra, lightnest, dark } = useMemo(() => COLORS);
-  
+
   return (
     <TouchableOpacity
       style={[
@@ -31,7 +31,7 @@ export default function ButtonIcon({
       children={<Icon name={name} size={size === "sm" ? 21 : 28} color={dark} />}
     />
   );
-}
+});
 
 const style = StyleSheet.create({
   container: {

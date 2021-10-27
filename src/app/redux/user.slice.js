@@ -34,7 +34,7 @@ const userSlice = createSlice({
       state.favorites = payload;
     },
     setSchedules(state, action) {
-      const { payload } = action;  
+      const { payload } = action;
 
       state.schedules = payload;
     },

@@ -13,6 +13,7 @@ import useAvatar from "../../hooks/useAvatar";
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
 
+//!!!important!!! issue when cancle  handleAvatarChange
 export default React.memo(function Settings() {
   //hooks
   const { avatar, logged } = useSelector(({ userSlice }) => userSlice);
@@ -23,8 +24,8 @@ export default React.memo(function Settings() {
   //handlers
   const handleLogOut = useCallback(() => logOutUser());
   const handleAvatarChange = useCallback(() => setAvatar(avatar.public_id));
-  const handleEmailChange = useCallback((val) => updateUser(val));
-  const handleUsernameChange = useCallback((val) => updateUser(val));
+  const handleEmailChange = useCallback((val) => updateUser(val, "email"));
+  const handleUsernameChange = useCallback((val) => updateUser(val, "username"));
   const handleDeleteAccount = useCallback(() => deleteUser());
   const handleSupportContact = useCallback(() =>
     Linking.openURL(`mailto:${SUPPORT_MAIL}`)

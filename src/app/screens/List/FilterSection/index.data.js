@@ -49,18 +49,6 @@ export const offers = [
     title: "edukacja i rozwoj",
     id: 8,
   },
-  {
-    active: false,
-    key: uuidv4(),
-    title: "dla dzieci",
-    id: 79,
-  },
-  {
-    active: false,
-    key: uuidv4(),
-    title: "inne",
-    id: 12,
-  },
 ];
 export const places = [
   {

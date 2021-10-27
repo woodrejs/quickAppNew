@@ -11,10 +11,8 @@ import useFavorites from "../../hooks/useFavorites";
 //!!!important!!! useFavorites, arr => obj
 export default React.memo(function AddToFavoriteButton({ data, active = false }) {
   const [isSelected, setIsSelected] = useState(active);
-  const [__, createFavorite, deleteFavorite] = useFavorites();
-  const isLogged = useSelector(({ userSlice }) => userSlice.logged);
-
-  if (!isLogged) return null;
+  const { logged, favorites } = useSelector(({ userSlice }) => userSlice);
+  const [createFavorite, deleteFavorite] = useFavorites(favorites);
 
   const backgroundColor = useMemo(
     () => ({ backgroundColor: isSelected ? COLORS.extra : COLORS.lightnest }),
@@ -29,7 +27,9 @@ export default React.memo(function AddToFavoriteButton({ data, active = false })
       createFavorite(data);
       setIsSelected(true);
     }
-  }, [isSelected, data]);
+  }, [isSelected, data, favorites]);
+
+  if (!logged) return null;
 
   return (
     <TouchableOpacity style={[style.container, backgroundColor]} onPress={handlePress}>

@@ -8,6 +8,7 @@ import useAuth from "../../../hooks/useAuth";
 import { RegisterSchema } from "../../../utils/strapi";
 import { COLORS } from "../../../style/colors";
 
+//!!!important!!! handle diff resp from register, 'username already exist' ...
 export default function Form() {
   const [_, __, ___, registerUser] = useAuth();
 

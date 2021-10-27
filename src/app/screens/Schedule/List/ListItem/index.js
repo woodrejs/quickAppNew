@@ -6,6 +6,7 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
 } from "react-native";
+import { useSelector } from "react-redux";
 //components
 import Icon from "../../../../components/Icon";
 //utils
@@ -16,14 +17,15 @@ import { STYLES } from "../../../../style/styles";
 
 export default React.memo(function ListItem({ data }) {
   //hooks
-  const [_, __, deleteSchedule] = useSchedules();
+  const { schedules } = useSelector(({ userSlice }) => userSlice);
+  const  {deleteSchedule} = useSchedules(schedules);
   const setId = useId();
 
   //const
   const { id, title, date, type } = useMemo(() => data);
 
   //handlers
-  const handleDelete = useCallback(() => deleteSchedule(id, date), [id, date]);
+  const handleDelete = useCallback(() => deleteSchedule(id, date), [id, date, schedules]);
   const handlePress = useCallback(() => setId(id, type));
 
   return (
