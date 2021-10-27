@@ -8,4 +8,5 @@ export const COLORS = {
   extra: "#E38137",
   extraLight: "rgba(227, 129, 55,0.9)",
   lightGrey: "rgba(193,208,204,0.2)",
+  correct: "#00ff00",
 };

@@ -1,80 +1,20 @@
-import React, { useMemo, useCallback } from "react";
-import {
-  ImageBackground,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
+import * as Animatable from "react-native-animatable";
 //components
-import Badge from "../../../components/Badge";
-//styles & utils
-import { COLORS } from "../../../style/colors";
-import { STYLES } from "../../../style/styles";
-import { setFilters } from "../../../redux/list.slice";
-import { stacksNames } from "../../../utils/stacksNames";
+import Square from "./Square";
 
 export default React.memo(function HorizontalSquareList({ list }) {
   return (
-    <ScrollView horizontal>
-      {list.map((square) => (
-        <Square key={square.id} data={square} />
-      ))}
-    </ScrollView>
+    <Animatable.View animation="slideInRight" useNativeDriver>
+      <ScrollView horizontal style={style.container}>
+        {list.map((square) => (
+          <Square key={square.id} data={square} />
+        ))}
+      </ScrollView>
+    </Animatable.View>
   );
 });
 
-const Square = React.memo(({ data }) => {
-  //const
-  const { url, title, variant, filters } = data;
-
-  //hooks
-  const navigation = useNavigation();
-
-  //handlers
-  const handler = useCallback(() => {
-    setFilters([variant, filters]);
-    navigation.navigate(stacksNames[variant]);
-  }, [variant]);
-
-  return (
-    <TouchableWithoutFeedback onPress={handler}>
-      <View style={style.squareContainer}>
-        <ImageBackground
-          style={style.squareBox}
-          imageStyle={style.squareImage}
-          source={url}
-        >
-          <Badge name="eye" styles={style.badge} />
-        </ImageBackground>
-
-        <Text style={style.squareTitle}>{title}</Text>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-});
-
-const style = StyleSheet.create({
-  squareContainer: {},
-  squareBox: {
-    height: 120,
-    width: 120,
-    backgroundColor: COLORS.dark,
-    borderRadius: 10,
-    position: "relative",
-    ...STYLES.shadow,
-    marginRight: 5,
-    marginBottom: 5,
-  },
-  squareImage: { borderRadius: 10, opacity: 0.7 },
-  squareTitle: {
-    ...STYLES.fonts.bold,
-    color: COLORS.dark,
-    fontSize: 12,
-    textAlign: "center",
-    paddingTop: 15,
-  },
-  badge: { top: 5, right: 5 },
-});
+const style = StyleSheet.create({ container: { paddingLeft: 5 } });

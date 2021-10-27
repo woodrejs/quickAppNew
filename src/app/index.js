@@ -3,6 +3,7 @@ import Navigation from "./routes";
 import { useSelector, useDispatch } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useFonts } from "@use-expo/font";
+
 //screens
 import Intro from "./screens/Intro";
 import LoadingModal from "./components/LoadingModal";

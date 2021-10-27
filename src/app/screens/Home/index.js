@@ -1,16 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Text, View, ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 //components
 import HorizontalRectangleList from "./HorizontalRectangleList";
 import HorizontalSquareList from "./HorizontalSquareList";
+import TitleSection from "./TitleSection";
 import SearchSection from "../../components/SearchSection";
 import VerticalList from "../../components/VerticalList";
-import Icon from "../../components/Icon";
 //styles
 import { placesData, offersData } from "./index.data";
-import { STYLES } from "../../style/styles";
-import { COLORS } from "../../style/colors";
 import { mainData } from "./index.data";
 
 export default React.memo(function Home() {
@@ -19,7 +17,7 @@ export default React.memo(function Home() {
   return (
     <ScrollView style={style.container}>
       {/* Search Section */}
-      <SearchSection />
+      <SearchSection styles={style.search} />
 
       {/* Featured Categories Section*/}
       <TitleSection title="Popularne kategorie" />
@@ -40,34 +38,12 @@ export default React.memo(function Home() {
   );
 });
 
-const TitleSection = React.memo(({ title }) => {
-  return (
-    <View style={style.titleContainer}>
-      <Text style={style.titleText} children={title} />
-      <Icon name="rightArrow" size={15} color={COLORS.extra} styles={style.titleIcon} />
-    </View>
-  );
-});
-
 const style = StyleSheet.create({
   container: {
     height: "100%",
     width: "100%",
-    padding: 10,
+    paddingVertical: 10,
   },
-  titleContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-  },
-  titleIcon: { marginBottom: 10 },
-  titleText: {
-    ...STYLES.fonts.bold,
-    fontSize: 18,
-    textTransform: "capitalize",
-    marginBottom: 10,
-    marginTop: 30,
-  },
-  verticalList: { marginBottom: 50 },
+  search: { paddingHorizontal: 10, marginTop: 30 },
+  verticalList: { marginBottom: 50, paddingHorizontal: 10 },
 });

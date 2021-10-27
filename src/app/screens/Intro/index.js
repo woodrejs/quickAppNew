@@ -1,4 +1,5 @@
-import React from "react";
+import React, { createRef } from "react";
+import * as Animatable from "react-native-animatable";
 import { View, StyleSheet } from "react-native";
 //components
 import Logo from "./Logo";
@@ -7,15 +8,25 @@ import { STYLES } from "../../style/styles";
 import { COLORS } from "../../style/colors";
 
 export default React.memo(function Intro() {
+  const ref = createRef();
+
   return (
     <View style={style.container}>
-      <View style={style.box}>
+      <Animatable.View
+        style={style.box}
+        ref={ref}
+        animation="pulse"
+        easing="ease-out"
+        useNativeDriver
+        iterationCount="infinite"
+      >
         <Logo />
-      </View>
+      </Animatable.View>
     </View>
   );
 });
 
+//style
 const style = StyleSheet.create({
   container: {
     display: "flex",
