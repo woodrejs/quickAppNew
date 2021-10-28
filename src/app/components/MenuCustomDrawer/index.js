@@ -1,24 +1,21 @@
 import React, { useMemo, useCallback } from "react";
-import { View, Text, TouchableWithoutFeedback, Button } from "react-native";
-import { useRoute, useNavigation } from "@react-navigation/native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import { useSelector } from "react-redux";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
-import { Dimensions, StyleSheet } from "react-native";
 //components
+import Tile from "./Tile";
 import MenuDrawerUserSection from "./MenuDrawerUserSection";
-import Icon from "../Icon";
 import CloseButton from "./CloseButton";
 //utils & styles
-import { stacksNames } from "../../utils/stacksNames";
 import useAuth from "../../hooks/useAuth";
+import { stacksNames } from "../../utils/stacksNames";
+import { screensNames } from "../../utils/screensNames";
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
-import { screensNames } from "../../utils/screensNames";
 
-///!!!important!!! useAuth arr => obj
 export default function MenuCustomDrawer(props) {
   //hooks
-  const [__, ___, logoutUser] = useAuth();
+  const { logout } = useAuth();
   const { logged } = useSelector(({ userSlice }) => userSlice);
 
   //const
@@ -31,7 +28,7 @@ export default function MenuCustomDrawer(props) {
   const handlePress = useCallback((name) => navigation.navigate(name), []);
   const handleCloseDrawer = useCallback(() => navigation.closeDrawer(), []);
   const handleLogOut = useCallback(
-    () => (logged ? logoutUser() : navigation.navigate(stacksNames.auth)),
+    () => (logged ? logout() : navigation.navigate(stacksNames.auth)),
     [logged]
   );
 
@@ -73,29 +70,6 @@ export default function MenuCustomDrawer(props) {
   );
 }
 
-const Tile = ({ name, icon, title, handler }) => {
-  //hooks
-  const navigation = useNavigation();
-
-  if (!navigation.getCurrentRoute()) return null;
-
-  //const
-  const route = navigation.getCurrentRoute().name;
-  const color = name === route ? COLORS.extra : COLORS.grey;
-
-  //handlers
-  const handlePress = () => handler(stacksNames[title]);
-
-  return (
-    <TouchableWithoutFeedback onPress={handlePress}>
-      <View style={style.tileContainer}>
-        <Text style={[style.tileTitle, { color }]} children={stacksNames[title]} />
-        <Icon name={icon} color={color} />
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
-
 const style = StyleSheet.create({
   box: {
     marginBottom: 120,
@@ -106,24 +80,6 @@ const style = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 5,
-  },
-  //tile
-  tileContainer: {
-    ...STYLES.shadow,
-    backgroundColor: COLORS.dark,
-    width: Dimensions.get("window").width / 2 - 26,
-    height: 100,
-    borderRadius: 10,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-    padding: 10,
-  },
-  tileTitle: {
-    ...STYLES.fonts.bold,
-    fontSize: 12,
-    textTransform: "uppercase",
   },
   version: {
     position: "absolute",

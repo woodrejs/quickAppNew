@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
-import * as Animatable from "react-native-animatable";
 import {
   Text,
   ImageBackground,
   StyleSheet,
   TouchableWithoutFeedback,
+  View,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
@@ -17,7 +17,6 @@ import { stacksNames } from "../../../../utils/stacksNames";
 export default React.memo(function Rectangle({ data }) {
   //hooks
   const navigation = useNavigation();
-  const ref = useRef(null);
   const dispatch = useDispatch();
 
   //const
@@ -25,20 +24,19 @@ export default React.memo(function Rectangle({ data }) {
 
   //handlers
   const handler = async () => {
-    await ref.current.pulse();
     dispatch(setFilters([variant, filters]));
     navigation.navigate(stacksNames[variant]);
   };
 
   return (
-    <Animatable.View ref={ref} style={style.container}>
+    <View style={style.container}>
       <TouchableWithoutFeedback onPress={handler}>
         <ImageBackground style={style.box} imageStyle={style.image} source={url}>
           <Text style={style.title}>{title}</Text>
           <Text style={style.tags}>{tags}</Text>
         </ImageBackground>
       </TouchableWithoutFeedback>
-    </Animatable.View>
+    </View>
   );
 });
 

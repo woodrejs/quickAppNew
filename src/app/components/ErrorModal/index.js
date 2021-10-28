@@ -15,6 +15,7 @@ import { STYLES } from "../../style/styles";
 import useModal from "../../hooks/useModal";
 
 export default function ErrorModal() {
+  //hooks
   const { closeError } = useModal();
   const message = useSelector(({ appSlice }) => appSlice.error.message);
 

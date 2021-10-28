@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import * as Animatable from "react-native-animatable";
+import React from "react";
 import {
   Text,
   ImageBackground,
@@ -12,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 //components
 import Badge from "../../../../components/Badge";
 //utils
+import { stacksNames } from "../../../../utils/stacksNames";
 import { setFilters } from "../../../../redux/list.slice";
 import { COLORS } from "../../../../style/colors";
 import { STYLES } from "../../../../style/styles";
@@ -19,7 +19,6 @@ import { STYLES } from "../../../../style/styles";
 export default React.memo(function Square({ data }) {
   //hooks
   const navigation = useNavigation();
-  const ref = useRef(null);
   const dispatch = useDispatch();
 
   //const
@@ -27,7 +26,6 @@ export default React.memo(function Square({ data }) {
 
   //handlers
   const handler = async () => {
-    await ref.current.pulse();
     dispatch(setFilters([variant, filters]));
     navigation.navigate(stacksNames[variant]);
   };
@@ -36,11 +34,10 @@ export default React.memo(function Square({ data }) {
     <View style={style.container}>
       <TouchableWithoutFeedback onPress={handler}>
         <View>
-          <Animatable.View ref={ref}>
-            <ImageBackground style={style.box} imageStyle={style.image} source={url}>
-              <Badge name="eye" styles={style.badge} />
-            </ImageBackground>
-          </Animatable.View>
+          <ImageBackground style={style.box} imageStyle={style.image} source={url}>
+            <Badge name="eye" styles={style.badge} />
+          </ImageBackground>
+
           <Text style={style.title}>{title}</Text>
         </View>
       </TouchableWithoutFeedback>

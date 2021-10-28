@@ -12,7 +12,7 @@ import {
 import { useSelector } from "react-redux";
 //components
 import IconsCockpit from "./IconsCockpit";
-import ButtonIcon from "./ButtonIcon";
+import ButtonIcon from "../../components/ButtonIcon";
 import Facilities from "./Facilities";
 import LocalizationMapSection from "../../components/LocalizationMapSection";
 import RenderHtmlSection from "../../components/RenderHtmlSection";

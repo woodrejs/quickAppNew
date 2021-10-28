@@ -1,7 +1,5 @@
-import React, { useMemo } from "react";
-import * as Progress from "react-native-progress";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useSelector } from "react-redux";
+import React from "react";
+import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 //components
 import Icon from "../../../components/Icon";
 //utils
@@ -12,29 +10,21 @@ export default React.memo(function ListButton({
   handler,
   icon,
   active = true,
-  customStyle = {},
+  styles = {},
 }) {
-  //hooks
-  const stage = useSelector(({ appSlice }) => appSlice.stage);
-
-  //const
-  const { dark, lightnest, extra } = useMemo(() => COLORS);
-  const backgroundColor = useMemo(
-    () => ({
-      backgroundColor: active ? lightnest : extra,
-    }),
-    [active]
-  );
-
   return (
-    <TouchableOpacity onPress={handler} style={customStyle}>
-      <View style={[style.container, backgroundColor]}>
-        {stage === "waiting" && <Icon name={icon} size={26} />}
-        {stage === "pending" && (
-          <Progress.Circle size={30} indeterminate={true} color={dark} />
-        )}
-      </View>
-    </TouchableOpacity>
+    <View style={styles}>
+      <TouchableWithoutFeedback onPress={handler}>
+        <View
+          style={[
+            style.container,
+            { backgroundColor: active ? COLORS.lightnest : COLORS.extra },
+          ]}
+        >
+          <Icon name={icon} size={26} />
+        </View>
+      </TouchableWithoutFeedback>
+    </View>
   );
 });
 

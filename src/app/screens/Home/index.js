@@ -43,7 +43,8 @@ const style = StyleSheet.create({
     height: "100%",
     width: "100%",
     paddingVertical: 10,
+    paddingBottom: 100,
   },
   search: { paddingHorizontal: 10, marginTop: 30 },
-  verticalList: { marginBottom: 50, paddingHorizontal: 10 },
+  verticalList: { marginBottom: 30, paddingHorizontal: 10 },
 });

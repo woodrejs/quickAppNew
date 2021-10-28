@@ -15,6 +15,7 @@ import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
 
 export default function InfoModal() {
+  //hooks
   const { closeInfo } = useModal();
   const { message, success, isOpen } = useSelector(({ appSlice }) => appSlice.info);
 

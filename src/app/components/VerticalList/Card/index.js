@@ -7,7 +7,6 @@ import {
   View,
   Text,
 } from "react-native";
-import * as Animatable from "react-native-animatable";
 //components
 import Badge from "../../Badge";
 //utils
@@ -20,20 +19,16 @@ export default React.memo(function Card({ data }) {
   //hooks
   const navigation = useNavigation();
   const setId = useId();
-  const ref = useRef(null);
 
   //const
   const { id, img, ticketing, title } = data;
 
   //handlers
-  const handlePress = async () => {
-    await ref.current.pulse();
-    //setId(id, "offers", navigation);
-  };
+  const handlePress = async () => setId(id, "offers", navigation);
 
   return (
     <TouchableWithoutFeedback onPress={handlePress}>
-      <Animatable.View style={style.container} ref={ref}>
+      <View style={style.container}>
         {/* west */}
         <View style={style.titleBox}>
           <Text style={style.ticketing} children={getTicketingTitle(ticketing)} />
@@ -47,7 +42,7 @@ export default React.memo(function Card({ data }) {
         >
           <Badge name="star" styles={style.badge} />
         </ImageBackground>
-      </Animatable.View>
+      </View>
     </TouchableWithoutFeedback>
   );
 });

@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React from "react";
 import {
   Text,
   StyleSheet,
@@ -15,17 +15,20 @@ import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 
 export default React.memo(function GridListItem({ data }) {
+  //hooks
   const setId = useId();
 
-  const { img, title, type, id } = useMemo(() => data, [data]);
+  //const
+  const { img, title, type, id } = data;
 
-  const handlePress = useCallback(() => setId(id, type), [id, type]);
+  //handlers
+  const handlePress = () => setId(id, type);
 
   return (
     <ImageBackground
       style={style.container}
       imageStyle={style.image}
-      source={img ? { uri: img } : require("../../../../../assets/img/no_img.jpg")}
+      source={{ uri: img }}
     >
       <TouchableWithoutFeedback onPress={handlePress}>
         <View style={style.box}>

@@ -1,41 +1,55 @@
-import React from "react";
-import { View,  StyleSheet } from "react-native";
+import React, { createRef } from "react";
+import * as Animatable from "react-native-animatable";
+import { View, StyleSheet } from "react-native";
+
 import { useSelector } from "react-redux";
 //components
-import ProgressSection from "../ProgressSection";
-//utils & styles
+import Logo from "./Logo";
+//utils
+import { STYLES } from "../../style/styles";
 import { COLORS } from "../../style/colors";
 
 export default React.memo(function LoadingModal() {
   const { stage } = useSelector(({ appSlice }) => appSlice);
+  const ref = createRef();
 
   if (stage === "waiting") return null;
 
   return (
     <View style={style.container}>
-      <View style={style.mask} />
-      <View>
-        <ProgressSection progress={0.5} styles={style.box} />
-      </View>
+      <Animatable.View
+        style={style.box}
+        ref={ref}
+        animation="pulse"
+        easing="ease-out"
+        useNativeDriver
+        iterationCount="infinite"
+      >
+        <Logo />
+      </Animatable.View>
     </View>
   );
 });
 
+//style
 const style = StyleSheet.create({
   container: {
-    width: "100%",
-    height: "100%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
-  },
-  mask: {
-    backgroundColor: COLORS.extra,
-    width: "100%",
     height: "100%",
-    position: "absolute",
+    width: "100%",
+    backgroundColor: COLORS.extra,
+    position: "relative",
   },
-  box: { position: "relative", bottom: 0 },
- 
+  box: {
+    ...STYLES.shadow,
+    borderRadius: 100,
+    backgroundColor: COLORS.extra,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 85,
+    width: 85,
+  },
 });

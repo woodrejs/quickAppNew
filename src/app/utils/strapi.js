@@ -71,6 +71,9 @@ export async function createAvatar(id, jwt) {
     quality: 1,
     base64: true,
   });
+
+  if (!base64) return null;
+
   const file = { base64: `data:image/png;base64,${base64}`, id };
   const URL = `${STRAPI_DB}avatars`;
   const options = { headers: { Authorization: `Bearer ${jwt}` } };

@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from "react";
+import React from "react";
 import {
   StyleSheet,
   View,
@@ -18,15 +18,15 @@ import { STYLES } from "../../../../style/styles";
 export default React.memo(function ListItem({ data }) {
   //hooks
   const { schedules } = useSelector(({ userSlice }) => userSlice);
-  const  {deleteSchedule} = useSchedules(schedules);
+  const { deleteSchedule } = useSchedules(schedules);
   const setId = useId();
 
   //const
-  const { id, title, date, type } = useMemo(() => data);
+  const { id, title, date, type } = data;
 
   //handlers
-  const handleDelete = useCallback(() => deleteSchedule(id, date), [id, date, schedules]);
-  const handlePress = useCallback(() => setId(id, type));
+  const handleDelete = () => deleteSchedule(id, date);
+  const handlePress = () => setId(id, type);
 
   return (
     <View style={style.container}>
@@ -74,6 +74,7 @@ const style = StyleSheet.create({
   titleBox: {
     padding: 10,
     display: "flex",
+    flex: 1,
     justifyContent: "space-between",
   },
   date: { ...STYLES.fonts.bold, fontSize: 12 },

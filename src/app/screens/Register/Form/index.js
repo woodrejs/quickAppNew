@@ -10,10 +10,12 @@ import { COLORS } from "../../../style/colors";
 
 //!!!important!!! handle diff resp from register, 'username already exist' ...
 export default function Form() {
-  const [_, __, ___, registerUser] = useAuth();
+  //hooks
+  const { register } = useAuth();
 
+  //handlers
   const onSubmit = ({ email, password, username }, { resetForm }) => {
-    registerUser(username, email, password);
+    register(username, email, password);
     resetForm({});
   };
 

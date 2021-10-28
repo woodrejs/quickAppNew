@@ -4,39 +4,34 @@ import { useNavigation } from "@react-navigation/native";
 import { userLogin, userRegister } from "../utils/strapi";
 import { setLoggedIn, setLoggedOut } from "../redux/user.slice";
 import { stacksNames } from "../utils/stacksNames";
+import { setUser } from "../redux/user.slice";
 import useModal from "./useModal";
 
 export default function useAuth() {
-  const [user, setUser] = useState(null);
   const { setInfo, setStage } = useModal();
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  return [
-    user,
-    //login
-    async (email, password) => {
+  return {
+    login: async (email, password) => {
       setStage("pending");
 
       try {
         const { data } = await userLogin(email, password);
-        setUser(data);
 
-        dispatch(setLoggedIn(data.jwt));
+        dispatch(setUser(data));
         setInfo(true, `${data.user.username} witaj w quick week app.`);
         navigation.navigate(stacksNames.home);
       } catch (error) {
         setInfo(false, `Błąd podczas logowania. Spróbuj ponownie.`);
       }
     },
-    //logout
-    () => {
+    logout: () => {
       dispatch(setLoggedOut());
       navigation.navigate(stacksNames.home);
       setInfo(true, "Zostałeś poprawnie wylogowany.");
     },
-    //register
-    async (username, email, password) => {
+    register: async (username, email, password) => {
       setStage("pending");
       try {
         const { data } = await userRegister(username, email, password);
@@ -49,5 +44,5 @@ export default function useAuth() {
         setInfo(false, `Błąd podczas rejestracji. Spróbuj ponownie.`);
       }
     },
-  ];
+  };
 }

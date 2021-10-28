@@ -9,11 +9,13 @@ import { COLORS } from "../../../style/colors";
 import { STYLES } from "../../../style/styles";
 import { stacksNames } from "../../../utils/stacksNames";
 
-//!!!important!!! set username
 export default React.memo(function MenuDrawerUserSection() {
   //hooks
   const navigation = useNavigation();
-  const { url } = useSelector(({ userSlice }) => userSlice.avatar);
+  const { avatar, username } = useSelector(({ userSlice }) => userSlice);
+
+  //const
+  const { url } = avatar;
 
   //handlers
   const handler = useCallback(() => navigation.navigate(stacksNames.settings));
@@ -27,7 +29,10 @@ export default React.memo(function MenuDrawerUserSection() {
             {!url && <Icon name="user" />}
           </View>
         </TouchableWithoutFeedback>
-        <Text style={style.title}>Witaj {"\n"}username</Text>
+        <Text style={style.title}>
+          Witaj {"\n"}
+          {username ?? "ponownie"}
+        </Text>
       </View>
     </View>
   );

@@ -12,13 +12,6 @@ export default React.memo(function FavoritesList() {
   //hooks
   const { favorites, logged } = useSelector(({ userSlice }) => userSlice);
 
-  if (!logged)
-    return (
-      <View style={style.box}>
-        <Text style={style.text}>Żeby dodawać do ulubionych, musisz być zalogowany.</Text>
-      </View>
-    );
-
   return (
     <ScrollView style={style.container}>
       <TitleSection
@@ -27,7 +20,14 @@ export default React.memo(function FavoritesList() {
         text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
       />
 
-      <GridCardList list={favorites} />
+      {!favorites.lenght && (
+        <View style={style.box}>
+          {logged && <Text style={style.text}>Brak wydarzeń.</Text>}
+          {!logged && <Text style={style.text}>Zaloguj się, żeby dodawać ulubione.</Text>}
+        </View>
+      )}
+
+      {favorites.lenght && <GridCardList list={favorites} />}
     </ScrollView>
   );
 });
@@ -38,10 +38,12 @@ const style = StyleSheet.create({
     backgroundColor: COLORS.extraLight,
   },
   box: {
+    backgroundColor: COLORS.extraLighter,
+    borderRadius: 10,
+    minHeight: 400,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height: "100%",
   },
   text: {
     ...STYLES.fonts.bold,

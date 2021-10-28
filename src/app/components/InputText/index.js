@@ -1,8 +1,10 @@
 import React from "react";
 import { TextInput, View, StyleSheet, Text } from "react-native";
+//components
+import Icon from "../Icon";
+//utils
 import { COLORS } from "../../style/colors";
 import { STYLES } from "../../style/styles";
-import Icon from "../Icon";
 
 export default function InputText({
   name,
@@ -13,7 +15,6 @@ export default function InputText({
   styles = {},
   error = null,
 }) {
-
   return (
     <View>
       <View style={[style.container, styles]}>
@@ -26,7 +27,9 @@ export default function InputText({
           placeholder={placeholder}
           placeholderTextColor={COLORS.grey}
         />
+     
       </View>
+
       {error && <Text style={style.error} children={error} />}
     </View>
   );

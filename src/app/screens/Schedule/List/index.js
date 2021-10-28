@@ -1,10 +1,11 @@
 import React from "react";
 import { StyleSheet, ScrollView, View, Dimensions, Text } from "react-native";
-import { useSelector } from "react-redux";
-import { STYLES } from "../../../style/styles";
-import { COLORS } from "../../../style/colors";
+//components
 import ListItem from "./ListItem";
 import Icon from "../../../components/Icon";
+//utils
+import { STYLES } from "../../../style/styles";
+import { COLORS } from "../../../style/colors";
 
 export default React.memo(function List({ title, list }) {
   return (
@@ -27,7 +28,7 @@ export default React.memo(function List({ title, list }) {
   );
 });
 
-const { width, height } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 const style = StyleSheet.create({
   container: { marginBottom: 20 },
   titleBox: {

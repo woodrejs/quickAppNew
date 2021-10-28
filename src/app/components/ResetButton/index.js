@@ -1,30 +1,28 @@
-import React, { useRef } from "react";
+import React from "react";
 import * as Animatable from "react-native-animatable";
-import { TouchableWithoutFeedback, StyleSheet } from "react-native";
+import { TouchableWithoutFeedback, StyleSheet, View } from "react-native";
 //components
 import Icon from "../Icon";
 //utils
 import { COLORS } from "../../style/colors";
 
-export default function ResetButton({ handleReset, value }) {
-  const ref = useRef(null);
-
-  const handlePress = () => {
-    ref.current.tada();
-    handleReset();
-  };
+export default function ResetButton({ handleReset, value, styles }) {
+  //handlers
+  const handlePress = () => handleReset();
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress}>
-      <Animatable.View
-        ref={ref}
-        animation={value.length ? "fadeIn" : "fadeOut"}
-        style={style.container}
-        useNativeDriver
-      >
-        <Icon name="cross" size={18} color={COLORS.grey} />
-      </Animatable.View>
-    </TouchableWithoutFeedback>
+    <View style={styles}>
+      <TouchableWithoutFeedback onPress={handlePress}>
+        <Animatable.View
+          animation={value.length ? "fadeIn" : "fadeOut"}
+          style={style.container}
+          duration={300}
+          useNativeDriver
+        >
+          <Icon name="cross" size={18} color={COLORS.grey} />
+        </Animatable.View>
+      </TouchableWithoutFeedback>
+    </View>
   );
 }
 

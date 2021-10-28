@@ -1,15 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+//utils
 import { useNavigation } from "@react-navigation/native";
+import { screensNames } from "../../utils/screensNames";
 import { STYLES } from "../../style/styles";
 import { COLORS } from "../../style/colors";
-import { screensNames } from "../../utils/screensNames";
 
 export default function AuthFooter({ name, title, text }) {
+  //hooks
   const navigation = useNavigation();
 
+  //handlers
   const handler = () => navigation.navigate(screensNames[name]);
-
 
   return (
     <View style={style.container}>
@@ -19,7 +21,7 @@ export default function AuthFooter({ name, title, text }) {
       </TouchableOpacity>
     </View>
   );
-};
+}
 
 const style = StyleSheet.create({
   container: { display: "flex", alignItems: "center" },

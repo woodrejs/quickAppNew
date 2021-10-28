@@ -9,9 +9,8 @@ export default function useUser() {
 
   const jwt = useSelector(({ userSlice }) => userSlice.jwt);
 
-  return [
-    //update user data
-    async (val, variant) => {
+  return {
+    updateUser: async (val, variant) => {
       setStage("pending");
 
       const message =
@@ -26,8 +25,7 @@ export default function useUser() {
         setInfo("failed", `Błąd podczas zmiany danych użytkownika. Spróbuj ponownie.`);
       }
     },
-    //delete user
-    async () => {
+    deleteUser: async () => {
       setStage("pending");
       try {
         const resp = await userDelete(jwt);
@@ -40,5 +38,5 @@ export default function useUser() {
         );
       }
     },
-  ];
+  };
 }

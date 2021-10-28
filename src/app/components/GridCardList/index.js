@@ -2,6 +2,8 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 //components
 import GridListItem from "./GridListItem";
+//utils
+import { COLORS } from "../../style/colors";
 
 export default React.memo(function GridCardList({ list }) {
   return (
@@ -22,3 +24,4 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
+

@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
 //components
 import Icon from "../../../components/Icon";
 //utils
@@ -8,10 +8,12 @@ import { STYLES } from "../../../style/styles";
 
 export default React.memo(function SettingsButton({ name, title, handler }) {
   return (
-    <TouchableOpacity style={style.container} onPress={handler}>
-      <Icon styles={style.icon} name={name} size={18} color={COLORS.grey} />
-      <Text style={style.text} children={title} />
-    </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={handler}>
+      <View style={style.container}>
+        <Icon styles={style.icon} name={name} size={18} color={COLORS.grey} />
+        <Text style={style.text} children={title} />
+      </View>
+    </TouchableWithoutFeedback>
   );
 });
 

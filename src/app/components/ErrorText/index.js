@@ -13,6 +13,7 @@ export default function ErrorText({ error }) {
       style={style.error}
       children={error}
       animation="fadeIn"
+      duration={300}
       useNativeDriver
     />
   );

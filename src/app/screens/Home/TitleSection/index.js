@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, StyleSheet, View } from "react-native";
-import * as Animatable from "react-native-animatable";
 //components
 import Icon from "../../../components/Icon";
 //utils
@@ -9,16 +8,9 @@ import { STYLES } from "../../../style/styles";
 
 export default React.memo(function TitleSection({ title }) {
   return (
-    <View style={style.box}>
-      <Animatable.View
-        style={style.container}
-        animation="fadeInUp"
-        useNativeDriver
-        delay={500}
-      >
-        <Text style={style.title} children={title} />
-        <Icon name="rightArrow" size={15} color={COLORS.extra} styles={style.icon} />
-      </Animatable.View>
+    <View style={style.container}>
+      <Text style={style.title} children={title} />
+      <Icon name="rightArrow" size={15} color={COLORS.extra} styles={style.icon} />
     </View>
   );
 });
@@ -32,7 +24,7 @@ const style = StyleSheet.create({
     paddingRight: 10,
     paddingLeft: 10,
   },
-  box: { overflow: "hidden" },
+
   icon: {},
   title: {
     ...STYLES.fonts.bold,

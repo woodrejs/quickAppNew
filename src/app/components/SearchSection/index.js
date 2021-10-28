@@ -18,7 +18,6 @@ import { screensNames } from "../../utils/screensNames";
 
 //!!!important!!! add serach hooks
 export default function SearchSection({ styles }) {
-  console.log(styles);
   //hooks
   const { setInfo, setStage } = useModal();
   const dispatch = useDispatch();

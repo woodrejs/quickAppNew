@@ -8,9 +8,8 @@ export default function useFavorites(favorites) {
   const jwt = useSelector(({ userSlice }) => userSlice.jwt);
   const dispatch = useDispatch();
 
-  return [
-    //createFavorite
-    async (obj) => {
+  return {
+    createFavorite: async (obj) => {
       setStage("pending");
 
       try {
@@ -24,8 +23,7 @@ export default function useFavorites(favorites) {
         setInfo(false, `Błąd podczas dodawania "${obj.title}". Spróbuj ponownie.`);
       }
     },
-    //deleteFavorite
-    async (id) => {
+    deleteFavorite: async (id) => {
       setStage("pending");
 
       try {
@@ -38,5 +36,5 @@ export default function useFavorites(favorites) {
         setInfo(false, `Błąd podczas usuwania z servera. Spróbuj ponownie.`);
       }
     },
-  ];
+  };
 }

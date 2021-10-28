@@ -1,15 +1,14 @@
 import React, { useCallback } from "react";
 import { StyleSheet, View, Dimensions, Text, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
 //coponents
 import List from "./List";
-import ButtonIcon from "../Single/ButtonIcon";
+import ButtonIcon from "../../components/ButtonIcon";
 //utils
-import { useSelector } from "react-redux";
 import { STYLES } from "../../style/styles";
 import { stacksNames } from "../../utils/stacksNames";
 
-//!!!important!!! move up ButtonIcon
 export default React.memo(function Schedule() {
   //hooks
   const { schedules, logged } = useSelector(({ userSlice }) => userSlice);

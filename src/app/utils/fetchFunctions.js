@@ -16,8 +16,6 @@ export const fetchItemList = async (
 ) => {
   const URL = `http://go.wroclaw.pl/api/v1.0/${type}/?key=${API_KEY}&type-id=${types.toString()}&page-size=${pageSize}&page=${page}&q=${q}`;
 
-  // console.log("start");
-  // console.log("stop");
   const resp = await axios.get(URL);
 
   const filteredData = resp.data.items.filter((item) => {

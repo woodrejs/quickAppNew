@@ -17,16 +17,22 @@ import { STYLES } from "../../style/styles";
 export default React.memo(function Settings() {
   //hooks
   const { avatar, logged } = useSelector(({ userSlice }) => userSlice);
-  const [updateUser, deleteUser] = useUser();
-  const [_, __, logOutUser] = useAuth();
+  const { updateUser, deleteUser } = useUser();
+  const { logout } = useAuth();
   const setAvatar = useAvatar();
 
   //handlers
-  const handleLogOut = useCallback(() => logOutUser());
+  const handleLogOut = useCallback(() => logout());
   const handleAvatarChange = useCallback(() => setAvatar(avatar.public_id));
-  const handleEmailChange = useCallback((val) => updateUser(val, "email"));
-  const handleUsernameChange = useCallback((val) => updateUser(val, "username"));
   const handleDeleteAccount = useCallback(() => deleteUser());
+  const handleEmailChange = useCallback((val, { resetForm }) => {
+    updateUser(val, "email");
+    resetForm({});
+  });
+  const handleUsernameChange = useCallback((val, { resetForm }) => {
+    updateUser(val, "username");
+    resetForm({});
+  });
   const handleSupportContact = useCallback(() =>
     Linking.openURL(`mailto:${SUPPORT_MAIL}`)
   );

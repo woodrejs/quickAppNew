@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TextInput } from "react-native";
-import { TouchableOpacity, View, Button } from "react-native";
+import { View, Button, TouchableWithoutFeedback } from "react-native";
 import { Formik } from "formik";
 //components
 import Icon from "../../../components/Icon";
@@ -22,8 +22,8 @@ export default React.memo(function SettingsInputButton({
   const handlePress = () => setIsOpen(!isOpen);
 
   return (
-    <TouchableOpacity style={style.container} onPress={handlePress}>
-      <View>
+    <TouchableWithoutFeedback onPress={handlePress}>
+      <View style={style.container}>
         {/* Title Section */}
         <View style={style.titleBox}>
           <Icon styles={style.titleIcon} name={name} size={18} color={COLORS.grey} />
@@ -62,7 +62,7 @@ export default React.memo(function SettingsInputButton({
           </Formik>
         )}
       </View>
-    </TouchableOpacity>
+    </TouchableWithoutFeedback>
   );
 });
 function getValidationSchema(name) {
