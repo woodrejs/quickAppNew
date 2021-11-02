@@ -7,12 +7,12 @@ export default React.memo(function TitleSection({ variant }) {
   return (
     <>
       <Text style={style.title}>
-        {variant === "offers" ? "Tytuł listy wydarzeń" : "Tytuł listy miejsc"}
+        {variant === "offers" ? "Wydarzenia w Quick Week" : "Miejsca w Quick Week"}
       </Text>
       <Text style={style.text}>
         {variant === "offers"
-          ? "wydarzenia Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-          : "miejsca Lorem Ipsum is simply dummy text of the printing and typesetting industry."}
+          ? "Lista najciekawszych wydarzeń w mieście. Korzystaj z filtrów, żeby odnaleźć interesujące Cię kategorie."
+          : "Lista najciekawszych miejsc w mieście. Korzystaj z filtrów, żeby odnaleźć interesujące Cię kategorie."}
       </Text>
     </>
   );

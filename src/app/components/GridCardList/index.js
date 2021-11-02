@@ -24,4 +24,3 @@ const style = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
-

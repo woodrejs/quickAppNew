@@ -8,6 +8,7 @@ export async function userLogin(identifier, password) {
   return await axios.post(`${STRAPI_DB}auth/local`, { identifier, password });
 }
 export async function userRegister(username, email, password) {
+  console.log(STRAPI_DB);
   return await axios.post(`${STRAPI_DB}auth/local/register`, {
     username,
     email,
@@ -63,6 +64,7 @@ export async function findOneAvatar(id, jwt) {
     },
   });
 }
+export async function deleteAvatar(id, jwt) {}
 export async function createAvatar(id, jwt) {
   const { base64 } = await ImagePicker.launchImageLibraryAsync({
     mediaTypes: ImagePicker.MediaTypeOptions.Images,

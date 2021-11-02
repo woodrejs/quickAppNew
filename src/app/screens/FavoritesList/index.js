@@ -17,17 +17,17 @@ export default React.memo(function FavoritesList() {
       <TitleSection
         styles={style.titleBox}
         title="Twoje ulubione wydarzenia i miejsca"
-        text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        text="Twórz listę interesujących Cię wydarzeń i miejsc. Trzymaj je w jednym miejscu i nie przegap żądnego. "
       />
 
-      {!favorites.lenght && (
+      {!favorites.length && (
         <View style={style.box}>
           {logged && <Text style={style.text}>Brak wydarzeń.</Text>}
           {!logged && <Text style={style.text}>Zaloguj się, żeby dodawać ulubione.</Text>}
         </View>
       )}
 
-      {favorites.lenght && <GridCardList list={favorites} />}
+      <GridCardList list={favorites} />
     </ScrollView>
   );
 });

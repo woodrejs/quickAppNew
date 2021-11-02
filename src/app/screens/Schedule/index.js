@@ -24,7 +24,7 @@ export default React.memo(function Schedule() {
     return (
       <View style={style.box}>
         <Text style={style.subText}>
-          Żeby dodawać do ulubionych, musisz być zalogowany.
+          Żeby dodawać wydarzenia do terminarza, musisz być zalogowany.
         </Text>
       </View>
     );
