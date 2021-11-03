@@ -16,6 +16,8 @@ import { getMainCardData } from "./utils/fetchFunctions";
 import { COLORS } from "./style/colors";
 import { setStage } from "./redux/app.slice";
 
+
+
 const App = () => {
   //hooks
   const [appLoaded, setAppLoaded] = useState(false);

@@ -8,7 +8,6 @@ export async function userLogin(identifier, password) {
   return await axios.post(`${STRAPI_DB}auth/local`, { identifier, password });
 }
 export async function userRegister(username, email, password) {
-  console.log(STRAPI_DB);
   return await axios.post(`${STRAPI_DB}auth/local/register`, {
     username,
     email,
