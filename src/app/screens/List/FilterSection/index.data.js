@@ -43,12 +43,6 @@ export const offers = [
     title: "literatura",
     id: 7,
   },
-  {
-    active: false,
-    key: uuidv4(),
-    title: "edukacja i rozwoj",
-    id: 8,
-  },
 ];
 export const places = [
   {

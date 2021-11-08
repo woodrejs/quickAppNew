@@ -6,8 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "build_android": "expo build:android -t apk",
-    "build_ios": "expo build:ios -t apk"
+    "build_android": "expo build:android",
+    "build_ios": "expo build:ios"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.0",
